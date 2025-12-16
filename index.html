@@ -1,0 +1,2304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sai Tech - AI Innovation Hub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #ff0000;       /* Red */
+            --secondary: #ffffff;     /* White */
+            --accent: #ff3333;        /* Light Red */
+            --dark: #000000;          /* Black */
+            --light-dark: #111111;    /* Dark Gray */
+            --medium-dark: #222222;   /* Medium Dark Gray */
+            --card-bg: rgba(30, 30, 30, 0.9);
+            --header-bg: rgba(0, 0, 0, 0.95);
+            --text-light: #ffffff;
+            --text-gray: #cccccc;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--dark);
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
+
+        /* ========== HEADER ========== */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--header-bg);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid transparent;
+            background: linear-gradient(var(--header-bg), var(--header-bg)) padding-box,
+                        linear-gradient(90deg, var(--primary), #ff3333) border-box;
+            animation: headerGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes headerGlow {
+            0%, 100% { border-color: var(--primary); }
+            50% { border-color: #ff6666; }
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary), #ff3333);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header-nav {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 0, 0, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .nav-link:hover::before {
+            left: 100%;
+        }
+
+        .nav-link:hover {
+            background: rgba(255, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .nav-link.active {
+            background: linear-gradient(135deg, var(--primary), #ff3333);
+            color: var(--dark);
+            box-shadow: 0 5px 15px rgba(255, 0, 0, 0.3);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        /* ========== CANVAS & CONTENT ========== */
+        #canvas3d {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .content {
+            position: relative;
+            z-index: 2;
+            padding-top: 80px;
+        }
+
+        /* ========== SIDE NAVIGATION ========== */
+        .nav {
+            position: fixed;
+            top: 50%;
+            right: 40px;
+            transform: translateY(-50%);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .nav-dot.active,
+        .nav-dot:hover {
+            background: var(--primary);
+            box-shadow: 0 0 20px var(--primary);
+            border-color: var(--primary);
+            transform: scale(1.3);
+        }
+
+        /* ========== HERO SECTION ========== */
+        .hero {
+            height: calc(100vh - 80px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 10vw, 7rem);
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            animation: glow 3s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { filter: drop-shadow(0 0 20px var(--primary)); }
+            50% { filter: drop-shadow(0 0 40px #ff3333); }
+        }
+
+        .hero p {
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            margin-bottom: 40px;
+            opacity: 0.9;
+            color: var(--text-gray);
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 15px 40px;
+            font-size: 1rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), #ff3333);
+            color: var(--secondary);
+            box-shadow: 0 10px 30px rgba(255, 0, 0, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 50px rgba(255, 0, 0, 0.6);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--secondary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 0, 0, 0.2);
+            transform: translateY(-5px);
+        }
+
+        /* ========== SECTION STYLES ========== */
+        section {
+            min-height: 100vh;
+            padding: 100px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .section-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 60px;
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ========== ABOUT SECTION ========== */
+        .about-card {
+            max-width: 800px;
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            border-radius: 30px;
+            padding: 50px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            transition: all 0.4s ease;
+        }
+
+        .about-card:hover {
+            transform: translateY(-10px) rotateX(5deg);
+            border-color: var(--primary);
+            box-shadow: 0 30px 80px rgba(255, 0, 0, 0.3);
+        }
+
+        .about-content h3 {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            opacity: 0.9;
+            color: var(--text-gray);
+        }
+
+        /* ========== SKILLS SECTION ========== */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .skill-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 0, 0, 0.2);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(255, 0, 0, 0.3);
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), #ff3333);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .skill-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .skill-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-icon {
+            font-size: 2.5rem;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 0, 0, 0.1);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 0, 0, 0.3);
+        }
+
+        .skill-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .skill-desc {
+            color: var(--text-gray);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-tools {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tool-tag {
+            background: rgba(255, 0, 0, 0.1);
+            color: var(--primary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.875rem;
+            border: 1px solid rgba(255, 0, 0, 0.3);
+        }
+
+        /* ========== PROJECTS SECTION ========== */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 40px;
+            max-width: 1400px;
+            width: 100%;
+            margin-top: 40px;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 30px;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 0, 0, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .project-card:hover::before {
+            left: 100%;
+        }
+
+        .project-card:hover {
+            transform: translateY(-15px) rotateX(5deg);
+            border-color: var(--primary);
+            box-shadow: 0 30px 60px rgba(255, 0, 0, 0.4);
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .project-rating {
+            display: flex;
+            gap: 5px;
+            font-size: 1.2rem;
+        }
+
+        .project-desc {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            opacity: 0.9;
+            color: var(--text-gray);
+        }
+
+        .project-tags {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .tag {
+            background: rgba(255, 0, 0, 0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: var(--primary);
+            border: 1px solid rgba(255, 0, 0, 0.3);
+        }
+
+        .project-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-small {
+            padding: 10px 20px;
+            font-size: 0.9rem;
+            border-radius: 20px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-view {
+            background: var(--primary);
+            color: var(--secondary);
+            font-weight: 700;
+        }
+
+        .btn-view:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(255, 0, 0, 0.5);
+        }
+
+        .btn-rate {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--secondary);
+            border: 1px solid var(--primary);
+        }
+
+        .btn-rate:hover {
+            background: rgba(255, 0, 0, 0.2);
+        }
+
+        /* ========== REVIEWS SECTION ========== */
+        .reviews {
+            margin-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+        }
+
+        .review-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .review-author {
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .review-stars {
+            color: var(--accent);
+        }
+
+        .review-text {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            color: var(--text-gray);
+        }
+
+        /* ========== UPCOMING PROJECTS SECTION ========== */
+        .upcoming-section {
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .upcoming-intro {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 60px;
+            padding: 30px;
+            background: var(--card-bg);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 0, 0, 0.2);
+        }
+
+        .upcoming-intro h3 {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        .upcoming-intro p {
+            color: var(--text-gray);
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .projects-announcements {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            width: 100%;
+        }
+
+        .announcement-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 0, 0, 0.2);
+            border-radius: 20px;
+            padding: 30px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .announcement-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(255, 0, 0, 0.3);
+        }
+
+        .announcement-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), #ff3333);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .announcement-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .announcement-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .announcement-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .announcement-status {
+            background: rgba(255, 0, 0, 0.1);
+            color: var(--primary);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border: 1px solid rgba(255, 0, 0, 0.3);
+        }
+
+        .announcement-description {
+            color: var(--text-gray);
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .announcement-features {
+            margin-bottom: 20px;
+        }
+
+        .announcement-features h4 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .features-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+
+        .feature-item {
+            background: rgba(255, 0, 0, 0.1);
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            color: var(--primary);
+            border: 1px solid rgba(255, 0, 0, 0.3);
+        }
+
+        .technologies {
+            margin-bottom: 20px;
+        }
+
+        .technologies h4 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .tech-list {
+            list-style: none;
+        }
+
+        .tech-list li {
+            color: var(--text-gray);
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .tech-list li:before {
+            content: "•";
+            color: var(--primary);
+            position: absolute;
+            left: 0;
+        }
+
+        /* ========== CONTACT SECTION ========== */
+        .contact-section {
+            min-height: auto;
+            padding: 80px 20px;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            width: 100%;
+            margin-top: 40px;
+        }
+
+        .contact-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            border-radius: 25px;
+            padding: 40px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 25px 50px rgba(255, 0, 0, 0.3);
+        }
+
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), #ff3333);
+        }
+
+        .contact-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .contact-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary), #ff3333);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: var(--secondary);
+        }
+
+        .contact-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            border-color: var(--primary);
+            background: rgba(255, 0, 0, 0.1);
+            transform: translateX(10px);
+        }
+
+        .item-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 0, 0, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            color: var(--primary);
+            border: 1px solid rgba(255, 0, 0, 0.3);
+        }
+
+        .item-details h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            color: var(--text-light);
+        }
+
+        .item-details p {
+            color: var(--text-gray);
+            font-size: 0.95rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 1.3rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: linear-gradient(135deg, var(--primary), #ff3333);
+            color: var(--secondary);
+            transform: translateY(-5px) rotate(5deg);
+            box-shadow: 0 10px 20px rgba(255, 0, 0, 0.3);
+        }
+
+        .contact-form {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            border-radius: 25px;
+            padding: 40px;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: var(--text-light);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
+        }
+
+        textarea.form-input {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* ========== MODALS ========== */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            border-radius: 30px;
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            transform: rotate(90deg);
+            color: #ff3333;
+        }
+
+        .star-rating {
+            display: flex;
+            gap: 10px;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+
+        .star {
+            color: rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .star.active,
+        .star:hover {
+            color: var(--accent);
+            transform: scale(1.2);
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 1024px) {
+            .header-nav {
+                display: flex;
+                position: static;
+                background: transparent;
+                flex-direction: row;
+                padding: 0;
+            }
+
+            .nav {
+                right: 20px;
+            }
+            
+            .nav-link {
+                padding: 0.3rem 0.6rem;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-nav {
+                display: none;
+            }
+            
+            .projects-grid,
+            .projects-announcements {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .skills-container {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .header {
+                padding: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                justify-content: center;
+            }
+            
+            .logo {
+                font-size: 1.5rem;
+            }
+            
+            .nav {
+                right: 10px;
+            }
+        }
+
+        /* ========== LOADING ========== */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">SAI TECH</div>
+        
+        <nav class="header-nav" id="headerNav">
+            <a href="#hero" class="nav-link active">Home</a>
+            <a href="#about" class="nav-link">About</a>
+            <a href="#skills" class="nav-link">Skills</a>
+            <a href="#projects" class="nav-link">Projects</a>
+            <a href="#upcoming" class="nav-link">Upcoming Projects</a>
+            <a href="#contact" class="nav-link">Contact</a>
+        </nav>
+
+        <!-- Removed mobile menu button -->
+        <div class="header-actions">
+            <!-- No hamburger menu button here -->
+        </div>
+    </header>
+
+    <!-- Canvas -->
+    <canvas id="canvas3d"></canvas>
+
+    <!-- Side Navigation -->
+    <div class="nav">
+        <div class="nav-dot active" data-section="hero"></div>
+        <div class="nav-dot" data-section="about"></div>
+        <div class="nav-dot" data-section="skills"></div>
+        <div class="nav-dot" data-section="projects"></div>
+        <div class="nav-dot" data-section="upcoming"></div>
+        <div class="nav-dot" data-section="contact"></div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+        <!-- Hero Section -->
+        <section class="hero" id="hero">
+            <h1>SAI TECH</h1>
+            <p>Where Ideas Become Reality</p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary" data-link="projects">View Projects</button>
+               
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-card">
+                <div class="about-content">
+                    <h3>👋 Hello, I'm Saiyam!</h3>
+                    <p>I'm a passionate AI developer and tech enthusiast dedicated to building innovative solutions that push the boundaries of what's possible. With expertise in machine learning, web development, and creative problem-solving, I transform ideas into reality.</p>
+                    <p>My journey in tech has been driven by curiosity and a desire to create meaningful impact through technology. I specialize in AI applications, full-stack development, and building intuitive user experiences.</p>
+                    <p>🚀 Currently working on exciting AI projects and always open to collaboration!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills">
+            <h2 class="section-title">Skills & Expertise</h2>
+            <div class="skills-container">
+                <!-- AI Development -->
+                <div class="skill-card">
+                    <div class="skill-header">
+                        <div class="skill-icon">🤖</div>
+                        <div class="skill-name">AI Development</div>
+                    </div>
+                    <p class="skill-desc">Building intelligent systems using modern AI tools and frameworks.</p>
+                    <div class="skill-tools">
+                        <span class="tool-tag">ChatGPT</span>
+                        <span class="tool-tag">AI Assistants</span>
+                        <span class="tool-tag">Prompt Engineering</span>
+                    </div>
+                </div>
+
+                <!-- Web Development -->
+                <div class="skill-card">
+                    <div class="skill-header">
+                        <div class="skill-icon">🌐</div>
+                        <div class="skill-name">Web Development</div>
+                    </div>
+                    <p class="skill-desc">Creating responsive and interactive web applications.</p>
+                    <div class="skill-tools">
+                        <span class="tool-tag">HTML/CSS</span>
+                        <span class="tool-tag">JavaScript</span>
+                        <span class="tool-tag">Three.js</span>
+                    </div>
+                </div>
+
+                <!-- AI Tools Mastery -->
+                <div class="skill-card">
+                    <div class="skill-header">
+                        <div class="skill-icon">⚡</div>
+                        <div class="skill-name">AI Tools Mastery</div>
+                    </div>
+                    <p class="skill-desc">Expert in using AI-powered tools for efficient development.</p>
+                    <div class="skill-tools">
+                        <span class="tool-tag">GitHub Copilot</span>
+                        <span class="tool-tag">AI Code Assistants</span>
+                        <span class="tool-tag">Automation</span>
+                    </div>
+                </div>
+
+                <!-- Rapid Prototyping -->
+                <div class="skill-card">
+                    <div class="skill-header">
+                        <div class="skill-icon">🚀</div>
+                        <div class="skill-name">Rapid Prototyping</div>
+                    </div>
+                    <p class="skill-desc">Quickly building and testing ideas using modern tools.</p>
+                    <div class="skill-tools">
+                        <span class="tool-tag">Fast Development</span>
+                        <span class="tool-tag">MVP Building</span>
+                        <span class="tool-tag">Iteration</span>
+                    </div>
+                </div>
+
+                <!-- Creative Problem Solving -->
+                <div class="skill-card">
+                    <div class="skill-header">
+                        <div class="skill-icon">💡</div>
+                        <div class="skill-name">Creative Solutions</div>
+                    </div>
+                    <p class="skill-desc">Finding innovative ways to solve complex problems.</p>
+                    <div class="skill-tools">
+                        <span class="tool-tag">Innovation</span>
+                        <span class="tool-tag">Problem Solving</span>
+                        <span class="tool-tag">Out-of-the-box Thinking</span>
+                    </div>
+                </div>
+
+                <!-- Project Management -->
+                <div class="skill-card">
+                    <div class="skill-header">
+                        <div class="skill-icon">📊</div>
+                        <div class="skill-name">Project Management</div>
+                    </div>
+                    <p class="skill-desc">Planning and executing projects efficiently using AI assistance.</p>
+                    <div class="skill-tools">
+                        <span class="tool-tag">Planning</span>
+                        <span class="tool-tag">Execution</span>
+                        <span class="tool-tag">AI Coordination</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects">
+            <h2 class="section-title">Projects</h2>
+            <div class="projects-grid" id="projectsGrid">
+                <!-- Projects will be loaded here -->
+            </div>
+        </section>
+
+        <!-- Upcoming Projects Section -->
+        <section id="upcoming">
+            <h2 class="section-title">Upcoming Projects</h2>
+            
+            <div class="upcoming-section">
+                <!-- Introduction -->
+                <div class="upcoming-intro">
+                    <h3>🚀 Exciting Projects Coming Soon!</h3>
+                    <p>I'm currently working on some innovative AI projects that will be launched soon. Here's a sneak peek at what's in development:</p>
+                    <p>These projects focus on cutting-edge AI technology, creative problem-solving, and user-friendly experiences.</p>
+                </div>
+
+                <!-- Project Announcements -->
+                <div class="projects-announcements">
+                    <!-- Project 1 -->
+                    <div class="announcement-card">
+                        <div class="announcement-header">
+                            <h3 class="announcement-title">AI-Powered Personal Assistant</h3>
+                            <span class="announcement-status">In Development • Q2 2024</span>
+                        </div>
+                        
+                        <p class="announcement-description">
+                            An advanced AI assistant that understands context and can help with daily tasks, learning, and productivity. Features natural conversation and multi-modal capabilities.
+                        </p>
+                        
+                        <div class="announcement-features">
+                            <h4>Key Features:</h4>
+                            <div class="features-list">
+                                <span class="feature-item">Voice & Text Interface</span>
+                                <span class="feature-item">Context Awareness</span>
+                                <span class="feature-item">Task Automation</span>
+                            </div>
+                        </div>
+                        
+                        <div class="technologies">
+                            <h4>Technologies Used:</h4>
+                            <ul class="tech-list">
+                                <li>Natural Language Processing</li>
+                                <li>Machine Learning Models</li>
+                                <li>Real-time Processing</li>
+                                <li>Cloud Integration</li>
+                                <li>API Development</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="announcement-card">
+                        <div class="announcement-header">
+                            <h3 class="announcement-title">3D Interactive Learning Platform</h3>
+                            <span class="announcement-status">In Development • Q3 2024</span>
+                        </div>
+                        
+                        <p class="announcement-description">
+                            An immersive educational platform that uses 3D graphics and interactive simulations to make learning complex concepts easy and engaging.
+                        </p>
+                        
+                        <div class="announcement-features">
+                            <h4>Key Features:</h4>
+                            <div class="features-list">
+                                <span class="feature-item">Interactive 3D Models</span>
+                                <span class="feature-item">Real-time Simulations</span>
+                                <span class="feature-item">Progress Tracking</span>
+                            </div>
+                        </div>
+                        
+                        <div class="technologies">
+                            <h4>Technologies Used:</h4>
+                            <ul class="tech-list">
+                                <li>Three.js / WebGL</li>
+                                <li>WebRTC for Collaboration</li>
+                                <li>Real-time Databases</li>
+                                <li>Interactive UI/UX</li>
+                                <li>Performance Optimization</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Project 3 -->
+                    <div class="announcement-card">
+                        <div class="announcement-header">
+                            <h3 class="announcement-title">Smart Health Monitoring System</h3>
+                            <span class="announcement-status">Planning Stage • Q4 2024</span>
+                        </div>
+                        
+                        <p class="announcement-description">
+                            AI-powered health monitoring system that tracks vital signs and provides personalized health insights using machine learning algorithms.
+                        </p>
+                        
+                        <div class="announcement-features">
+                            <h4>Key Features:</h4>
+                            <div class="features-list">
+                                <span class="feature-item">Health Data Analysis</span>
+                                <span class="feature-item">Predictive Insights</span>
+                                <span class="feature-item">Privacy-First Design</span>
+                            </div>
+                        </div>
+                        
+                        <div class="technologies">
+                            <h4>Technologies Used:</h4>
+                            <ul class="tech-list">
+                                <li>Machine Learning Algorithms</li>
+                                <li>Data Security Protocols</li>
+                                <li>Mobile & Web Integration</li>
+                                <li>Real-time Analytics</li>
+                                <li>Health Data Standards</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact-section">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-grid">
+                <!-- Contact Info Card -->
+                <div class="contact-card">
+                    <div class="contact-header">
+                        <div class="contact-icon">📞</div>
+                        <h3 class="contact-title">Contact Info</h3>
+                    </div>
+                    
+                    <div class="contact-info">
+                        <!-- Phone -->
+                        <div class="contact-item">
+                            <div class="item-icon">📱</div>
+                            <div class="item-details">
+                                <h4>Phone Number</h4>
+                                <p>+91 6398068797</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Email -->
+                        <div class="contact-item">
+                            <div class="item-icon">✉️</div>
+                            <div class="item-details">
+                                <h4>Email Address</h4>
+                                <p>saiyamjain2405@gmail.com</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Location -->
+                        <div class="contact-item">
+                            <div class="item-icon">📍</div>
+                            <div class="item-details">
+                                <h4>Location</h4>
+                                <p>Muzaffarnagar</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Availability -->
+                        <div class="contact-item">
+                            <div class="item-icon">⏰</div>
+                            <div class="item-details">
+                                <h4>Availability</h4>
+                                <p>Mon-Fri: 10AM - 7PM</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Social Media -->
+                    <h4 style="color: var(--primary); margin: 2rem 0 1rem; font-size: 1.2rem;">Connect With Me</h4>
+                    <div class="social-links">
+                        <a href="https://github.com/saiyam-creator" target="_blank" class="social-link">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        
+                        <a href="https://x.com/saiyam2405" target="_blank" class="social-link">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://instagram.com/saiiyam_jain" target="_blank" class="social-link">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://discord.gg/yourinvite" target="_blank" class="social-link">
+                            <i class="fab fa-discord"></i>
+                        </a>
+                       
+                    </div>
+                </div>
+
+                <!-- Quick Message Card -->
+                <div class="contact-card">
+                    <div class="contact-header">
+                        <div class="contact-icon">💬</div>
+                        <h3 class="contact-title">Quick Message</h3>
+                    </div>
+                    
+                    <div class="contact-form">
+                        <div class="form-group">
+                            <label>Your Name</label>
+                            <input type="text" class="form-input" placeholder="Enter your name" id="contactName">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <input type="email" class="form-input" placeholder="your@email.com" id="contactEmail">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Subject</label>
+                            <select class="form-input" id="contactSubject">
+                                <option value="project">Project Inquiry</option>
+                                <option value="collab">Collaboration</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Message</label>
+                            <textarea class="form-input" placeholder="Hi Sai, I'd like to discuss..." id="contactMessage"></textarea>
+                        </div>
+                        
+                        <button class="btn btn-primary" style="width: 100%;" data-action="send-message">
+                            <i class="fas fa-paper-plane"></i> Send Message
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Rating Modal -->
+    <div class="modal" id="ratingModal">
+        <div class="modal-content">
+            <span class="modal-close" data-action="close-rating">&times;</span>
+            <h2 style="color: var(--primary); margin-bottom: 30px;">Rate Project</h2>
+            <div class="form-group">
+                <label>Your Name</label>
+                <input type="text" id="reviewerName" placeholder="Enter your name">
+            </div>
+            <div class="form-group">
+                <label>Rating</label>
+                <div class="star-rating" id="starRating">
+                    <span class="star" data-rating="1">★</span>
+                    <span class="star" data-rating="2">★</span>
+                    <span class="star" data-rating="3">★</span>
+                    <span class="star" data-rating="4">★</span>
+                    <span class="star" data-rating="5">★</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Review</label>
+                <textarea id="reviewText" rows="4" placeholder="Share your thoughts..."></textarea>
+            </div>
+            <button class="btn btn-primary" data-action="submit-review">Submit Review</button>
+        </div>
+    </div>
+
+    <!-- Job Application Modal - REMOVED -->
+    
+    <!-- Job Details Modal - REMOVED -->
+
+    <!-- Font Awesome for icons -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- Supabase JS Library ADD KAREIN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        // ============= SUPABASE CONFIGURATION =============
+        // YAHAN APNA SUPABASE CREDENTIALS DALEN
+        const SUPABASE_CONFIG = {
+            url: 'https://woofmttbekotbolbgryv.supabase.co',  // CHANGE THIS
+            anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Indvb2ZtdHRiZWtvdGJvbGJncnl2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU3NjI0NzMsImV4cCI6MjA4MTMzODQ3M30.Ujr6y94vhdz3Xya7GShsxLT3mdx629oMkq144KMQwso'           // CHANGE THIS
+        };
+
+        // Initialize Supabase client
+        const supabase = window.supabase.createClient(
+            SUPABASE_CONFIG.url,
+            SUPABASE_CONFIG.anonKey
+        );
+
+        // ============= CONFIGURATION SECTION =============
+        const SITE_CONFIG = {
+            personal: {
+                name: "Sai",
+                phone: "+91 98765 43210",
+                email: "hello@saitech.dev",
+                location: "Remote - Available Worldwide",
+                availability: "Mon-Fri: 10AM - 7PM"
+            },
+
+            social: {
+                github: "https://github.com/yourusername",
+                linkedin: "https://linkedin.com/in/yourusername",
+                twitter: "https://twitter.com/yourusername",
+                instagram: "https://instagram.com/yourusername",
+                discord: "https://discord.gg/yourinvite",
+                youtube: "https://youtube.com/yourchannel"
+            },
+
+            projects: [
+                {
+                    id: 'project1',
+                    title: 'stock-calculator',
+                    description: 'its a Advanced stock claculator which can calculate you P&L according to your investment.',
+                    tags: ['AI', 'Python', 'JAVA'],
+                    demoLink: 'https://saiyam-creator.github.io/stock-calculator/',
+                    codeLink: 'https://github.com/saiyam-creator/stock-calculator',
+                    rating: 4.5
+                },
+                {
+                    id: 'project2',
+                    title: 'investment calculator',
+                    description: 'No description available.',
+                    tags: ['HTML', 'CSS', 'JavaScript'],
+                    demoLink: 'https://saiyam-creator.github.io/investment-calculate/',
+                    codeLink: 'https://github.com/saiyam-creator/investment-calculate',
+                    rating: 4.8
+                },
+                {
+                    id: 'project3',
+                    title: 'English-Corrector',
+                    description: 'here you can improve your english grammer.',
+                    tags: ['HTML', 'CSS', 'JS'],
+                    demoLink: 'https://saiyam-creator.github.io/correct-english/',
+                    codeLink: 'https://github.com/saiyam-creator/correct-english',
+                    rating: 4.3
+                },
+                  {
+                    id: 'project4',
+                    title: 'solar-system',
+                    description: 'in this project you can see the solar system in 3D view.',
+                    tags: ['AI'],
+                    demoLink: 'https://saiyam-creator.github.io/solar-system/',
+                    codeLink: 'https://github.com/saiyam-creator/solar-system',
+                    rating: 4.3
+                },
+               
+                  {
+                    id: 'project5',
+                    title: 'All About Shapes',
+                    description: 'An educational app teaching kids about shapes using interactive visuals and quizzes.',
+                    tags: ['js', 'HTML', 'CSS'],
+                    demoLink: 'https://saiyam-creator.github.io/all-about-shapes/',
+                    codeLink: 'https://github.com/saiyam-creator/all-about-shapes',
+                    rating: 4.3
+                },
+               
+                 
+               
+               
+            ]
+        };
+
+        // ============= THREE.JS BACKGROUND =============
+        function init3DBackground() {
+            const canvas = document.getElementById('canvas3d');
+            if (!canvas) return;
+
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ 
+                canvas, 
+                alpha: true, 
+                antialias: true 
+            });
+            
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+            // Create floating geometry with red theme
+            const createFloatingGeometry = (type, size, color) => {
+                let geometry;
+                switch(type) {
+                    case 'torus': geometry = new THREE.TorusGeometry(size, size/3, 16, 100); break;
+                    case 'sphere': geometry = new THREE.SphereGeometry(size, 32, 32); break;
+                    case 'cube': geometry = new THREE.BoxGeometry(size, size, size); break;
+                    default: geometry = new THREE.IcosahedronGeometry(size, 0);
+                }
+                
+                const material = new THREE.MeshStandardMaterial({ 
+                    color: color,
+                    wireframe: true,
+                    transparent: true,
+                    opacity: 0.6,
+                    emissive: color,
+                    emissiveIntensity: 0.2
+                });
+                
+                return new THREE.Mesh(geometry, material);
+            };
+
+            // Add floating objects with red colors
+            const objects = [
+                { mesh: createFloatingGeometry('torus', 10, 0xff0000), speed: 0.005 },
+                { mesh: createFloatingGeometry('sphere', 7, 0xff3333), speed: 0.007 },
+                { mesh: createFloatingGeometry('cube', 8, 0xff6666), speed: 0.003 }
+            ];
+
+            objects.forEach(obj => {
+                obj.mesh.position.set(
+                    (Math.random() - 0.5) * 30,
+                    (Math.random() - 0.5) * 30,
+                    (Math.random() - 0.5) * 30 - 50
+                );
+                scene.add(obj.mesh);
+            });
+
+            // Add particles with red color
+            const particlesCount = 2000;
+            const particlesGeometry = new THREE.BufferGeometry();
+            const positions = new Float32Array(particlesCount * 3);
+            
+            for(let i = 0; i < particlesCount * 3; i++) {
+                positions[i] = (Math.random() - 0.5) * 100;
+            }
+            
+            particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            
+            const particlesMaterial = new THREE.PointsMaterial({
+                size: 0.1,
+                color: 0xff0000,
+                transparent: true,
+                opacity: 0.6
+            });
+            
+            const particles = new THREE.Points(particlesGeometry, particlesMaterial);
+            scene.add(particles);
+
+            // Lighting with red tones
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+            const pointLight1 = new THREE.PointLight(0xff0000, 1, 50);
+            const pointLight2 = new THREE.PointLight(0xff3333, 1, 50);
+            pointLight1.position.set(20, 20, 20);
+            pointLight2.position.set(-20, -20, 20);
+            scene.add(ambientLight, pointLight1, pointLight2);
+
+            camera.position.z = 30;
+
+            // Mouse interaction
+            let mouseX = 0, mouseY = 0;
+            let targetX = 0, targetY = 0;
+
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX / window.innerWidth;
+                mouseY = e.clientY / window.innerHeight;
+                targetX = (mouseX - 0.5) * 2;
+                targetY = (mouseY - 0.5) * 2;
+            });
+
+            // Animation loop
+            function animate() {
+                requestAnimationFrame(animate);
+
+                const time = Date.now() * 0.001;
+
+                // Animate objects
+                objects.forEach((obj, i) => {
+                    obj.mesh.rotation.x += obj.speed;
+                    obj.mesh.rotation.y += obj.speed * 1.3;
+                    obj.mesh.position.y += Math.sin(time + i) * 0.02;
+                    
+                    // Follow cursor slightly
+                    obj.mesh.position.x += (targetX * 5 - obj.mesh.position.x) * 0.02;
+                    obj.mesh.position.y += (targetY * 5 - obj.mesh.position.y) * 0.02;
+                });
+
+                // Animate particles
+                particles.rotation.y += 0.001;
+
+                // Camera movement
+                camera.position.x += (targetX * 10 - camera.position.x) * 0.05;
+                camera.position.y += (-targetY * 10 - camera.position.y) * 0.05;
+
+                renderer.render(scene, camera);
+            }
+
+            animate();
+
+            // Handle resize
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+        }
+
+        // ============= ENHANCED STORAGE MANAGER WITH SUPABASE =============
+        class EnhancedStorageManager {
+            constructor() {
+                this.prefix = 'sai_portfolio_';
+                this.syncQueue = [];
+                this.initializeSync();
+            }
+
+            set(key, value) {
+                try {
+                    localStorage.setItem(this.prefix + key, JSON.stringify(value));
+                } catch (e) {
+                    console.warn('LocalStorage not available, using fallback');
+                    this.fallbackStorage = this.fallbackStorage || {};
+                    this.fallbackStorage[key] = value;
+                }
+            }
+
+            get(key) {
+                try {
+                    const item = localStorage.getItem(this.prefix + key);
+                    return item ? JSON.parse(item) : null;
+                } catch (e) {
+                    return (this.fallbackStorage && this.fallbackStorage[key]) || null;
+                }
+            }
+
+            remove(key) {
+                try {
+                    localStorage.removeItem(this.prefix + key);
+                } catch (e) {
+                    if (this.fallbackStorage) {
+                        delete this.fallbackStorage[key];
+                    }
+                }
+            }
+
+            // ============= DATABASE SYNC METHODS =============
+            addToSyncQueue(type, data) {
+                this.syncQueue.push({ type, data, timestamp: Date.now() });
+                this.saveSyncQueue();
+                
+                // Try immediate sync if online
+                if (navigator.onLine) {
+                    this.syncWithDatabase();
+                }
+            }
+
+            saveSyncQueue() {
+                localStorage.setItem(this.prefix + 'sync_queue', JSON.stringify(this.syncQueue));
+            }
+
+            loadSyncQueue() {
+                const queue = localStorage.getItem(this.prefix + 'sync_queue');
+                this.syncQueue = queue ? JSON.parse(queue) : [];
+            }
+
+            async initializeSync() {
+                this.loadSyncQueue();
+                
+                // Sync immediately if online
+                if (navigator.onLine && this.syncQueue.length > 0) {
+                    await this.syncWithDatabase();
+                }
+                
+                // Listen for online status
+                window.addEventListener('online', () => this.syncWithDatabase());
+                
+                // Periodic sync every 2 minutes
+                setInterval(() => this.syncWithDatabase(), 2 * 60 * 1000);
+            }
+
+            async syncWithDatabase() {
+                if (this.syncQueue.length === 0 || !navigator.onLine) return;
+
+                const failedItems = [];
+                
+                for (const item of this.syncQueue) {
+                    try {
+                        switch(item.type) {
+                            case 'review':
+                                await this.saveReviewToDB(item.data);
+                                break;
+                            case 'contact_message':
+                                await this.saveContactMessageToDB(item.data);
+                                break;
+                        }
+                    } catch (error) {
+                        console.error('Sync failed for', item.type, error);
+                        failedItems.push(item);
+                    }
+                }
+                
+                // Update queue with failed items only
+                this.syncQueue = failedItems;
+                this.saveSyncQueue();
+            }
+
+            // ============= SUPABASE DATABASE METHODS =============
+            async saveReviewToDB(review) {
+                const { error } = await supabase
+                    .from('reviews')
+                    .insert([
+                        {
+                            project_id: review.projectId,
+                            reviewer_name: review.name,
+                            rating: review.rating,
+                            review_text: review.text,
+                            created_at: new Date().toISOString()
+                        }
+                    ]);
+
+                if (error) throw error;
+                return true;
+            }
+
+            async saveContactMessageToDB(message) {
+                const { error } = await supabase
+                    .from('contact_messages')
+                    .insert([
+                        {
+                            name: message.name,
+                            email: message.email,
+                            subject: message.subject || '',
+                            message: message.message,
+                            created_at: new Date().toISOString()
+                        }
+                    ]);
+
+                if (error) throw error;
+                return true;
+            }
+
+            async getReviewsFromDB(projectId) {
+                try {
+                    const { data, error } = await supabase
+                        .from('reviews')
+                        .select('*')
+                        .eq('project_id', projectId)
+                        .order('created_at', { ascending: false })
+                        .limit(10);
+
+                    if (error) throw error;
+
+                    return data.map(row => ({
+                        name: row.reviewer_name,
+                        rating: row.rating,
+                        text: row.review_text,
+                        date: row.created_at
+                    }));
+                } catch (error) {
+                    console.error('Error fetching reviews from DB:', error);
+                    return [];
+                }
+            }
+        }
+
+        // Initialize storage manager
+        const storage = new EnhancedStorageManager();
+
+        // ============= ENHANCED PROJECT MANAGER =============
+        class ProjectManager {
+            constructor() {
+                this.currentProjectId = null;
+                this.selectedRating = 0;
+            }
+
+            async loadProjects() {
+                const grid = document.getElementById('projectsGrid');
+                if (!grid) return;
+
+                grid.innerHTML = '';
+
+                for (const project of SITE_CONFIG.projects) {
+                    // Get reviews - try database first, then local storage
+                    let reviews = [];
+                    
+                    // Try to fetch from database if online
+                    if (navigator.onLine) {
+                        try {
+                            reviews = await storage.getReviewsFromDB(project.id);
+                        } catch (dbError) {
+                            console.log('Using local reviews due to DB error:', dbError);
+                            reviews = await this.getLocalReviews(project.id);
+                        }
+                    } else {
+                        // Offline - use local storage
+                        reviews = await this.getLocalReviews(project.id);
+                    }
+                    
+                    const avgRating = this.calculateAverageRating(reviews);
+                    
+                    const card = document.createElement('div');
+                    card.className = 'project-card';
+                    card.innerHTML = `
+                        <div class="project-header">
+                            <div class="project-title">${project.title}</div>
+                            <div class="project-rating">${this.renderStars(avgRating)}</div>
+                        </div>
+                        <p class="project-desc">${project.description}</p>
+                        <div class="project-tags">
+                            ${project.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                        </div>
+                        <div class="project-actions">
+                            <button class="btn-small btn-view" data-action="view-project" data-link="${project.demoLink}">
+                                View Demo
+                            </button>
+                            <button class="btn-small btn-view" data-action="view-code" data-link="${project.codeLink}">
+                                View Code
+                            </button>
+                            <button class="btn-small btn-rate" data-action="rate-project" data-project="${project.id}">
+                                Rate
+                            </button>
+                        </div>
+                        <div class="reviews" id="reviews-${project.id}">
+                            ${reviews.length > 0 ? `
+                                <h4 style="color: var(--primary); margin-bottom: 15px;">Reviews (${reviews.length})</h4>
+                                ${reviews.slice(0, 3).map(review => `
+                                    <div class="review-item">
+                                        <div class="review-header">
+                                            <span class="review-author">${review.name}</span>
+                                            <span class="review-stars">${this.renderStars(review.rating)}</span>
+                                        </div>
+                                        <p class="review-text">${review.text}</p>
+                                    </div>
+                                `).join('')}
+                            ` : ''}
+                        </div>
+                    `;
+                    grid.appendChild(card);
+                }
+            }
+
+            async getLocalReviews(projectId) {
+                const reviews = storage.get(`reviews_${projectId}`);
+                return reviews || [];
+            }
+
+            async saveReview(projectId, review) {
+                // Save locally first (immediate)
+                const reviews = await this.getLocalReviews(projectId);
+                reviews.push(review);
+                storage.set(`reviews_${projectId}`, reviews);
+                
+                // Add to sync queue for database
+                storage.addToSyncQueue('review', {
+                    projectId,
+                    name: review.name,
+                    rating: review.rating,
+                    text: review.text
+                });
+            }
+
+            calculateAverageRating(reviews) {
+                if (reviews.length === 0) return 0;
+                const sum = reviews.reduce((acc, r) => acc + r.rating, 0);
+                return (sum / reviews.length).toFixed(1);
+            }
+
+            renderStars(rating) {
+                const fullStars = Math.floor(rating);
+                const halfStar = rating % 1 >= 0.5;
+                const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
+                
+                return '★'.repeat(fullStars) + (halfStar ? '½' : '') + '☆'.repeat(emptyStars);
+            }
+
+            openRatingModal(projectId) {
+                this.currentProjectId = projectId;
+                this.selectedRating = 0;
+                document.getElementById('reviewerName').value = '';
+                document.getElementById('reviewText').value = '';
+                document.querySelectorAll('.star').forEach(star => star.classList.remove('active'));
+                document.getElementById('ratingModal').classList.add('active');
+            }
+
+            async submitReview() {
+                const name = document.getElementById('reviewerName').value.trim();
+                const text = document.getElementById('reviewText').value.trim();
+
+                if (!name || !text || this.selectedRating === 0) {
+                    alert('Please fill all fields and select a rating!');
+                    return;
+                }
+
+                const review = {
+                    name,
+                    rating: this.selectedRating,
+                    text,
+                    date: new Date().toISOString()
+                };
+
+                await this.saveReview(this.currentProjectId, review);
+                this.closeModal('ratingModal');
+                this.loadProjects();
+                alert('Thank you for your review!');
+            }
+
+            closeModal(modalId) {
+                document.getElementById(modalId).classList.remove('active');
+            }
+        }
+
+        // ============= ENHANCED CONTACT MANAGER =============
+        class ContactManager {
+            constructor() {
+                this.initializeContactForm();
+            }
+
+            initializeContactForm() {
+                // Load personal info into contact section
+                this.updatePersonalInfo();
+                
+                // Set up message sending
+                document.querySelector('[data-action="send-message"]')?.addEventListener('click', () => {
+                    this.sendMessage();
+                });
+            }
+
+            updatePersonalInfo() {
+                const personal = SITE_CONFIG.personal;
+                const social = SITE_CONFIG.social;
+                console.log('Contact info loaded:', personal);
+                console.log('Social links loaded:', social);
+            }
+
+            async sendMessage() {
+                const name = document.getElementById('contactName').value.trim();
+                const email = document.getElementById('contactEmail').value.trim();
+                const subject = document.getElementById('contactSubject').value;
+                const message = document.getElementById('contactMessage').value.trim();
+
+                if (!name || !email || !message) {
+                    alert('Please fill all fields!');
+                    return;
+                }
+
+                const contactMessage = {
+                    name,
+                    email,
+                    subject,
+                    message,
+                    date: new Date().toISOString()
+                };
+
+                // Save locally first
+                const messages = storage.get('contact_messages') || [];
+                messages.push(contactMessage);
+                storage.set('contact_messages', messages);
+                
+                // Add to sync queue for database
+                storage.addToSyncQueue('contact_message', contactMessage);
+
+                alert('Message sent successfully! I\'ll get back to you soon.');
+                this.resetContactForm();
+            }
+
+            resetContactForm() {
+                document.getElementById('contactName').value = '';
+                document.getElementById('contactEmail').value = '';
+                document.getElementById('contactSubject').value = 'project';
+                document.getElementById('contactMessage').value = '';
+            }
+        }
+
+        // ============= NAVIGATION MANAGER =============
+        class NavigationManager {
+            constructor() {
+                this.initializeNavigation();
+                this.initializeButtonLinks();
+            }
+
+            initializeNavigation() {
+                const sections = document.querySelectorAll('section');
+                const navDots = document.querySelectorAll('.nav-dot');
+                const navLinks = document.querySelectorAll('.nav-link');
+
+                const updateActiveSection = () => {
+                    let current = '';
+                    sections.forEach(section => {
+                        const sectionTop = section.offsetTop;
+                        if (window.scrollY >= sectionTop - 300) {
+                            current = section.getAttribute('id');
+                        }
+                    });
+
+                    navDots.forEach(dot => {
+                        dot.classList.remove('active');
+                        if (dot.getAttribute('data-section') === current) {
+                            dot.classList.add('active');
+                        }
+                    });
+
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === `#${current}`) {
+                            link.classList.add('active');
+                        }
+                    });
+                };
+
+                window.addEventListener('scroll', updateActiveSection);
+
+                navDots.forEach(dot => {
+                    dot.addEventListener('click', () => {
+                        const section = dot.getAttribute('data-section');
+                        this.scrollToSection(section);
+                    });
+                });
+
+                navLinks.forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const href = link.getAttribute('href');
+                        if (href.startsWith('#')) {
+                            this.scrollToSection(href.substring(1));
+                        }
+                    });
+                });
+            }
+
+            initializeButtonLinks() {
+                document.addEventListener('click', (e) => {
+                    const button = e.target.closest('[data-link]');
+                    if (button) {
+                        const link = button.getAttribute('data-link');
+                        if (link.startsWith('#')) {
+                            this.scrollToSection(link.substring(1));
+                        } else if (link !== '#') {
+                            window.open(link, '_blank');
+                        }
+                    }
+
+                    const actionButton = e.target.closest('[data-action]');
+                    if (actionButton) {
+                        const action = actionButton.getAttribute('data-action');
+                        this.handleButtonAction(action, actionButton);
+                    }
+
+                    const socialLink = e.target.closest('.social-link');
+                    if (socialLink) {
+                        const href = socialLink.getAttribute('href');
+                        if (href && href !== '#') {
+                            window.open(href, '_blank');
+                        }
+                    }
+                });
+            }
+
+            scrollToSection(id) {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+
+            handleButtonAction(action, element) {
+                switch(action) {
+                    case 'view-project':
+                        const demoLink = element.getAttribute('data-link');
+                        if (demoLink && demoLink !== '#') {
+                            window.open(demoLink, '_blank');
+                        }
+                        break;
+                        
+                    case 'view-code':
+                        const codeLink = element.getAttribute('data-link');
+                        if (codeLink && codeLink !== '#') {
+                            window.open(codeLink, '_blank');
+                        }
+                        break;
+                        
+                    case 'rate-project':
+                        const projectId = element.getAttribute('data-project');
+                        if (projectId) {
+                            projectManager.openRatingModal(projectId);
+                        }
+                        break;
+                        
+                    case 'submit-review':
+                        projectManager.submitReview();
+                        break;
+                        
+                    case 'close-rating':
+                        document.getElementById('ratingModal').classList.remove('active');
+                        break;
+                        
+                    case 'send-message':
+                        contactManager.sendMessage();
+                        break;
+                }
+            }
+        }
+
+        // ============= STAR RATING SYSTEM =============
+        function initializeStarRating() {
+            const stars = document.querySelectorAll('.star');
+            stars.forEach(star => {
+                star.addEventListener('click', function() {
+                    const rating = parseInt(this.getAttribute('data-rating'));
+                    projectManager.selectedRating = rating;
+                    
+                    stars.forEach((s, index) => {
+                        s.classList.toggle('active', index < rating);
+                    });
+                });
+
+                star.addEventListener('mouseover', function() {
+                    const rating = parseInt(this.getAttribute('data-rating'));
+                    stars.forEach((s, index) => {
+                        s.classList.toggle('active', index < rating);
+                    });
+                });
+
+                star.addEventListener('mouseout', function() {
+                    stars.forEach((s, index) => {
+                        s.classList.toggle('active', index < projectManager.selectedRating);
+                    });
+                });
+            });
+        }
+
+        // ============= MODAL MANAGEMENT =============
+        function initializeModals() {
+            document.querySelectorAll('.modal').forEach(modal => {
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) {
+                        modal.classList.remove('active');
+                    }
+                });
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    document.querySelectorAll('.modal.active').forEach(modal => {
+                        modal.classList.remove('active');
+                    });
+                }
+            });
+        }
+
+        // ============= SUPABASE SETUP GUIDE =============
+        function showSetupGuide() {
+            console.log(`
+            ============= SUPABASE SETUP GUIDE =============
+            
+            1. Go to https://supabase.com
+            2. Create free account
+            3. Create new project
+            4. Go to SQL Editor and run:
+            
+            CREATE TABLE reviews (
+                id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+                project_id TEXT NOT NULL,
+                reviewer_name TEXT NOT NULL,
+                rating INTEGER NOT NULL CHECK (rating >= 1 AND rating <= 5),
+                review_text TEXT NOT NULL,
+                created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+            );
+            
+            CREATE TABLE contact_messages (
+                id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+                name TEXT NOT NULL,
+                email TEXT NOT NULL,
+                subject TEXT,
+                message TEXT NOT NULL,
+                created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+            );
+            
+            5. Go to Settings → API
+            6. Copy URL and anon key
+            7. Replace in code above:
+               SUPABASE_CONFIG.url = 'YOUR_URL'
+               SUPABASE_CONFIG.anonKey = 'YOUR_KEY'
+            `);
+        }
+
+        // ============= INITIALIZE EVERYTHING =============
+        let projectManager;
+        let contactManager;
+        let navigationManager;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Show setup guide in console
+            showSetupGuide();
+            
+            console.log('Supabase initialized:', SUPABASE_CONFIG.url ? 'Connected' : 'Not configured');
+
+            // Initialize managers
+            projectManager = new ProjectManager();
+            contactManager = new ContactManager();
+            navigationManager = new NavigationManager();
+
+            // Initialize systems
+            init3DBackground();
+            initializeStarRating();
+            initializeModals();
+
+            // Load projects
+            projectManager.loadProjects();
+
+            // Add animation on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -100px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // Observe animated elements
+            document.querySelectorAll('.skill-card, .project-card, .contact-card, .contact-item, .announcement-card').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'all 0.6s ease';
+                observer.observe(el);
+            });
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            // Update any responsive elements if needed
+        });
+    </script>
+</body>
+</html>
