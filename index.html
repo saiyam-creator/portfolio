@@ -161,46 +161,141 @@
             transform: scale(1.3);
         }
 
-        /* ========== HERO SECTION ========== */
+        /* ========== UPDATED HERO SECTION ========== */
         .hero {
-            height: calc(100vh - 80px);
+            min-height: 100vh;
             display: flex;
-            flex-direction: column;
-            justify-content: center;
             align-items: center;
-            text-align: center;
-            padding: 20px;
+            justify-content: center;
+            padding: 120px 20px 80px;
             position: relative;
+            overflow: hidden;
         }
 
-        .hero h1 {
-            font-size: clamp(3rem, 10vw, 7rem);
+        .hero-content {
+            max-width: 1200px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-text {
+            position: relative;
+            z-index: 3;
+        }
+
+        .hero-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
             font-weight: 900;
+            margin-bottom: 20px;
             background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 20px;
-            animation: glow 3s ease-in-out infinite;
+            line-height: 1.1;
         }
 
-        @keyframes glow {
-            0%, 100% { filter: drop-shadow(0 0 20px var(--primary)); }
-            50% { filter: drop-shadow(0 0 40px #ff3333); }
+        .hero-title-main {
+            display: block;
+            font-size: clamp(3.5rem, 8vw, 6rem);
+            margin-bottom: 10px;
         }
 
-        .hero p {
-            font-size: clamp(1.2rem, 3vw, 2rem);
-            margin-bottom: 40px;
-            opacity: 0.9;
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
+            font-weight: 600;
+            color: var(--text-light);
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .hero-subtitle::before {
+            content: '';
+            display: block;
+            width: 40px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), #ff3333);
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
             color: var(--text-gray);
+            margin-bottom: 40px;
+            max-width: 600px;
+        }
+
+        .hero-divider {
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(255, 0, 0, 0.3) 20%, 
+                rgba(255, 0, 0, 0.5) 50%, 
+                rgba(255, 0, 0, 0.3) 80%, 
+                transparent 100%);
+            margin: 40px 0;
+        }
+
+        .hero-social-links {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .hero-social-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 25px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 0, 0, 0.2);
+            border-radius: 25px;
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-social-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 0, 0, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .hero-social-link:hover::before {
+            left: 100%;
+        }
+
+        .hero-social-link:hover {
+            background: rgba(255, 0, 0, 0.1);
+            border-color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 0, 0, 0.2);
+        }
+
+        .hero-social-icon {
+            font-size: 1.2rem;
+            color: var(--primary);
         }
 
         .hero-buttons {
             display: flex;
             gap: 20px;
             flex-wrap: wrap;
-            justify-content: center;
+            margin-top: 40px;
         }
 
         .btn {
@@ -252,6 +347,90 @@
         .btn-secondary:hover {
             background: rgba(255, 0, 0, 0.2);
             transform: translateY(-5px);
+        }
+
+        /* Hero Visual/Animation Side */
+        .hero-visual {
+            position: relative;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-visual-container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .floating-element {
+            position: absolute;
+            background: rgba(255, 0, 0, 0.1);
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(255, 0, 0, 0.1);
+            transition: all 0.5s ease;
+            opacity: 0.8;
+        }
+
+        .floating-element:hover {
+            opacity: 1;
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(255, 0, 0, 0.2);
+        }
+
+        .element-1 {
+            top: 10%;
+            left: 10%;
+            width: 150px;
+            height: 150px;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .element-2 {
+            top: 50%;
+            right: 15%;
+            width: 120px;
+            height: 120px;
+            animation: float 5s ease-in-out infinite 0.5s;
+        }
+
+        .element-3 {
+            bottom: 15%;
+            left: 20%;
+            width: 180px;
+            height: 180px;
+            animation: float 7s ease-in-out infinite 1s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        .element-content {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .element-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .element-text {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            font-weight: 600;
         }
 
         /* ========== SECTION STYLES ========== */
@@ -451,13 +630,6 @@
             color: var(--primary);
         }
 
-        .project-rating {
-            display: flex;
-            gap: 5px;
-            font-size: 1.2rem;
-            color: gold;
-        }
-
         .project-desc {
             font-size: 1rem;
             line-height: 1.6;
@@ -515,41 +687,6 @@
 
         .btn-rate:hover {
             background: rgba(255, 0, 0, 0.2);
-        }
-
-        /* ========== REVIEWS SECTION ========== */
-        .reviews {
-            margin-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding-top: 20px;
-        }
-
-        .review-item {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 10px;
-        }
-
-        .review-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-        }
-
-        .review-author {
-            font-weight: 700;
-            color: var(--primary);
-        }
-
-        .review-stars {
-            color: gold;
-        }
-
-        .review-text {
-            font-size: 0.95rem;
-            opacity: 0.9;
-            color: var(--text-gray);
         }
 
         /* ========== UPCOMING PROJECTS SECTION ========== */
@@ -891,71 +1028,6 @@
             min-height: 120px;
         }
 
-        /* ========== MODALS ========== */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .modal.active {
-            display: flex;
-        }
-
-        .modal-content {
-            background: var(--card-bg);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 0, 0, 0.3);
-            border-radius: 30px;
-            padding: 40px;
-            max-width: 600px;
-            width: 100%;
-            max-height: 90vh;
-            overflow-y: auto;
-            position: relative;
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 2rem;
-            cursor: pointer;
-            color: var(--primary);
-            transition: all 0.3s ease;
-        }
-
-        .modal-close:hover {
-            transform: rotate(90deg);
-            color: #ff3333;
-        }
-
-        .star-rating {
-            display: flex;
-            gap: 10px;
-            font-size: 2rem;
-            cursor: pointer;
-        }
-
-        .star {
-            color: rgba(255, 255, 255, 0.3);
-            transition: all 0.3s ease;
-        }
-
-        .star.active,
-        .star:hover {
-            color: gold;
-            transform: scale(1.2);
-        }
-
         /* ========== RESPONSIVE ========== */
         @media (max-width: 1024px) {
             .header-nav {
@@ -974,6 +1046,16 @@
                 padding: 0.3rem 0.6rem;
                 font-size: 0.9rem;
             }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .hero-visual {
+                height: 400px;
+                order: -1;
+            }
         }
 
         @media (max-width: 768px) {
@@ -989,6 +1071,15 @@
             .hero-buttons {
                 flex-direction: column;
                 align-items: center;
+            }
+
+            .hero-social-links {
+                flex-direction: column;
+            }
+
+            .hero-social-link {
+                width: 100%;
+                justify-content: center;
             }
 
             .btn {
@@ -1007,6 +1098,14 @@
             .header {
                 padding: 1rem;
             }
+
+            .hero {
+                padding: 100px 20px 60px;
+            }
+
+            .floating-element {
+                transform: scale(0.9);
+            }
         }
 
         @media (max-width: 480px) {
@@ -1020,6 +1119,24 @@
             
             .nav {
                 right: 10px;
+            }
+
+            .hero-visual {
+                height: 300px;
+            }
+
+            .floating-element {
+                padding: 15px;
+                transform: scale(0.8);
+            }
+
+            .element-1, .element-2, .element-3 {
+                position: relative;
+                margin: 10px;
+                top: auto;
+                left: auto;
+                right: auto;
+                bottom: auto;
             }
         }
 
@@ -1074,12 +1191,60 @@
 
     <!-- Main Content -->
     <div class="content">
-        <!-- Hero Section -->
+        <!-- UPDATED HERO SECTION -->
         <section class="hero" id="hero">
-            <h1>SAI TECH</h1>
-            <p>Where Ideas Become Reality</p>
-            <div class="hero-buttons">
-                <a href="#projects" class="btn btn-primary">View Projects</a>
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">
+                        <span class="hero-title-main">Sai Tech</span>
+                        AI Engineer & Full-Stack Developer
+                    </h1>
+                    
+                    <p class="hero-description">
+                        Hey there! I'm passionate about building intelligent systems that actually solve problems. When I'm not training neural networks, you'll find me exploring new ML architectures or contributing to open source.
+                    </p>
+                    
+                    <div class="hero-divider"></div>
+                    
+                    <div class="hero-social-links">
+                        <a href="https://github.com/saiyam-creator" target="_blank" class="hero-social-link">
+                            <span class="hero-social-icon">🐙</span>
+                            <span>GitHub</span>
+                        </a>
+                       
+                        <a href="#contact" class="hero-social-link">
+                            <span class="hero-social-icon">📧</span>
+                            <span>Contact Me</span>
+                        </a>
+                    </div>
+                    
+                    <div class="hero-buttons">
+                        <a href="#projects" class="btn btn-primary">View Projects</a>
+                    </div>
+                </div>
+                
+                <div class="hero-visual">
+                    <div class="hero-visual-container">
+                        <div class="floating-element element-1">
+                            <div class="element-content">
+                                <div class="element-icon">🤖</div>
+                                <div class="element-text">AI Engineer</div>
+                            </div>
+                        </div>
+                        <div class="floating-element element-2">
+                            <div class="element-content">
+                                <div class="element-icon">💻</div>
+                                <div class="element-text">Full-Stack Dev</div>
+                            </div>
+                        </div>
+                        <div class="floating-element element-3">
+                            <div class="element-content">
+                                <div class="element-icon">🚀</div>
+                                <div class="element-text">ML Architectures</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -1349,33 +1514,6 @@
         </section>
     </div>
 
-    <!-- Rating Modal -->
-    <div class="modal" id="ratingModal">
-        <div class="modal-content">
-            <span class="modal-close" data-action="close-rating">&times;</span>
-            <h2 style="color: var(--primary); margin-bottom: 30px;">Rate Project</h2>
-            <div class="form-group">
-                <label>Your Name</label>
-                <input type="text" id="reviewerName" class="form-input" placeholder="Enter your name">
-            </div>
-            <div class="form-group">
-                <label>Rating</label>
-                <div class="star-rating" id="starRating">
-                    <span class="star" data-rating="1">★</span>
-                    <span class="star" data-rating="2">★</span>
-                    <span class="star" data-rating="3">★</span>
-                    <span class="star" data-rating="4">★</span>
-                    <span class="star" data-rating="5">★</span>
-                </div>
-            </div>
-            <div class="form-group">
-                <label>Review</label>
-                <textarea id="reviewText" class="form-input" rows="4" placeholder="Share your thoughts..."></textarea>
-            </div>
-            <button class="btn btn-primary" data-action="submit-review">Submit Review</button>
-        </div>
-    </div>
-
  <!-- Scripts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -1407,8 +1545,7 @@
                 description: 'Advanced stock calculator which can calculate your P&L according to your investment.',
                 tags: ['AI', 'Python', 'JAVA'],
                 demoLink: 'https://saiyam-creator.github.io/stock-calculator/',
-                codeLink: 'https://github.com/saiyam-creator/stock-calculator',
-                rating: 4.5
+                codeLink: 'https://github.com/saiyam-creator/stock-calculator'
             },
             {
                 id: 'project2',
@@ -1416,8 +1553,7 @@
                 description: 'Calculate your investment returns with advanced algorithms.',
                 tags: ['HTML', 'CSS', 'JavaScript'],
                 demoLink: 'https://saiyam-creator.github.io/investment-calculate/',
-                codeLink: 'https://github.com/saiyam-creator/investment-calculate',
-                rating: 4.8
+                codeLink: 'https://github.com/saiyam-creator/investment-calculate'
             },
             {
                 id: 'project3',
@@ -1425,8 +1561,7 @@
                 description: 'Improve your English grammar with this AI-powered tool.',
                 tags: ['HTML', 'CSS', 'JS'],
                 demoLink: 'https://saiyam-creator.github.io/correct-english/',
-                codeLink: 'https://github.com/saiyam-creator/correct-english',
-                rating: 4.3
+                codeLink: 'https://github.com/saiyam-creator/correct-english'
             },
             {
                 id: 'project4',
@@ -1434,8 +1569,7 @@
                 description: 'Explore our solar system in interactive 3D view.',
                 tags: ['AI', '3D'],
                 demoLink: 'https://saiyam-creator.github.io/solar-system/',
-                codeLink: 'https://github.com/saiyam-creator/solar-system',
-                rating: 4.3
+                codeLink: 'https://github.com/saiyam-creator/solar-system'
             },
             {
                 id: 'project5',
@@ -1443,23 +1577,30 @@
                 description: 'Educational app teaching kids about shapes using interactive visuals.',
                 tags: ['JS', 'HTML', 'CSS'],
                 demoLink: 'https://saiyam-creator.github.io/all-about-shapes/',
-                codeLink: 'https://github.com/saiyam-creator/all-about-shapes',
-                rating: 4.3
+                codeLink: 'https://github.com/saiyam-creator/all-about-shapes'
+            },
+
+{
+                id: 'project6',
+                title: 'Life GPS',
+                description: 'AI-powered life coaching app to help you navigate personal and professional challenges.',
+                tags: ['React', 'AI', 'Web App'],
+                demoLink: 'https://life-gps-coral.vercel.app/',
+                codeLink: 'https://github.com/saiyam-creator/life-gps'
             }
         ]
     };
 
     // ============= FIREBASE CONFIGURATION =============
-    // 🔥 YAHAN APNA FIREBASE CONFIG PASTE KARNA
-  const firebaseConfig = {
-  apiKey: "AIzaSyBfp3xzEFjsfxcqkKIgc2-W0uVAxytNGEU",
-  authDomain: "sai-portfolio-reviews.firebaseapp.com",
-  projectId: "sai-portfolio-reviews",
-  storageBucket: "sai-portfolio-reviews.firebasestorage.app",
-  messagingSenderId: "146249023788",
-  appId: "1:146249023788:web:b75a21ffa16514e67c2c89",
-  measurementId: "G-8GV80F6RTF"
-};
+    const firebaseConfig = {
+        apiKey: "AIzaSyBfp3xzEFjsfxcqkKIgc2-W0uVAxytNGEU",
+        authDomain: "sai-portfolio-reviews.firebaseapp.com",
+        projectId: "sai-portfolio-reviews",
+        storageBucket: "sai-portfolio-reviews.firebasestorage.app",
+        messagingSenderId: "146249023788",
+        appId: "1:146249023788:web:b75a21ffa16514e67c2c89",
+        measurementId: "G-8GV80F6RTF"
+    };
 
     // Initialize Firebase
     let db;
@@ -1581,179 +1722,10 @@
         }
     }
 
-    // ============= FIREBASE REVIEW SYSTEM =============
-    class FirebaseReviewSystem {
-        constructor() {
-            this.db = db;
-        }
-
-        // Save review to Firebase
-        async saveReview(projectId, review) {
-            if (!this.db) {
-                console.log('Firebase not available, saving locally');
-                this.saveToLocalStorage(projectId, review);
-                return false;
-            }
-
-            try {
-                await this.db.collection('reviews').add({
-                    projectId: projectId,
-                    name: review.name,
-                    rating: review.rating,
-                    text: review.text,
-                    timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                    approved: true
-                });
-                
-                // Also save locally for immediate display
-                this.saveToLocalStorage(projectId, review);
-                
-                console.log('✅ Review saved to Firebase');
-                return true;
-            } catch (error) {
-                console.error('❌ Failed to save to Firebase:', error);
-                this.saveToLocalStorage(projectId, review);
-                return false;
-            }
-        }
-
-        // Get reviews from Firebase (with local fallback)
-        async getReviews(projectId) {
-            // First try Firebase
-            if (this.db) {
-                try {
-                    const snapshot = await this.db
-                        .collection('reviews')
-                        .where('projectId', '==', projectId)
-                        .where('approved', '==', true)
-                        .orderBy('timestamp', 'desc')
-                        .limit(20)
-                        .get();
-
-                    if (!snapshot.empty) {
-                        const firebaseReviews = snapshot.docs.map(doc => {
-                            const data = doc.data();
-                            return {
-                                name: data.name,
-                                rating: data.rating,
-                                text: data.text,
-                                date: data.timestamp?.toDate() || new Date(),
-                                source: 'firebase'
-                            };
-                        });
-
-                        // Save to local storage for offline use
-                        this.saveReviewsToLocalStorage(projectId, firebaseReviews);
-                        return firebaseReviews;
-                    }
-                } catch (error) {
-                    console.error('❌ Firebase fetch error:', error);
-                }
-            }
-            
-            // Fallback to local storage
-            return this.getFromLocalStorage(projectId);
-        }
-
-        // Local storage methods
-        saveToLocalStorage(projectId, review) {
-            const reviews = this.getFromLocalStorage(projectId);
-            reviews.push({
-                ...review,
-                date: new Date().toISOString(),
-                source: 'local'
-            });
-            localStorage.setItem(`sai_portfolio_reviews_${projectId}`, JSON.stringify(reviews));
-        }
-
-        saveReviewsToLocalStorage(projectId, reviews) {
-            localStorage.setItem(`sai_portfolio_reviews_${projectId}`, JSON.stringify(reviews));
-        }
-
-        getFromLocalStorage(projectId) {
-            const reviews = localStorage.getItem(`sai_portfolio_reviews_${projectId}`);
-            return reviews ? JSON.parse(reviews) : [];
-        }
-    }
-
-    // ============= FIREBASE MESSAGE SYSTEM =============
-    class FirebaseMessageSystem {
-        constructor() {
-            this.db = db;
-        }
-
-        // Save message to Firebase
-        async saveMessage(messageData) {
-            if (!this.db) {
-                console.log('Firebase not available, saving locally');
-                this.saveMessageToLocalStorage(messageData);
-                return false;
-            }
-
-            try {
-                await this.db.collection('messages').add({
-                    name: messageData.name,
-                    email: messageData.email,
-                    subject: messageData.subject,
-                    message: messageData.message,
-                    timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                    read: false,
-                    replied: false
-                });
-                
-                console.log('✅ Message saved to Firebase');
-                return true;
-            } catch (error) {
-                console.error('❌ Failed to save message:', error);
-                this.saveMessageToLocalStorage(messageData);
-                return false;
-            }
-        }
-
-        // Get messages (for admin)
-        async getMessages(limit = 50) {
-            if (!this.db) return [];
-            
-            try {
-                const snapshot = await this.db
-                    .collection('messages')
-                    .orderBy('timestamp', 'desc')
-                    .limit(limit)
-                    .get();
-
-                return snapshot.docs.map(doc => ({
-                    id: doc.id,
-                    ...doc.data()
-                }));
-            } catch (error) {
-                console.error('❌ Failed to get messages:', error);
-                return [];
-            }
-        }
-
-        // Local storage methods (fallback)
-        saveMessageToLocalStorage(messageData) {
-            const messages = this.getMessagesFromLocalStorage();
-            messages.push({
-                ...messageData,
-                timestamp: new Date().toISOString(),
-                source: 'local'
-            });
-            localStorage.setItem('sai_portfolio_messages', JSON.stringify(messages));
-        }
-
-        getMessagesFromLocalStorage() {
-            const messages = localStorage.getItem('sai_portfolio_messages');
-            return messages ? JSON.parse(messages) : [];
-        }
-    }
-
     // ============= PROJECT MANAGER =============
     class ProjectManager {
         constructor() {
-            this.reviewSystem = new FirebaseReviewSystem();
             this.currentProjectId = null;
-            this.selectedRating = 0;
         }
 
         async loadProjects() {
@@ -1763,16 +1735,11 @@
             grid.innerHTML = '';
 
             for (const project of SITE_CONFIG.projects) {
-                // Get reviews from Firebase (with local fallback)
-                const reviews = await this.reviewSystem.getReviews(project.id);
-                const avgRating = this.calculateAverageRating(reviews);
-                
                 const card = document.createElement('div');
                 card.className = 'project-card';
                 card.innerHTML = `
                     <div class="project-header">
                         <div class="project-title">${project.title}</div>
-                        <div class="project-rating">${this.renderStars(avgRating)}</div>
                     </div>
                     <p class="project-desc">${project.description}</p>
                     <div class="project-tags">
@@ -1785,108 +1752,17 @@
                         <button class="btn-small btn-view" data-action="view-code" data-link="${project.codeLink}">
                             View Code
                         </button>
-                        <button class="btn-small btn-rate" data-action="rate-project" data-project="${project.id}">
-                            Rate
-                        </button>
-                    </div>
-                    <div class="reviews" id="reviews-${project.id}">
-                        ${reviews.length > 0 ? `
-                            <h4 style="color: var(--primary); margin-bottom: 15px;">Reviews (${reviews.length})</h4>
-                            ${reviews.slice(0, 3).map(review => `
-                                <div class="review-item">
-                                    <div class="review-header">
-                                        <span class="review-author">${review.name}</span>
-                                        <span class="review-stars">${this.renderStars(review.rating)}</span>
-                                    </div>
-                                    <p class="review-text">${review.text}</p>
-                                </div>
-                            `).join('')}
-                        ` : ''}
                     </div>
                 `;
                 grid.appendChild(card);
             }
-        }
-
-        calculateAverageRating(reviews) {
-            if (reviews.length === 0) return 0;
-            const sum = reviews.reduce((acc, r) => acc + r.rating, 0);
-            return (sum / reviews.length).toFixed(1);
-        }
-
-        renderStars(rating) {
-            rating = parseFloat(rating);
-            let stars = '';
-            for (let i = 1; i <= 5; i++) {
-                if (i <= Math.floor(rating)) {
-                    stars += '★';
-                } else if (i - 0.5 <= rating) {
-                    stars += '½';
-                } else {
-                    stars += '☆';
-                }
-            }
-            return stars;
-        }
-
-        openRatingModal(projectId) {
-            this.currentProjectId = projectId;
-            this.selectedRating = 0;
-            document.getElementById('reviewerName').value = '';
-            document.getElementById('reviewText').value = '';
-            document.querySelectorAll('.star').forEach(star => star.classList.remove('active'));
-            document.getElementById('ratingModal').classList.add('active');
-        }
-
-        async submitReview() {
-            const name = document.getElementById('reviewerName').value.trim();
-            const text = document.getElementById('reviewText').value.trim();
-
-            if (!name || !text || this.selectedRating === 0) {
-                alert('Please fill all fields and select a rating!');
-                return;
-            }
-
-            const review = {
-                name,
-                rating: this.selectedRating,
-                text,
-                date: new Date().toISOString()
-            };
-
-            // Show loading
-            const submitBtn = document.querySelector('[data-action="submit-review"]');
-            const originalText = submitBtn.textContent;
-            submitBtn.innerHTML = '<div class="loading"></div> Saving...';
-            submitBtn.disabled = true;
-
-            // Save to Firebase
-            const success = await this.reviewSystem.saveReview(this.currentProjectId, review);
-
-            // Reset button
-            submitBtn.textContent = originalText;
-            submitBtn.disabled = false;
-
-            if (success) {
-                alert('✅ Thank you for your review! It is now visible to everyone.');
-            } else {
-                alert('⚠️ Review saved locally. It will sync when Firebase is available.');
-            }
-
-            // Close modal and refresh projects
-            this.closeModal('ratingModal');
-            await this.loadProjects();
-        }
-
-        closeModal(modalId) {
-            document.getElementById(modalId).classList.remove('active');
         }
     }
 
     // ============= CONTACT MANAGER WITH FIREBASE =============
     class ContactManager {
         constructor() {
-            this.messageSystem = new FirebaseMessageSystem();
+            this.db = db;
         }
 
         async sendMessage() {
@@ -1922,7 +1798,7 @@
             sendBtn.disabled = true;
 
             // Save to Firebase
-            const success = await this.messageSystem.saveMessage(messageData);
+            const success = await this.saveMessageToFirebase(messageData);
 
             // Reset button
             sendBtn.innerHTML = originalContent;
@@ -1934,6 +1810,33 @@
             } else {
                 this.showAlert('⚠️ Message saved locally. It will sync when Firebase is available.', 'warning');
                 this.resetContactForm();
+            }
+        }
+
+        async saveMessageToFirebase(messageData) {
+            if (!this.db) {
+                console.log('Firebase not available, saving locally');
+                this.saveMessageToLocalStorage(messageData);
+                return false;
+            }
+
+            try {
+                await this.db.collection('messages').add({
+                    name: messageData.name,
+                    email: messageData.email,
+                    subject: messageData.subject,
+                    message: messageData.message,
+                    timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                    read: false,
+                    replied: false
+                });
+                
+                console.log('✅ Message saved to Firebase');
+                return true;
+            } catch (error) {
+                console.error('❌ Failed to save message:', error);
+                this.saveMessageToLocalStorage(messageData);
+                return false;
             }
         }
 
@@ -1956,6 +1859,21 @@
             document.getElementById('contactEmail').value = '';
             document.getElementById('contactSubject').value = 'project';
             document.getElementById('contactMessage').value = '';
+        }
+
+        saveMessageToLocalStorage(messageData) {
+            const messages = this.getMessagesFromLocalStorage();
+            messages.push({
+                ...messageData,
+                timestamp: new Date().toISOString(),
+                source: 'local'
+            });
+            localStorage.setItem('sai_portfolio_messages', JSON.stringify(messages));
+        }
+
+        getMessagesFromLocalStorage() {
+            const messages = localStorage.getItem('sai_portfolio_messages');
+            return messages ? JSON.parse(messages) : [];
         }
 
         showAlert(message, type = 'info') {
@@ -2065,7 +1983,6 @@
 
                 const action = button.getAttribute('data-action');
                 const link = button.getAttribute('data-link');
-                const projectId = button.getAttribute('data-project');
 
                 switch(action) {
                     case 'view-project':
@@ -2075,67 +1992,12 @@
                         }
                         break;
                         
-                    case 'rate-project':
-                        if (this.projectManager && projectId) {
-                            this.projectManager.openRatingModal(projectId);
-                        }
-                        break;
-                        
-                    case 'submit-review':
-                        if (this.projectManager) {
-                            this.projectManager.submitReview();
-                        }
-                        break;
-                        
-                    case 'close-rating':
-                        if (this.projectManager) {
-                            this.projectManager.closeModal('ratingModal');
-                        }
-                        break;
-                        
                     case 'send-message':
                         if (this.contactManager) {
                             this.contactManager.sendMessage();
                         }
                         break;
                 }
-            });
-
-            // Star rating interaction
-            const stars = document.querySelectorAll('.star');
-            stars.forEach(star => {
-                star.addEventListener('click', () => {
-                    const rating = parseInt(star.getAttribute('data-rating'));
-                    if (this.projectManager) {
-                        this.projectManager.selectedRating = rating;
-                    }
-                    
-                    stars.forEach((s, index) => {
-                        s.classList.toggle('active', index < rating);
-                    });
-                });
-
-                star.addEventListener('mouseover', () => {
-                    const rating = parseInt(star.getAttribute('data-rating'));
-                    stars.forEach((s, index) => {
-                        s.classList.toggle('active', index < rating);
-                    });
-                });
-
-                star.addEventListener('mouseout', () => {
-                    stars.forEach((s, index) => {
-                        const currentRating = this.projectManager ? this.projectManager.selectedRating : 0;
-                        s.classList.toggle('active', index < currentRating);
-                    });
-                });
-            });
-
-            document.querySelectorAll('.modal').forEach(modal => {
-                modal.addEventListener('click', (e) => {
-                    if (e.target === modal) {
-                        modal.classList.remove('active');
-                    }
-                });
             });
 
             document.addEventListener('keydown', (e) => {
