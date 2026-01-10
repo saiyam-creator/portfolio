@@ -1154,6 +1154,620 @@
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
+        
+        
+        /* ========== 3D ROTATING GALLERY ========== */
+.gallery-container {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    min-height: 600px;
+    perspective: 1000px;
+}
+
+/* Gallery Controls */
+.gallery-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    padding: 20px;
+    background: rgba(20, 20, 20, 0.8);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+.nav-btn {
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.nav-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255, 0, 0, 0.2), 
+        transparent);
+    transition: left 0.6s ease;
+}
+
+.nav-btn:hover::before {
+    left: 100%;
+}
+
+.nav-btn:hover {
+    background: rgba(255, 0, 0, 0.1);
+    border-color: var(--primary);
+    transform: scale(1.1);
+}
+
+.nav-btn svg {
+    width: 24px;
+    height: 24px;
+    fill: rgba(255, 255, 255, 0.8);
+    transition: fill 0.3s ease;
+}
+
+.nav-btn:hover svg {
+    fill: var(--primary);
+}
+
+.gallery-info {
+    display: flex;
+    gap: 30px;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 80px;
+}
+
+.info-label {
+    font-size: 0.8rem;
+    letter-spacing: 3px;
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+.info-value {
+    font-family: 'Courier New', monospace;
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--primary);
+    background: rgba(255, 0, 0, 0.1);
+    padding: 5px 15px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 0, 0, 0.3);
+}
+
+/* 3D Carousel */
+.carousel-3d {
+    position: relative;
+    height: 500px;
+    perspective: 1500px;
+    margin: 0 auto;
+}
+
+.carousel-track {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    will-change: transform;
+}
+
+.carousel-item {
+    position: absolute;
+    width: 350px;
+    height: 450px;
+    left: 50%;
+    top: 50%;
+    margin-left: -175px;
+    margin-top: -225px;
+    transform-style: preserve-3d;
+    transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    opacity: 0.5;
+    filter: blur(2px);
+    pointer-events: none;
+}
+
+.carousel-item.active {
+    opacity: 1;
+    filter: blur(0);
+    z-index: 10;
+    pointer-events: auto;
+    transform: translateZ(200px) scale(1.1);
+}
+
+.carousel-item.prev-1 {
+    opacity: 0.8;
+    filter: blur(1px);
+    transform: translateX(-350px) translateZ(100px) scale(0.9);
+    pointer-events: auto;
+}
+
+.carousel-item.next-1 {
+    opacity: 0.8;
+    filter: blur(1px);
+    transform: translateX(350px) translateZ(100px) scale(0.9);
+    pointer-events: auto;
+}
+
+.carousel-item.prev-2 {
+    opacity: 0.3;
+    transform: translateX(-500px) translateZ(0) scale(0.8);
+}
+
+.carousel-item.next-2 {
+    opacity: 0.3;
+    transform: translateX(500px) translateZ(0) scale(0.8);
+}
+
+.carousel-item.prev-3,
+.carousel-item.next-3 {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* Item Content */
+.item-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        145deg,
+        rgba(30, 30, 30, 0.95) 0%,
+        rgba(50, 0, 0, 0.9) 100%
+    );
+    border-radius: 25px;
+    padding: 30px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.item-glow {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    right: -50%;
+    bottom: -50%;
+    background: radial-gradient(
+        circle at center,
+        rgba(255, 0, 0, 0.2) 0%,
+        transparent 70%
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.carousel-item.active .item-glow {
+    opacity: 0.5;
+    animation: glowPulse 2s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.6; }
+}
+
+.item-border {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 25px;
+    padding: 2px;
+    background: linear-gradient(
+        45deg,
+        var(--primary),
+        #ff3333,
+        var(--primary)
+    );
+    -webkit-mask: 
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.carousel-item.active .item-border {
+    opacity: 1;
+    animation: borderFlow 3s linear infinite;
+}
+
+@keyframes borderFlow {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 200% 200%; }
+}
+
+/* Item Header */
+.item-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.item-icon {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, 
+        rgba(255, 0, 0, 0.2), 
+        rgba(255, 51, 51, 0.1));
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    border: 1px solid rgba(255, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.carousel-item.active .item-icon {
+    background: linear-gradient(135deg, var(--primary), #ff3333);
+    transform: rotate(10deg);
+    box-shadow: 0 10px 30px rgba(255, 0, 0, 0.3);
+    color: white;
+}
+
+.item-title {
+    font-size: 1.8rem;
+    font-weight: 800;
+    background: linear-gradient(45deg, #fff, var(--primary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -0.5px;
+}
+
+/* Stats Ring */
+.item-stats {
+    display: flex;
+    justify-content: center;
+    margin: 25px 0;
+}
+
+.stat-ring {
+    position: relative;
+    width: 120px;
+    height: 120px;
+}
+
+.ring-svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+}
+
+.ring-bg {
+    fill: none;
+    stroke: rgba(255, 255, 255, 0.1);
+    stroke-width: 8;
+}
+
+.ring-progress {
+    fill: none;
+    stroke: var(--primary);
+    stroke-width: 8;
+    stroke-linecap: round;
+    stroke-dasharray: 283;
+    transition: stroke-dashoffset 1.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.ring-value {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Courier New', monospace;
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--primary);
+}
+
+/* Item Details */
+.item-details {
+    flex: 1;
+}
+
+.item-desc {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.tech-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.tech-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.tech-name {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.9);
+    width: 120px;
+}
+
+.tech-bar {
+    flex: 1;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.tech-fill {
+    height: 100%;
+    background: linear-gradient(90deg, 
+        var(--primary), 
+        #ff3333);
+    border-radius: 3px;
+    position: relative;
+    transition: width 1s ease;
+}
+
+.tech-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.3), 
+        transparent);
+    animation: techShine 2s linear infinite;
+}
+
+@keyframes techShine {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+/* Item Footer */
+.item-footer {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.exp-badge {
+    background: rgba(255, 0, 0, 0.1);
+    border: 1px solid rgba(255, 0, 0, 0.3);
+    border-radius: 20px;
+    padding: 8px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.exp-years {
+    font-family: 'Courier New', monospace;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 2px;
+}
+
+.exp-label {
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.6);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* Navigation Dots */
+.carousel-dots {
+    position: absolute;
+    bottom: -50px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    z-index: 100;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.dot::after {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    right: -4px;
+    bottom: -4px;
+    border: 1px solid transparent;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.dot:hover {
+    background: rgba(255, 0, 0, 0.5);
+    transform: scale(1.2);
+}
+
+.dot.active {
+    background: var(--primary);
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
+}
+
+.dot.active::after {
+    border-color: var(--primary);
+    animation: dotPulse 2s ease-in-out infinite;
+}
+
+@keyframes dotPulse {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.3); opacity: 0.8; }
+}
+
+/* Drag Support */
+.carousel-track {
+    cursor: grab;
+    user-select: none;
+}
+
+.carousel-track:active {
+    cursor: grabbing;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .carousel-item {
+        width: 320px;
+        height: 420px;
+        margin-left: -160px;
+        margin-top: -210px;
+    }
+    
+    .carousel-item.prev-1 {
+        transform: translateX(-300px) translateZ(100px) scale(0.9);
+    }
+    
+    .carousel-item.next-1 {
+        transform: translateX(300px) translateZ(100px) scale(0.9);
+    }
+    
+    .carousel-item.prev-2 {
+        transform: translateX(-450px) translateZ(0) scale(0.8);
+    }
+    
+    .carousel-item.next-2 {
+        transform: translateX(450px) translateZ(0) scale(0.8);
+    }
+}
+
+@media (max-width: 768px) {
+    .gallery-container {
+        padding: 20px;
+    }
+    
+    .gallery-controls {
+        flex-direction: column;
+        gap: 20px;
+        align-items: stretch;
+    }
+    
+    .carousel-3d {
+        height: 450px;
+    }
+    
+    .carousel-item {
+        width: 280px;
+        height: 380px;
+        margin-left: -140px;
+        margin-top: -190px;
+    }
+    
+    .carousel-item.active {
+        transform: translateZ(150px) scale(1.1);
+    }
+    
+    .carousel-item.prev-1 {
+        transform: translateX(-250px) translateZ(80px) scale(0.9);
+    }
+    
+    .carousel-item.next-1 {
+        transform: translateX(250px) translateZ(80px) scale(0.9);
+    }
+    
+    .item-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+    
+    .item-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 2rem;
+    }
+    
+    .item-title {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .carousel-3d {
+        height: 400px;
+    }
+    
+    .carousel-item {
+        width: 250px;
+        height: 340px;
+        margin-left: -125px;
+        margin-top: -170px;
+        padding: 20px;
+    }
+    
+    .tech-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+    
+    .tech-bar {
+        width: 100%;
+    }
+    
+    .carousel-dots {
+        bottom: -40px;
+    }
+    
+    .dot {
+        width: 10px;
+        height: 10px;
+    }
+}
     </style>
 </head>
 <body>
@@ -1261,95 +1875,390 @@
             </div>
         </section>
 
-        <!-- Skills Section -->
-        <section id="skills">
-            <h2 class="section-title">Skills & Expertise</h2>
-            <div class="skills-container">
-                <!-- AI Development -->
-                <div class="skill-card">
-                    <div class="skill-header">
-                        <div class="skill-icon">🤖</div>
-                        <div class="skill-name">AI Development</div>
-                    </div>
-                    <p class="skill-desc">Building intelligent systems using modern AI tools and frameworks.</p>
-                    <div class="skill-tools">
-                        <span class="tool-tag">ChatGPT</span>
-                        <span class="tool-tag">AI Assistants</span>
-                        <span class="tool-tag">Prompt Engineering</span>
+       <!-- Skills Section - 3D ROTATING GALLERY -->
+<section id="skills">
+    <h2 class="section-title">Skills Gallery</h2>
+    
+    <div class="gallery-container">
+        <!-- Navigation Controls -->
+        <div class="gallery-controls">
+            <button class="nav-btn prev-btn" aria-label="Previous skill">
+                <svg viewBox="0 0 24 24">
+                    <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+                </svg>
+            </button>
+            
+            <div class="gallery-info">
+                <div class="info-item">
+                    <span class="info-label">SKILL</span>
+                    <span class="info-value" id="currentSkill">01</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">TOTAL</span>
+                    <span class="info-value" id="totalSkills">06</span>
+                </div>
+            </div>
+            
+            <button class="nav-btn next-btn" aria-label="Next skill">
+                <svg viewBox="0 0 24 24">
+                    <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+                </svg>
+            </button>
+        </div>
+        
+        <!-- 3D Carousel Container -->
+        <div class="carousel-3d">
+            <!-- Carousel Items -->
+            <div class="carousel-track" id="carouselTrack">
+                <!-- Item 1: AI Development -->
+                <div class="carousel-item active" data-index="0">
+                    <div class="item-content">
+                        <div class="item-glow"></div>
+                        <div class="item-border"></div>
+                        
+                        <div class="item-header">
+                            <div class="item-icon">🤖</div>
+                            <div class="item-title">AI Development</div>
+                        </div>
+                        
+                        <div class="item-stats">
+                            <div class="stat-ring">
+                                <svg class="ring-svg" viewBox="0 0 100 100">
+                                    <circle class="ring-bg" cx="50" cy="50" r="45"/>
+                                    <circle class="ring-progress" cx="50" cy="50" r="45" 
+                                            stroke-dasharray="283" stroke-dashoffset="28.3"/>
+                                </svg>
+                                <span class="ring-value">90%</span>
+                            </div>
+                        </div>
+                        
+                        <div class="item-details">
+                            <p class="item-desc">Building intelligent systems with machine learning, neural networks, and modern AI frameworks.</p>
+                            
+                            <div class="tech-stack">
+                                <div class="tech-item">
+                                    <span class="tech-name">TensorFlow</span>
+                                    <div class="tech-bar">
+                                        <div class="tech-fill" style="width: 85%"></div>
+                                    </div>
+                                </div>
+                                <div class="tech-item">
+                                    <span class="tech-name">PyTorch</span>
+                                    <div class="tech-bar">
+                                        <div class="tech-fill" style="width: 80%"></div>
+                                    </div>
+                                </div>
+                                <div class="tech-item">
+                                    <span class="tech-name">ChatGPT API</span>
+                                    <div class="tech-bar">
+                                        <div class="tech-fill" style="width: 95%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="item-footer">
+                            <div class="exp-badge">
+                                <span class="exp-years">3+ Years</span>
+                                <span class="exp-label">Experience</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
-                <!-- Web Development -->
-                <div class="skill-card">
-                    <div class="skill-header">
-                        <div class="skill-icon">🌐</div>
-                        <div class="skill-name">Web Development</div>
-                    </div>
-                    <p class="skill-desc">Creating responsive and interactive web applications.</p>
-                    <div class="skill-tools">
-                        <span class="tool-tag">HTML/CSS</span>
-                        <span class="tool-tag">JavaScript</span>
-                        <span class="tool-tag">Three.js</span>
+                
+                <!-- Item 2: Web Development -->
+                <div class="carousel-item" data-index="1">
+                    <div class="item-content">
+                        <div class="item-glow"></div>
+                        <div class="item-border"></div>
+                        
+                        <div class="item-header">
+                            <div class="item-icon">🌐</div>
+                            <div class="item-title">Web Development</div>
+                        </div>
+                        
+                        <div class="item-stats">
+                            <div class="stat-ring">
+                                <svg class="ring-svg" viewBox="0 0 100 100">
+                                    <circle class="ring-bg" cx="50" cy="50" r="45"/>
+                                    <circle class="ring-progress" cx="50" cy="50" r="45" 
+                                            stroke-dasharray="283" stroke-dashoffset="42.45"/>
+                                </svg>
+                                <span class="ring-value">85%</span>
+                            </div>
+                        </div>
+                        
+                        <div class="item-details">
+                            <p class="item-desc">Creating responsive & interactive web applications with modern frameworks and best practices.</p>
+                            
+                            <div class="tech-stack">
+                                <div class="tech-item">
+                                    <span class="tech-name">React</span>
+                                    <div class="tech-bar">
+                                        <div class="tech-fill" style="width: 90%"></div>
+                                    </div>
+                                </div>
+                                <div class="tech-item">
+                                    <span class="tech-name">Three.js</span>
+                                    <div class="tech-bar">
+                                        <div class="tech-fill" style="width: 75%"></div>
+                                    </div>
+                                </div>
+                                <div class="tech-item">
+                                    <span class="tech-name">Node.js</span>
+                                    <div class="tech-bar">
+                                        <div class="tech-fill" style="width: 80%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="item-footer">
+                            <div class="exp-badge">
+                                <span class="exp-years">4+ Years</span>
+                                <span class="exp-label">Experience</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
-                <!-- AI Tools Mastery -->
-                <div class="skill-card">
-                    <div class="skill-header">
-                        <div class="skill-icon">⚡</div>
-                        <div class="skill-name">AI Tools Mastery</div>
-                    </div>
-                    <p class="skill-desc">Expert in using AI-powered tools for efficient development.</p>
-                    <div class="skill-tools">
-                        <span class="tool-tag">GitHub Copilot</span>
-                        <span class="tool-tag">AI Code Assistants</span>
-                        <span class="tool-tag">Automation</span>
+                
+                <!-- Item 3: AI Tools -->
+                <div class="carousel-item" data-index="2">
+                    <div class="item-content">
+                        <div class="item-glow"></div>
+                        <div class="item-border"></div>
+                        
+                        <div class="item-header">
+                            <div class="item-icon">⚡</div>
+                            <div class="item-title">AI Tools</div>
+                        </div>
+                        
+                        <div class="item-stats">
+                            <div class="stat-ring">
+                                <svg class="ring-svg" viewBox="0 0 100 100">
+                                    <circle class="ring-bg" cx="50" cy="50" r="45"/>
+                                    <circle class="ring-progress" cx="50" cy="50" r="45" 
+                                            stroke-dasharray="283" stroke-dashoffset="14.15"/>
+                                </svg>
+                                <span class="ring-value">95%</span>
+                            </div>
+                        </div>
+                        
+                        <div class="item-details">
+                            <p class="item-desc">Mastering AI-powered development tools for efficient workflow automation and productivity.</p>
+                            
+                            <div class="tech-stack">
+                                <div class="tech-item">
+                                    <span class="tech-name">GitHub Copilot</span>
+                                    <div class="tech-bar">
+                                        <div class="tech-fill" style="width: 98%"></div>
+                                    </div>
+                                </div>
+                                <div class="tech-item">
+                                    <span class="tech-name">Cursor</span>
+                                    <div class="tech-bar">
+                                        <div class="tech-fill" style="width: 92%"></div>
+                                    </div>
+                                </div>
+                                <div class="tech-item">
+                                    <span class="tech-name">ChatGPT</span>
+                                    <div class="tech-bar">
+                                        <div class="tech-fill" style="width: 95%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="item-footer">
+                            <div class="exp-badge">
+                                <span class="exp-years">2+ Years</span>
+                                <span class="exp-label">Experience</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
-                <!-- Rapid Prototyping -->
-                <div class="skill-card">
-                    <div class="skill-header">
-                        <div class="skill-icon">🚀</div>
-                        <div class="skill-name">Rapid Prototyping</div>
-                    </div>
-                    <p class="skill-desc">Quickly building and testing ideas using modern tools.</p>
-                    <div class="skill-tools">
-                        <span class="tool-tag">Fast Development</span>
-                        <span class="tool-tag">MVP Building</span>
-                        <span class="tool-tag">Iteration</span>
+                
+                <!-- Item 4: Rapid Prototyping -->
+                <div class="carousel-item" data-index="3">
+                    <div class="item-content">
+                        <div class="item-glow"></div>
+                        <div class="item-border"></div>
+                        
+                        <div class="item-header">
+                            <div class="item-icon">🚀</div>
+                            <div class="item-title">Rapid Prototyping</div>
+                        </div>
+                        
+                        <div class="item-stats">
+                            <div class="stat-ring">
+                                <svg class="ring-svg" viewBox="0 0 100 100">
+                                    <circle class="ring-bg" cx="50" cy="50" r="45"/>
+                                    <circle class="ring-progress" cx="50" cy="50" r="45" 
+                                            stroke-dasharray="283" stroke-dashoffset="33.96"/>
+                                </svg>
+                                <span class="ring-value">88%</span>
+                            </div>
+                        </div>
+                        
+                        <div class="item-details">
+                            <p class="item-desc">Fast MVP development and iterative product design using modern tools and methodologies.</p>
+                            
+                            <div class="tech-stack">
+                                <div class="tech-item">
+                                    <span class="tech-name">Figma</span>
+                                    <div class="tech-bar">
+                                        <div class="tech-fill" style="width: 85%"></div>
+                                    </div>
+                                </div>
+                                <div class="tech-item">
+                                    <span class="tech-name">Prototyping</span>
+                                    <div class="tech-bar">
+                                        <div class="tech-fill" style="width: 90%"></div>
+                                    </div>
+                                </div>
+                                <div class="tech-item">
+                                    <span class="tech-name">User Testing</span>
+                                    <div class="tech-bar">
+                                        <div class="tech-fill" style="width: 80%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="item-footer">
+                            <div class="exp-badge">
+                                <span class="exp-years">3+ Years</span>
+                                <span class="exp-label">Experience</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
-                <!-- Creative Problem Solving -->
-                <div class="skill-card">
-                    <div class="skill-header">
-                        <div class="skill-icon">💡</div>
-                        <div class="skill-name">Creative Solutions</div>
-                    </div>
-                    <p class="skill-desc">Finding innovative ways to solve complex problems.</p>
-                    <div class="skill-tools">
-                        <span class="tool-tag">Innovation</span>
-                        <span class="tool-tag">Problem Solving</span>
-                        <span class="tool-tag">Out-of-the-box Thinking</span>
+                
+                <!-- Item 5: Creative Solutions -->
+                <div class="carousel-item" data-index="4">
+                    <div class="item-content">
+                        <div class="item-glow"></div>
+                        <div class="item-border"></div>
+                        
+                        <div class="item-header">
+                            <div class="item-icon">💡</div>
+                            <div class="item-title">Creative Solutions</div>
+                        </div>
+                        
+                        <div class="item-stats">
+                            <div class="stat-ring">
+                                <svg class="ring-svg" viewBox="0 0 100 100">
+                                    <circle class="ring-bg" cx="50" cy="50" r="45"/>
+                                    <circle class="ring-progress" cx="50" cy="50" r="45" 
+                                            stroke-dasharray="283" stroke-dashoffset="22.64"/>
+                                </svg>
+                                <span class="ring-value">92%</span>
+                            </div>
+                        </div>
+                        
+                        <div class="item-details">
+                            <p class="item-desc">Innovative problem-solving approaches and strategic thinking for complex challenges.</p>
+                            
+                            <div class="tech-stack">
+                                <div class="tech-item">
+                                    <span class="tech-name">Analytical Thinking</span>
+                                    <div class="tech-bar">
+                                        <div class="tech-fill" style="width: 95%"></div>
+                                    </div>
+                                </div>
+                                <div class="tech-item">
+                                    <span class="tech-name">Strategy</span>
+                                    <div class="tech-bar">
+                                        <div class="tech-fill" style="width: 90%"></div>
+                                    </div>
+                                </div>
+                                <div class="tech-item">
+                                    <span class="tech-name">Innovation</span>
+                                    <div class="tech-bar">
+                                        <div class="tech-fill" style="width: 90%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="item-footer">
+                            <div class="exp-badge">
+                                <span class="exp-years">5+ Years</span>
+                                <span class="exp-label">Experience</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
-                <!-- Project Management -->
-                <div class="skill-card">
-                    <div class="skill-header">
-                        <div class="skill-icon">📊</div>
-                        <div class="skill-name">Project Management</div>
-                    </div>
-                    <p class="skill-desc">Planning and executing projects efficiently using AI assistance.</p>
-                    <div class="skill-tools">
-                        <span class="tool-tag">Planning</span>
-                        <span class="tool-tag">Execution</span>
-                        <span class="tool-tag">AI Coordination</span>
+                
+                <!-- Item 6: Project Management -->
+                <div class="carousel-item" data-index="5">
+                    <div class="item-content">
+                        <div class="item-glow"></div>
+                        <div class="item-border"></div>
+                        
+                        <div class="item-header">
+                            <div class="item-icon">📊</div>
+                            <div class="item-title">Project Management</div>
+                        </div>
+                        
+                        <div class="item-stats">
+                            <div class="stat-ring">
+                                <svg class="ring-svg" viewBox="0 0 100 100">
+                                    <circle class="ring-bg" cx="50" cy="50" r="45"/>
+                                    <circle class="ring-progress" cx="50" cy="50" r="45" 
+                                            stroke-dasharray="283" stroke-dashoffset="56.6"/>
+                                </svg>
+                                <span class="ring-value">80%</span>
+                            </div>
+                        </div>
+                        
+                        <div class="item-details">
+                            <p class="item-desc">AI-assisted project planning, execution, and team coordination for successful delivery.</p>
+                            
+                            <div class="tech-stack">
+                                <div class="tech-item">
+                                    <span class="tech-name">Agile/Scrum</span>
+                                    <div class="tech-bar">
+                                        <div class="tech-fill" style="width: 85%"></div>
+                                    </div>
+                                </div>
+                                <div class="tech-item">
+                                    <span class="tech-name">Jira</span>
+                                    <div class="tech-bar">
+                                        <div class="tech-fill" style="width: 75%"></div>
+                                    </div>
+                                </div>
+                                <div class="tech-item">
+                                    <span class="tech-name">Team Leadership</span>
+                                    <div class="tech-bar">
+                                        <div class="tech-fill" style="width: 80%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="item-footer">
+                            <div class="exp-badge">
+                                <span class="exp-years">4+ Years</span>
+                                <span class="exp-label">Experience</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </section>
+            
+            <!-- Navigation Dots -->
+            <div class="carousel-dots">
+                <div class="dot active" data-index="0"></div>
+                <div class="dot" data-index="1"></div>
+                <div class="dot" data-index="2"></div>
+                <div class="dot" data-index="3"></div>
+                <div class="dot" data-index="4"></div>
+                <div class="dot" data-index="5"></div>
+            </div>
+        </div>
+    </div>
+</section>
 
         <!-- Projects Section -->
         <section id="projects">
@@ -2133,6 +3042,445 @@
     window.addEventListener('resize', () => {
         // Update any responsive elements if needed
     });
+    // ============= 3D ROTATING GALLERY =============
+class SkillGallery3D {
+    constructor() {
+        this.track = document.getElementById('carouselTrack');
+        this.items = document.querySelectorAll('.carousel-item');
+        this.dots = document.querySelectorAll('.dot');
+        this.prevBtn = document.querySelector('.prev-btn');
+        this.nextBtn = document.querySelector('.next-btn');
+        this.currentSkill = document.getElementById('currentSkill');
+        this.totalSkills = document.getElementById('totalSkills');
+        
+        this.currentIndex = 0;
+        this.totalItems = this.items.length;
+        this.isAnimating = false;
+        this.animationSpeed = 800;
+        this.drag = {
+            startX: 0,
+            endX: 0,
+            isDragging: false
+        };
+        
+        this.init();
+    }
+
+    init() {
+        this.setupGallery();
+        this.setupControls();
+        this.setupDrag();
+        this.updateDisplay();
+        
+        // Set total skills count
+        this.totalSkills.textContent = this.totalItems.toString().padStart(2, '0');
+        
+        // Start auto rotation (optional)
+        // this.startAutoRotate();
+    }
+
+    setupGallery() {
+        // Position all items initially
+        this.positionItems();
+        
+        // Set first item as active
+        this.setActiveItem(this.currentIndex);
+    }
+
+    positionItems() {
+        this.items.forEach((item, index) => {
+            // Remove all position classes
+            item.classList.remove('active', 'prev-1', 'prev-2', 'prev-3', 'next-1', 'next-2', 'next-3');
+            
+            // Calculate position
+            let positionClass = '';
+            
+            if (index === this.currentIndex) {
+                positionClass = 'active';
+            } else if (index === this.getPrevIndex(1)) {
+                positionClass = 'prev-1';
+            } else if (index === this.getPrevIndex(2)) {
+                positionClass = 'prev-2';
+            } else if (index === this.getPrevIndex(3)) {
+                positionClass = 'prev-3';
+            } else if (index === this.getNextIndex(1)) {
+                positionClass = 'next-1';
+            } else if (index === this.getNextIndex(2)) {
+                positionClass = 'next-2';
+            } else if (index === this.getNextIndex(3)) {
+                positionClass = 'next-3';
+            }
+            
+            if (positionClass) {
+                item.classList.add(positionClass);
+            }
+        });
+    }
+
+    getPrevIndex(steps) {
+        let index = this.currentIndex - steps;
+        while (index < 0) index += this.totalItems;
+        return index % this.totalItems;
+    }
+
+    getNextIndex(steps) {
+        return (this.currentIndex + steps) % this.totalItems;
+    }
+
+    setActiveItem(index) {
+        if (this.isAnimating) return;
+        
+        this.isAnimating = true;
+        this.currentIndex = index;
+        
+        // Update positions
+        this.positionItems();
+        
+        // Update dots
+        this.dots.forEach((dot, i) => {
+            dot.classList.toggle('active', i === index);
+        });
+        
+        // Update current skill display
+        this.currentSkill.textContent = (index + 1).toString().padStart(2, '0');
+        
+        // Animate progress rings
+        this.animateProgressRings();
+        
+        // Reset animation flag
+        setTimeout(() => {
+            this.isAnimating = false;
+        }, this.animationSpeed);
+    }
+
+    animateProgressRings() {
+        const activeItem = this.items[this.currentIndex];
+        const progressRing = activeItem.querySelector('.ring-progress');
+        
+        if (progressRing) {
+            // Reset animation
+            progressRing.style.transition = 'none';
+            progressRing.style.strokeDashoffset = '283';
+            
+            // Force reflow
+            void progressRing.offsetWidth;
+            
+            // Animate to actual value
+            progressRing.style.transition = `stroke-dashoffset ${this.animationSpeed}ms cubic-bezier(0.34, 1.56, 0.64, 1)`;
+            progressRing.style.strokeDashoffset = progressRing.getAttribute('stroke-dashoffset');
+        }
+    }
+
+    setupControls() {
+        // Previous button
+        this.prevBtn.addEventListener('click', () => {
+            this.goToPrev();
+        });
+        
+        // Next button
+        this.nextBtn.addEventListener('click', () => {
+            this.goToNext();
+        });
+        
+        // Navigation dots
+        this.dots.forEach(dot => {
+            dot.addEventListener('click', (e) => {
+                const index = parseInt(e.target.dataset.index);
+                if (index !== this.currentIndex) {
+                    this.goToIndex(index);
+                }
+            });
+        });
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') {
+                this.goToPrev();
+            } else if (e.key === 'ArrowRight') {
+                this.goToNext();
+            }
+        });
+    }
+
+    goToPrev() {
+        const prevIndex = this.getPrevIndex(1);
+        this.setActiveItem(prevIndex);
+        
+        // Add button click effect
+        this.createButtonEffect(this.prevBtn, 'left');
+    }
+
+    goToNext() {
+        const nextIndex = this.getNextIndex(1);
+        this.setActiveItem(nextIndex);
+        
+        // Add button click effect
+        this.createButtonEffect(this.nextBtn, 'right');
+    }
+
+    goToIndex(index) {
+        this.setActiveItem(index);
+        
+        // Add dot click effect
+        const dot = this.dots[index];
+        this.createDotEffect(dot);
+    }
+
+    createButtonEffect(button, direction) {
+        const effect = document.createElement('div');
+        effect.className = 'button-effect';
+        
+        effect.style.cssText = `
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at ${direction === 'left' ? '30%' : '70%'} 50%, 
+                rgba(255, 0, 0, 0.2) 0%, 
+                transparent 70%);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 1;
+            animation: buttonEffect 0.6s ease-out;
+        `;
+        
+        button.appendChild(effect);
+        setTimeout(() => effect.remove(), 600);
+    }
+
+    createDotEffect(dot) {
+        const effect = document.createElement('div');
+        effect.className = 'dot-effect';
+        
+        effect.style.cssText = `
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            background: var(--primary);
+            border-radius: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            pointer-events: none;
+            z-index: 1;
+            animation: dotEffect 0.4s ease-out;
+        `;
+        
+        dot.appendChild(effect);
+        setTimeout(() => effect.remove(), 400);
+    }
+
+    setupDrag() {
+        this.track.addEventListener('mousedown', this.startDrag.bind(this));
+        this.track.addEventListener('touchstart', this.startDragTouch.bind(this));
+        
+        document.addEventListener('mousemove', this.dragMove.bind(this));
+        document.addEventListener('touchmove', this.dragMoveTouch.bind(this));
+        
+        document.addEventListener('mouseup', this.endDrag.bind(this));
+        document.addEventListener('touchend', this.endDrag.bind(this));
+    }
+
+    startDrag(e) {
+        this.drag.startX = e.clientX;
+        this.drag.isDragging = true;
+        this.track.style.cursor = 'grabbing';
+        e.preventDefault();
+    }
+
+    startDragTouch(e) {
+        if (e.touches.length === 1) {
+            this.drag.startX = e.touches[0].clientX;
+            this.drag.isDragging = true;
+            e.preventDefault();
+        }
+    }
+
+    dragMove(e) {
+        if (!this.drag.isDragging) return;
+        
+        this.drag.endX = e.clientX;
+        this.handleDrag();
+    }
+
+    dragMoveTouch(e) {
+        if (!this.drag.isDragging || e.touches.length !== 1) return;
+        
+        this.drag.endX = e.touches[0].clientX;
+        this.handleDrag();
+        e.preventDefault();
+    }
+
+    handleDrag() {
+        const dragDistance = this.drag.endX - this.drag.startX;
+        const dragThreshold = 50;
+        
+        // Add visual feedback during drag
+        const activeItem = this.items[this.currentIndex];
+        const dragIntensity = Math.min(Math.abs(dragDistance) / 100, 0.3);
+        
+        if (dragDistance > 0) {
+            activeItem.style.transform = `translateZ(200px) scale(1.1) rotateY(${-dragIntensity * 10}deg)`;
+        } else {
+            activeItem.style.transform = `translateZ(200px) scale(1.1) rotateY(${dragIntensity * 10}deg)`;
+        }
+    }
+
+    endDrag() {
+        if (!this.drag.isDragging) return;
+        
+        const dragDistance = this.drag.endX - this.drag.startX;
+        const dragThreshold = 50;
+        
+        // Reset active item transform
+        const activeItem = this.items[this.currentIndex];
+        activeItem.style.transform = '';
+        
+        // Determine navigation direction
+        if (Math.abs(dragDistance) > dragThreshold) {
+            if (dragDistance > 0) {
+                this.goToPrev();
+            } else {
+                this.goToNext();
+            }
+            
+            // Add swipe effect
+            this.createSwipeEffect(dragDistance > 0 ? 'left' : 'right');
+        }
+        
+        // Reset drag state
+        this.drag.isDragging = false;
+        this.drag.startX = 0;
+        this.drag.endX = 0;
+        this.track.style.cursor = 'grab';
+    }
+
+    createSwipeEffect(direction) {
+        const effect = document.createElement('div');
+        effect.className = 'swipe-effect';
+        
+        effect.style.cssText = `
+            position: absolute;
+            top: 0;
+            ${direction === 'left' ? 'right: 0' : 'left: 0'};
+            width: 100px;
+            height: 100%;
+            background: linear-gradient(to ${direction === 'left' ? 'right' : 'left'}, 
+                rgba(255, 0, 0, 0.2), 
+                transparent);
+            pointer-events: none;
+            z-index: 100;
+            animation: swipeEffect 0.6s ease-out;
+        `;
+        
+        this.track.appendChild(effect);
+        setTimeout(() => effect.remove(), 600);
+    }
+
+    startAutoRotate() {
+        // Auto rotate every 5 seconds
+        setInterval(() => {
+            if (!this.drag.isDragging) {
+                this.goToNext();
+            }
+        }, 5000);
+    }
+
+    updateDisplay() {
+        // Update any additional display elements if needed
+    }
+}
+
+// Add extra animations to CSS
+const galleryStyles = document.createElement('style');
+galleryStyles.textContent = `
+    @keyframes buttonEffect {
+        0% {
+            opacity: 0.8;
+            transform: translate(-50%, -50%) scale(1);
+        }
+        100% {
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(2);
+        }
+    }
+    
+    @keyframes dotEffect {
+        0% {
+            opacity: 0.6;
+            transform: translate(-50%, -50%) scale(0);
+        }
+        50% {
+            opacity: 0.3;
+            transform: translate(-50%, -50%) scale(2);
+        }
+        100% {
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(3);
+        }
+    }
+    
+    @keyframes swipeEffect {
+        0% {
+            opacity: 0.5;
+            transform: translateX(0);
+        }
+        100% {
+            opacity: 0;
+            transform: translateX(${direction => direction === 'left' ? '-100px' : '100px'});
+        }
+    }
+    
+    /* Add hover effect to side items */
+    .carousel-item.prev-1:hover,
+    .carousel-item.next-1:hover {
+        filter: blur(0.5px) !important;
+        opacity: 0.9 !important;
+    }
+    
+    /* Add click ripple effect */
+    .carousel-item.active:active {
+        animation: itemClick 0.3s ease;
+    }
+    
+    @keyframes itemClick {
+        0% { transform: translateZ(200px) scale(1.1); }
+        50% { transform: translateZ(200px) scale(1.05); }
+        100% { transform: translateZ(200px) scale(1.1); }
+    }
+    
+    /* Improve 3D depth effect */
+    .carousel-track {
+        transform: rotateY(${() => {
+            const rotation = Math.sin(Date.now() / 10000) * 2;
+            return rotation;
+        }}deg);
+        transition: transform 0.1s linear;
+    }
+`;
+document.head.appendChild(galleryStyles);
+
+// Initialize when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('🚀 Initializing 3D Skill Gallery...');
+    
+    // Initialize 3D Gallery
+    const skillGallery = new SkillGallery3D();
+    
+    console.log('✅ 3D Skill Gallery initialized!');
+    
+    // Add wheel navigation
+    document.querySelector('.carousel-3d').addEventListener('wheel', (e) => {
+        e.preventDefault();
+        if (e.deltaY > 0) {
+            skillGallery.goToNext();
+        } else {
+            skillGallery.goToPrev();
+        }
+    }, { passive: false });
+});
 </script>
 </body>
 </html>
