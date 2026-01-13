@@ -5020,156 +5020,172 @@ textarea.form-input {
   
 
     // ============= CONTACT MANAGER WITH FIREBASE =============
-    class ContactManager {
-        constructor() {
-            this.db = db;
+  class ContactManager {
+    constructor() {
+        this.db = db;
+        console.log('📱 ContactManager initialized', this.db ? 'Firebase connected' : 'Firebase offline');
+    }
+
+    async sendMessage() {
+        const name = document.getElementById('contactName')?.value.trim();
+        const email = document.getElementById('contactEmail')?.value.trim();
+        const projectType = document.getElementById('projectType')?.value || 'general';
+        const timeline = document.getElementById('projectTimeline')?.value || 'not-specified';
+        const message = document.getElementById('contactMessage')?.value.trim();
+        
+        // Validation
+        if (!name || !email || !message) {
+            this.showNotification('Please fill all required fields!', 'error');
+            return;
         }
 
-        async sendMessage() {
-            const name = document.getElementById('contactName').value.trim();
-            const email = document.getElementById('contactEmail').value.trim();
-            const subject = document.getElementById('contactSubject').value;
-            const message = document.getElementById('contactMessage').value.trim();
+        if (!this.isValidEmail(email)) {
+            this.showNotification('Please enter a valid email address!', 'error');
+            return;
+        }
 
-            // Validation
-            if (!name || !email || !message) {
-                this.showAlert('Please fill all required fields!', 'error');
-                return;
-            }
+        // Create message object
+        const messageData = {
+            name: name,
+            email: email,
+            projectType: projectType,
+            timeline: timeline,
+            message: message,
+            date: new Date().toISOString(),
+            timestamp: new Date().getTime(),
+            status: 'unread'
+        };
 
-            if (!this.isValidEmail(email)) {
-                this.showAlert('Please enter a valid email address!', 'error');
-                return;
-            }
+        console.log('📨 Sending message:', messageData);
 
-            // Create message object
-            const messageData = {
-                name,
-                email,
-                subject: this.getSubjectText(subject),
-                message,
-                date: new Date().toISOString()
-            };
-
-            // Show loading
-            const sendBtn = document.querySelector('[data-action="send-message"]');
-            const originalContent = sendBtn.innerHTML;
+        // Show loading
+        const sendBtn = document.querySelector('[data-action="send-message"]');
+        const originalContent = sendBtn?.innerHTML || 'Send Message';
+        if (sendBtn) {
             sendBtn.innerHTML = '<div class="loading"></div> Sending...';
             sendBtn.disabled = true;
+        }
 
+        try {
             // Save to Firebase
             const success = await this.saveMessageToFirebase(messageData);
 
-            // Reset button
-            sendBtn.innerHTML = originalContent;
-            sendBtn.disabled = false;
-
             if (success) {
-                this.showAlert('✅ Message sent successfully! I\'ll get back to you soon.', 'success');
+                this.showNotification('✅ Message sent successfully! I\'ll get back to you soon.', 'success');
                 this.resetContactForm();
             } else {
-                this.showAlert('⚠️ Message saved locally. It will sync when Firebase is available.', 'warning');
+                this.showNotification('⚠️ Message saved locally. Will sync when online.', 'warning');
                 this.resetContactForm();
             }
-        }
-
-        async saveMessageToFirebase(messageData) {
-            if (!this.db) {
-                console.log('Firebase not available, saving locally');
-                this.saveMessageToLocalStorage(messageData);
-                return false;
-            }
-
-            try {
-                await this.db.collection('messages').add({
-                    name: messageData.name,
-                    email: messageData.email,
-                    subject: messageData.subject,
-                    message: messageData.message,
-                    timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                    read: false,
-                    replied: false
-                });
-                
-                console.log('✅ Message saved to Firebase');
-                return true;
-            } catch (error) {
-                console.error('❌ Failed to save message:', error);
-                this.saveMessageToLocalStorage(messageData);
-                return false;
-            }
-        }
-
-        isValidEmail(email) {
-            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return re.test(email);
-        }
-
-        getSubjectText(subjectValue) {
-            const subjects = {
-                'project': 'Project Inquiry',
-                'collab': 'Collaboration Request',
-                'other': 'Other Inquiry'
-            };
-            return subjects[subjectValue] || subjectValue;
-        }
-
-        resetContactForm() {
-            document.getElementById('contactName').value = '';
-            document.getElementById('contactEmail').value = '';
-            document.getElementById('contactSubject').value = 'project';
-            document.getElementById('contactMessage').value = '';
-        }
-
-        saveMessageToLocalStorage(messageData) {
-            const messages = this.getMessagesFromLocalStorage();
-            messages.push({
-                ...messageData,
-                timestamp: new Date().toISOString(),
-                source: 'local'
-            });
-            localStorage.setItem('sai_portfolio_messages', JSON.stringify(messages));
-        }
-
-        getMessagesFromLocalStorage() {
-            const messages = localStorage.getItem('sai_portfolio_messages');
-            return messages ? JSON.parse(messages) : [];
-        }
-
-        showAlert(message, type = 'info') {
-            // Create alert element
-            const alert = document.createElement('div');
-            alert.className = `form-alert form-alert-${type}`;
-            alert.innerHTML = `
-                <span>${message}</span>
-                <button class="alert-close">&times;</button>
-            `;
-
-            // Add to form
-            const form = document.querySelector('.contact-form');
-            if (form) {
-                // Remove existing alerts
-                const existingAlert = document.querySelector('.form-alert');
-                if (existingAlert) existingAlert.remove();
-                
-                form.insertBefore(alert, form.firstChild);
-
-                // Close button functionality
-                alert.querySelector('.alert-close').addEventListener('click', () => {
-                    alert.remove();
-                });
-
-                // Auto remove after 5 seconds
-                setTimeout(() => {
-                    if (alert.parentNode) {
-                        alert.remove();
-                    }
-                }, 5000);
-            } else {
-                alert(message);
+        } catch (error) {
+            console.error('❌ Error sending message:', error);
+            this.showNotification('❌ Failed to send message. Please try again.', 'error');
+        } finally {
+            // Reset button
+            if (sendBtn) {
+                sendBtn.innerHTML = originalContent;
+                sendBtn.disabled = false;
             }
         }
     }
+
+    async saveMessageToFirebase(messageData) {
+        if (!this.db) {
+            console.log('Firebase not available, saving locally');
+            this.saveMessageToLocalStorage(messageData);
+            return false;
+        }
+
+        try {
+            // ✅ Important: Firestore me 'messages' collection me add karo
+            const docRef = await this.db.collection('messages').add({
+                ...messageData,
+                serverTimestamp: firebase.firestore.FieldValue.serverTimestamp()
+            });
+            
+            console.log('✅ Message saved to Firebase with ID:', docRef.id);
+            return true;
+        } catch (error) {
+            console.error('❌ Failed to save message to Firebase:', error);
+            
+            // Detailed error check
+            if (error.code === 'permission-denied') {
+                console.error('❌ Permission denied! Check Firestore rules.');
+                this.showNotification('❌ Database permission error. Please contact admin.', 'error');
+            }
+            
+            this.saveMessageToLocalStorage(messageData);
+            return false;
+        }
+    }
+
+    isValidEmail(email) {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email);
+    }
+
+    resetContactForm() {
+        const form = document.getElementById('contact-form');
+        if (form) {
+            form.querySelector('#contactName').value = '';
+            form.querySelector('#contactEmail').value = '';
+            form.querySelector('#projectType').value = '';
+            form.querySelector('#projectTimeline').value = '';
+            form.querySelector('#contactMessage').value = '';
+            form.querySelector('#newsletterOptIn').checked = false;
+        }
+    }
+
+    saveMessageToLocalStorage(messageData) {
+        try {
+            const messages = this.getMessagesFromLocalStorage();
+            messages.push(messageData);
+            localStorage.setItem('sai_portfolio_messages', JSON.stringify(messages));
+            console.log('💾 Message saved locally:', messageData);
+        } catch (error) {
+            console.error('Error saving to local storage:', error);
+        }
+    }
+
+    getMessagesFromLocalStorage() {
+        try {
+            const messages = localStorage.getItem('sai_portfolio_messages');
+            return messages ? JSON.parse(messages) : [];
+        } catch (error) {
+            console.error('Error reading local storage:', error);
+            return [];
+        }
+    }
+
+    showNotification(message, type = 'info') {
+        // Remove existing notifications
+        const existing = document.querySelector('.notification');
+        if (existing) existing.remove();
+
+        const notification = document.createElement('div');
+        notification.className = `notification notification-${type}`;
+        notification.innerHTML = `
+            <div class="notification-content">
+                <p>${message}</p>
+                <button class="notification-close">&times;</button>
+            </div>
+        `;
+
+        document.body.appendChild(notification);
+
+        // Close button
+        notification.querySelector('.notification-close').addEventListener('click', () => {
+            notification.remove();
+        });
+
+        // Auto remove
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.remove();
+            }
+        }, 5000);
+    }
+}
 
     // ============= NAVIGATION MANAGER =============
     class NavigationManager {
