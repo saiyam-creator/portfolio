@@ -2809,9 +2809,1000 @@ textarea.form-input {
         opacity: 0;
     }
 }
+/* ========== UPDATED HERO SECTION ========== */
+.hero-main-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 900;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-bottom: 20px;
+    position: relative;
+    display: inline-block;
+}
+
+.hero-main-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary), #ff3333);
+    border-radius: 2px;
+}
+
+.hero-name {
+    font-size: clamp(3rem, 8vw, 5rem);
+    font-weight: 900;
+    margin: 20px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: center;
+}
+
+.name-first {
+    background: linear-gradient(135deg, var(--primary), #ff6666);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.name-last {
+    color: var(--text-light);
+    position: relative;
+}
+
+.name-last::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--primary), transparent);
+}
+
+.hero-profession {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin: 25px 0;
+    padding: 15px 0;
+    border-top: 1px solid rgba(255, 0, 0, 0.2);
+    border-bottom: 1px solid rgba(255, 0, 0, 0.2);
+}
+
+.profession-icon {
+    color: var(--primary);
+    font-size: 1.5rem;
+    font-weight: 900;
+}
+
+.profession-text {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 700;
+    color: var(--text-light);
+    text-align: center;
+    flex: 1;
+}
+
+.hero-description {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: var(--text-gray);
+    margin: 30px 0;
+    max-width: 800px;
+    padding-left: 20px;
+    border-left: 4px solid var(--primary);
+    background: rgba(255, 0, 0, 0.05);
+    padding: 20px;
+    border-radius: 0 10px 10px 0;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 20px;
+    margin-top: 40px;
+    flex-wrap: wrap;
+}
+
+.hero-buttons .btn {
+    padding: 18px 40px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    min-width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.btn-icon {
+    font-size: 1.2rem;
+}
+
+/* ========== PROFESSIONAL ABOUT SECTION ========== */
+.about-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.section-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 900;
+    color: var(--text-light);
+    margin-bottom: 10px;
+}
+
+.section-subtitle {
+    font-size: 1.2rem;
+    color: var(--text-gray);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.about-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+}
+
+@media (max-width: 1024px) {
+    .about-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Left Column */
+.about-left {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.about-card {
+    background: linear-gradient(145deg, 
+        rgba(30, 30, 30, 0.95), 
+        rgba(40, 10, 10, 0.9));
+    border-radius: 20px;
+    padding: 35px;
+    border: 1px solid rgba(255, 0, 0, 0.2);
+    transition: all 0.4s ease;
+}
+
+.about-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary);
+    box-shadow: 0 20px 40px rgba(255, 0, 0, 0.3);
+}
+
+.about-card-title {
+    font-size: 1.8rem;
+    color: var(--primary);
+    margin-bottom: 25px;
+    font-weight: 800;
+    padding-bottom: 15px;
+    border-bottom: 2px solid rgba(255, 0, 0, 0.3);
+}
+
+.about-card-text {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--text-gray);
+    margin-bottom: 20px;
+}
+
+/* Stats Grid */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-top: 30px;
+}
+
+@media (max-width: 480px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.stat-item {
+    background: rgba(255, 0, 0, 0.05);
+    border: 1px solid rgba(255, 0, 0, 0.2);
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.stat-item:hover {
+    background: rgba(255, 0, 0, 0.1);
+    transform: translateY(-5px);
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--primary);
+    margin-bottom: 5px;
+    font-family: 'Courier New', monospace;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: var(--text-gray);
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+/* About Divider */
+.about-divider {
+    height: 1px;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255, 0, 0, 0.5), 
+        transparent);
+    margin: 20px 0;
+}
+
+/* Expertise Grid */
+.expertise-grid {
+    display: grid;
+    gap: 25px;
+}
+
+.expertise-item {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+}
+
+.expertise-item:hover {
+    background: rgba(255, 0, 0, 0.05);
+    border-color: rgba(255, 0, 0, 0.3);
+    transform: translateX(10px);
+}
+
+.expertise-icon {
+    font-size: 2rem;
+    width: 60px;
+    height: 60px;
+    background: rgba(255, 0, 0, 0.1);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255, 0, 0, 0.3);
+    flex-shrink: 0;
+}
+
+.expertise-content {
+    flex: 1;
+}
+
+.expertise-content h4 {
+    font-size: 1.3rem;
+    color: var(--text-light);
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.expertise-content p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-gray);
+    margin: 0;
+}
+
+/* Right Column - Skills Visualization */
+.about-right {
+    position: relative;
+}
+
+.skills-visual {
+    position: sticky;
+    top: 100px;
+    background: linear-gradient(145deg, 
+        rgba(30, 30, 30, 0.95), 
+        rgba(40, 10, 10, 0.9));
+    border-radius: 20px;
+    padding: 35px;
+    border: 1px solid rgba(255, 0, 0, 0.2);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+}
+
+.skills-header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 0, 0, 0.2);
+}
+
+.skills-header h3 {
+    font-size: 1.8rem;
+    color: var(--primary);
+    margin-bottom: 10px;
+    font-weight: 800;
+}
+
+.skills-header p {
+    color: var(--text-gray);
+    font-size: 1rem;
+}
+
+/* Skill Category */
+.skill-category {
+    margin-bottom: 30px;
+    padding-bottom: 25px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.skill-category:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.category-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 15px;
+}
+
+.category-icon {
+    font-size: 1.5rem;
+    width: 45px;
+    height: 45px;
+    background: rgba(255, 0, 0, 0.1);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255, 0, 0, 0.3);
+}
+
+.category-title {
+    font-size: 1.2rem;
+    color: var(--text-light);
+    font-weight: 700;
+    flex: 1;
+}
+
+.category-level {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--primary);
+    background: rgba(255, 0, 0, 0.1);
+    padding: 5px 15px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 0, 0, 0.3);
+}
+
+.category-description {
+    font-size: 0.95rem;
+    color: var(--text-gray);
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+/* Skill Progress */
+.skill-progress-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.skill-progress {
+    display: grid;
+    grid-template-columns: 100px 1fr 50px;
+    align-items: center;
+    gap: 15px;
+}
+
+.skill-name {
+    font-size: 0.95rem;
+    color: var(--text-light);
+    font-weight: 600;
+}
+
+.progress-bar {
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), #ff3333);
+    border-radius: 4px;
+    position: relative;
+    overflow: hidden;
+}
+
+.progress-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.3), 
+        transparent);
+    animation: shine 2s infinite;
+}
+
+@keyframes shine {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+.skill-percent {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--primary);
+    text-align: right;
+    font-family: 'Courier New', monospace;
+}
+
+/* Skill Tags */
+.skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.skill-tag {
+    background: rgba(255, 0, 0, 0.1);
+    color: var(--primary);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border: 1px solid rgba(255, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.skill-tag:hover {
+    background: rgba(255, 0, 0, 0.2);
+    transform: translateY(-2px);
+}
+
+/* Tools Grid */
+.tools-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.tool-item {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 15px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.tool-item:hover {
+    background: rgba(255, 0, 0, 0.1);
+    border-color: rgba(255, 0, 0, 0.3);
+    transform: translateY(-5px);
+}
+
+.tool-icon {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.tool-name {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    font-weight: 600;
+}
+/* ========== PAGE LOADER ========== */
+.page-loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #000000 0%, #111111 50%, #1a0000 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    opacity: 1;
+    transition: opacity 1s ease;
+}
+
+.loader-container {
+    text-align: center;
+    max-width: 800px;
+    padding: 40px;
+}
+
+.loader-text {
+    font-size: clamp(3rem, 8vw, 5rem);
+    font-weight: 900;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+
+.loader-text .char {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: charAppear 0.3s ease forwards;
+}
+
+.loader-text .char:nth-child(1) { animation-delay: 0.1s; }
+.loader-text .char:nth-child(2) { animation-delay: 0.2s; }
+.loader-text .char:nth-child(3) { animation-delay: 0.3s; }
+.loader-text .char:nth-child(4) { animation-delay: 0.4s; }
+.loader-text .char:nth-child(5) { animation-delay: 0.5s; }
+.loader-text .char:nth-child(6) { animation-delay: 0.6s; }
+.loader-text .char:nth-child(7) { animation-delay: 0.7s; }
+.loader-text .char:nth-child(8) { animation-delay: 0.8s; }
+
+@keyframes charAppear {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        color: var(--primary);
+        text-shadow: 0 0 20px var(--primary);
+    }
+}
+
+.loader-subtitle {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 30px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.loader-bar {
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: 30px;
+}
+
+.loader-progress {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--primary), #ff3333);
+    border-radius: 2px;
+    animation: loadingProgress 2s ease-in-out forwards;
+}
+
+@keyframes loadingProgress {
+    0% { width: 0%; }
+    30% { width: 30%; }
+    70% { width: 70%; }
+    100% { width: 100%; }
+}
+
+.loader-stats {
+    display: flex;
+    justify-content: space-between;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.9rem;
+    font-family: 'Courier New', monospace;
+}
+
+.loader-stats .stat:nth-child(1) { animation: statPulse 1s ease 0.5s forwards; opacity: 0; }
+.loader-stats .stat:nth-child(2) { animation: statPulse 1s ease 1s forwards; opacity: 0; }
+.loader-stats .stat:nth-child(3) { animation: statPulse 1s ease 1.5s forwards; opacity: 0; }
+
+@keyframes statPulse {
+    to {
+        opacity: 1;
+        color: var(--primary);
+    }
+}
+
+/* ========== SCROLL ANIMATIONS ========== */
+[data-animate] {
+    opacity: 0;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes scaleUp {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-100%);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+/* ========== GLITCH EFFECT ========== */
+.glitch {
+    position: relative;
+    animation: glitch 0.3s linear;
+}
+
+@keyframes glitch {
+    0% {
+        transform: translate(0);
+    }
+    20% {
+        transform: translate(-2px, 2px);
+        opacity: 0.8;
+    }
+    40% {
+        transform: translate(-2px, -2px);
+        opacity: 0.6;
+    }
+    60% {
+        transform: translate(2px, 2px);
+        opacity: 0.8;
+    }
+    80% {
+        transform: translate(2px, -2px);
+        opacity: 0.6;
+    }
+    100% {
+        transform: translate(0);
+        opacity: 1;
+    }
+}
+
+/* ========== CUSTOM CURSOR ========== */
+.custom-cursor {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--primary);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.1s ease;
+    transform: translate(-50%, -50%);
+    mix-blend-mode: difference;
+}
+
+.custom-cursor.hover {
+    transform: translate(-50%, -50%) scale(1.5);
+    background: rgba(255, 0, 0, 0.2);
+}
+
+.custom-cursor.click {
+    transform: translate(-50%, -50%) scale(0.8);
+    background: var(--primary);
+}
+
+.cursor-trail {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: var(--primary);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    animation: trailFade 1s ease-out forwards;
+}
+
+@keyframes trailFade {
+    from {
+        opacity: 0.8;
+        transform: scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: scale(0);
+    }
+}
+
+/* ========== PARTICLE SYSTEM ========== */
+.particles-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.particle {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(2px);
+}
+
+@keyframes particleFloat {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* ========== SECTION ENTRANCE ANIMATIONS ========== */
+.section-title {
+    position: relative;
+    overflow: hidden;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary), #ff3333);
+    animation: titleUnderline 1s ease 0.5s forwards;
+}
+
+@keyframes titleUnderline {
+    to {
+        width: 100%;
+    }
+}
+
+/* ========== BUTTON ANIMATIONS ========== */
+.btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn:hover::after {
+    width: 300px;
+    height: 300px;
+}
+
+/* ========== CARD HOVER ANIMATIONS ========== */
+.project-card, .skill-card, .contact-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.project-card::before, .skill-card::before, .contact-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.1), 
+        transparent);
+    transition: left 0.8s ease;
+}
+
+.project-card:hover::before, .skill-card:hover::before, .contact-card:hover::before {
+    left: 100%;
+}
+
+/* ========== TEXT GRADIENT ANIMATION ========== */
+.gradient-text {
+    background: linear-gradient(90deg, 
+        var(--primary), 
+        #ff6666, 
+        var(--primary));
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientFlow 3s linear infinite;
+}
+
+@keyframes gradientFlow {
+    to {
+        background-position: 200% center;
+    }
+}
+
+/* ========== PULSE EFFECTS ========== */
+.pulse {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 20px rgba(255, 0, 0, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 0, 0, 0);
+    }
+}
+
+/* ========== SCROLL INDICATOR ========== */
+.scroll-indicator {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 0, 0, 0.1);
+    border: 2px solid var(--primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.scroll-indicator.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.scroll-indicator:hover {
+    background: rgba(255, 0, 0, 0.2);
+    transform: scale(1.1);
+}
+
+.scroll-indicator i {
+    color: var(--primary);
+    font-size: 1.5rem;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+/* ========== MOBILE OPTIMIZATIONS ========== */
+@media (max-width: 768px) {
+    .custom-cursor {
+        display: none;
+    }
+    
+    .cursor-trail {
+        display: none;
+    }
+    
+    .particles-container {
+        display: none;
+    }
+}
     </style>
 </head>
 <body>
+  <!-- Add this RIGHT after <body> tag -->
+<div class="page-loader">
+    <div class="loader-container">
+        <div class="loader-text">
+            <span class="char">S</span>
+            <span class="char">A</span>
+            <span class="char">I</span>
+            <span class="char">&nbsp;</span>
+            <span class="char">T</span>
+            <span class="char">E</span>
+            <span class="char">C</span>
+            <span class="char">H</span>
+        </div>
+        <div class="loader-subtitle">Loading Portfolio...</div>
+        <div class="loader-bar">
+            <div class="loader-progress"></div>
+        </div>
+        <div class="loader-stats">
+            <div class="stat">3D Initializing...</div>
+            <div class="stat">AI Systems Ready</div>
+            <div class="stat">Portfolio Loaded</div>
+        </div>
+    </div>
+</div>
+
+<!-- Add this for particle effects -->
+<div class="particles-container"></div>
     <!-- Header -->
     <header class="header">
         <div class="logo">SAI TECH</div>
@@ -2847,132 +3838,258 @@ textarea.form-input {
     <!-- Main Content -->
     <div class="content">
        <!-- UPDATED HERO SECTION -->
+<!-- UPDATED HERO SECTION -->
 <section class="hero" id="hero">
     <div class="hero-content">
         <div class="hero-text">
-            <h1 class="hero-title">
-                <span class="hero-title-main">Saiyam Jain</span>
-                AI & Full-Stack Developer
+            <!-- Updated Title with screenshot font style -->
+            <h1 class="hero-main-title">
+                WELCOME TO MY PORTFOLIO
             </h1>
             
-            <div class="hero-tagline">
-                <span class="tagline-item">🤖 AI Engineering</span>
-                <span class="tagline-item">🌐 Full-Stack Development</span>
-                <span class="tagline-item">🚀 Scalable Solutions</span>
+            <!-- Name with professional styling -->
+            <div class="hero-name">
+                <span class="name-first">Saiyam</span>
+                <span class="name-last">Jain</span>
             </div>
             
+            <!-- Professional Title -->
+            <div class="hero-profession">
+                <span class="profession-icon">|</span>
+                <span class="profession-text">AI Developer & Full-Stack Engineer</span>
+                <span class="profession-icon">|</span>
+            </div>
+            
+            <!-- Description -->
             <p class="hero-description">
-                I architect intelligent systems that bridge the gap between complex algorithms and user-friendly experiences. 
-                Specializing in AI integration, responsive web applications, and scalable software solutions that deliver 
-                measurable business value.
+                Transforming complex problems into elegant AI-powered solutions. Specialized in 
+                machine learning, intelligent systems, and modern web technologies that drive 
+                real-world impact.
             </p>
             
-            <div class="hero-highlights">
-                <div class="highlight-item">
-                    <span class="highlight-icon">⚡</span>
-                    <span>AI-Powered Solutions</span>
-                </div>
-                <div class="highlight-item">
-                    <span class="highlight-icon">🔧</span>
-                    <span>Clean Code Architecture</span>
-                </div>
-                <div class="highlight-item">
-                    <span class="highlight-icon">🎯</span>
-                    <span>Problem-First Approach</span>
-                </div>
-            </div>
-            
-            <div class="hero-divider"></div>
-            
-            <div class="hero-social-links">
-                <a href="https://github.com/saiyam-creator" target="_blank" class="hero-social-link">
-                    <span class="hero-social-icon">🐙</span>
-                    <span>GitHub Portfolio</span>
-                </a>
-                <a href="#contact" class="hero-social-link">
-                    <span class="hero-social-icon">💼</span>
-                    <span>Professional Inquiry</span>
-                </a>
-            </div>
-            
+            <!-- CTA Buttons -->
             <div class="hero-buttons">
-                <a href="#projects" class="btn btn-primary">View My Work</a>
-                <a href="#contact" class="btn btn-secondary">Start a Project</a>
+                <a href="#projects" class="btn btn-primary">
+                    <span class="btn-icon">👨‍💻</span>
+                    VIEW MY WORK
+                </a>
+                <a href="#contact" class="btn btn-secondary">
+                    <span class="btn-icon">✉️</span>
+                    GET IN TOUCH
+                </a>
             </div>
         </div>
         
+        <!-- Visual Element -->
         <div class="hero-visual">
             <div class="hero-visual-container">
                 <div class="floating-element element-1">
                     <div class="element-content">
                         <div class="element-icon">🤖</div>
-                        <div class="element-text">AI Integration</div>
+                        <div class="element-text">AI Developer</div>
                     </div>
                 </div>
                 <div class="floating-element element-2">
                     <div class="element-content">
                         <div class="element-icon">💻</div>
-                        <div class="element-text">Full-Stack Dev</div>
+                        <div class="element-text">Full-Stack</div>
                     </div>
                 </div>
                 <div class="floating-element element-3">
                     <div class="element-content">
                         <div class="element-icon">🚀</div>
-                        <div class="element-text">Scalable Systems</div>
+                        <div class="element-text">Innovator</div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
-        <!-- About Section -->
-       <!-- PROFESSIONAL ABOUT SECTION -->
+        <!-- PROFESSIONAL ABOUT SECTION -->
 <section id="about">
-    <h2 class="section-title">Professional Profile</h2>
-    <div class="about-card">
+    <div class="about-container">
+        <!-- Main Title -->
+        <div class="section-header">
+            <h2 class="section-title"># About Me</h2>
+            <div class="section-subtitle">Professional Profile & Expertise</div>
+        </div>
+        
         <div class="about-content">
-            <div class="about-header">
-                <h3>Saiyam Jain</h3>
-                <div class="about-title">AI & Full-Stack Developer</div>
-            </div>
-            
-            <div class="about-body">
-                <p class="about-intro">
-                    I am a results-driven developer specializing in creating intelligent systems 
-                    that solve real-world problems. With expertise spanning artificial intelligence, 
-                    full-stack web development, and modern software architecture, I deliver solutions 
-                    that are both technically robust and user-centric.
-                </p>
-                
-                <div class="about-expertise">
-                    <div class="expertise-column">
-                        <h4>Core Competencies</h4>
-                        <ul class="expertise-list">
-                            <li>AI/ML Integration & Model Development</li>
-                            <li>Full-Stack Web Application Development</li>
-                            <li>API Design & Microservices Architecture</li>
-                            <li>Real-time Data Processing Systems</li>
-                            <li>Cloud Infrastructure & Deployment</li>
-                        </ul>
-                    </div>
+            <!-- Left Column: Professional Info -->
+            <div class="about-left">
+                <!-- Professional Background -->
+                <div class="about-card">
+                    <h3 class="about-card-title">Professional Background</h3>
+                    <p class="about-card-text">
+                        I'm a results-driven AI developer with a strong foundation in machine learning 
+                        and full-stack development. My expertise lies in building intelligent systems 
+                        that solve real-world problems through innovative technology.
+                    </p>
+                    <p class="about-card-text">
+                        With hands-on experience across the entire development lifecycle, I specialize 
+                        in creating scalable AI applications, implementing advanced algorithms, and 
+                        designing intuitive user experiences that make complex technology accessible.
+                    </p>
                     
-                    <div class="expertise-column">
-                        <h4>Development Philosophy</h4>
-                        <ul class="expertise-list">
-                            <li>Problem-first approach to solution design</li>
-                            <li>Clean, maintainable code architecture</li>
-                            <li>Agile methodologies & iterative development</li>
-                            <li>Performance optimization & scalability</li>
-                            <li>Security-first development practices</li>
-                        </ul>
+                    <!-- Stats Grid -->
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-number">8+</div>
+                            <div class="stat-label">PROJECTS DELIVERED</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">4+</div>
+                            <div class="stat-label">YEARS EXPERIENCE</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">100%</div>
+                            <div class="stat-label">CLIENT SATISFACTION</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">24/7</div>
+                            <div class="stat-label">AVAILABILITY</div>
+                        </div>
                     </div>
                 </div>
                 
-                <div class="about-cta">
-                    <p>
-                        Currently focused on advancing AI applications in practical domains and 
-                        building scalable solutions. Open to challenging projects and innovative collaborations.
-                    </p>
+                <!-- Divider -->
+                <div class="about-divider"></div>
+                
+                <!-- Core Expertise -->
+                <div class="about-card">
+                    <h3 class="about-card-title">Core Expertise</h3>
+                    
+                    <!-- Expertise Items -->
+                    <div class="expertise-grid">
+                        <div class="expertise-item">
+                            <div class="expertise-icon">🔑</div>
+                            <div class="expertise-content">
+                                <h4>AI & Machine Learning</h4>
+                                <p>Deep expertise in neural networks, NLP, and computer vision. Building 
+                                intelligent systems with TensorFlow, PyTorch, and modern AI frameworks.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="expertise-item">
+                            <div class="expertise-icon">🔄</div>
+                            <div class="expertise-content">
+                                <h4>Full-Stack Development</h4>
+                                <p>Creating responsive, scalable web applications using React, Node.js, 
+                                and modern JavaScript frameworks with seamless user experiences.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="expertise-item">
+                            <div class="expertise-icon">📊</div>
+                            <div class="expertise-content">
+                                <h4>Rapid Prototyping</h4>
+                                <p>Quickly transforming ideas into working prototypes, enabling fast 
+                                iteration and validation of concepts before full-scale development.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="expertise-item">
+                            <div class="expertise-icon">🏗️</div>
+                            <div class="expertise-content">
+                                <h4>Data-Driven Solutions</h4>
+                                <p>Leveraging data analytics and visualization to derive insights and 
+                                drive informed decision-making.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right Column: Skills Visualization -->
+            <div class="about-right">
+                <div class="skills-visual">
+                    <div class="skills-header">
+                        <h3>Technical Skills Matrix</h3>
+                        <p>Proficiency across key technology domains</p>
+                    </div>
+                    
+                    <!-- AI Skills -->
+                    <div class="skill-category">
+                        <div class="category-header">
+                            <span class="category-icon">🤖</span>
+                            <span class="category-title">AI & Machine Learning</span>
+                            <span class="category-level">Expert</span>
+                        </div>
+                        <p class="category-description">
+                            Deep expertise in neural networks, NLP, and computer vision. Building 
+                            intelligent systems with TensorFlow, PyTorch, and modern AI frameworks.
+                        </p>
+                        
+                        <!-- Skills Progress -->
+                        <div class="skill-progress-grid">
+                            <div class="skill-progress">
+                                <div class="skill-name">TensorFlow</div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 90%"></div>
+                                </div>
+                                <div class="skill-percent">90%</div>
+                            </div>
+                            <div class="skill-progress">
+                                <div class="skill-name">PyTorch</div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 85%"></div>
+                                </div>
+                                <div class="skill-percent">85%</div>
+                            </div>
+                            <div class="skill-progress">
+                                <div class="skill-name">NLP</div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 88%"></div>
+                                </div>
+                                <div class="skill-percent">88%</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Web Dev Skills -->
+                    <div class="skill-category">
+                        <div class="category-header">
+                            <span class="category-icon">🌐</span>
+                            <span class="category-title">Web Development</span>
+                            <span class="category-level">Advanced</span>
+                        </div>
+                        <p class="category-description">
+                            Full-stack development with modern frameworks and technologies.
+                        </p>
+                        
+                        <div class="skill-tags">
+                            <span class="skill-tag">React.js</span>
+                            <span class="skill-tag">Node.js</span>
+                            <span class="skill-tag">Three.js</span>
+                            <span class="skill-tag">MongoDB</span>
+                            <span class="skill-tag">Firebase</span>
+                            <span class="skill-tag">REST APIs</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Tools -->
+                    <div class="skill-category">
+                        <div class="category-header">
+                            <span class="category-icon">⚙️</span>
+                            <span class="category-title">Development Tools</span>
+                            <span class="category-level">Expert</span>
+                        </div>
+                        
+                        <div class="tools-grid">
+                            <div class="tool-item">
+                                <div class="tool-icon">🤖</div>
+                                <div class="tool-name">GitHub Copilot</div>
+                            </div>
+                            <div class="tool-item">
+                                <div class="tool-icon">⌨️</div>
+                                <div class="tool-name">Cursor AI</div>
+                            </div>
+                            <div class="tool-item">
+                                <div class="tool-icon">💬</div>
+                                <div class="tool-name">ChatGPT API</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -5604,6 +6721,490 @@ document.addEventListener('DOMContentLoaded', async () => {
     console.log('✅ Project section loaded with 8 professional projects!');
 });
 </script>
+
+<script>
+  // Add this script for scroll animations
+class ScrollAnimations {
+    constructor() {
+        this.animatedElements = [];
+        this.init();
+    }
+    
+    init() {
+        this.setupObserver();
+        this.setupParallax();
+        this.setupMouseEffects();
+        this.setupPageLoader();
+    }
+    
+    setupObserver() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    this.animateElement(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '50px'
+        });
+        
+        // Observe all elements that need animation
+        document.querySelectorAll('[data-animate]').forEach(el => {
+            observer.observe(el);
+        });
+    }
+    
+    animateElement(element) {
+        const animation = element.dataset.animate || 'fade-up';
+        
+        switch(animation) {
+            case 'fade-up':
+                element.style.animation = 'fadeUp 0.8s ease forwards';
+                break;
+            case 'fade-left':
+                element.style.animation = 'fadeLeft 0.8s ease forwards';
+                break;
+            case 'fade-right':
+                element.style.animation = 'fadeRight 0.8s ease forwards';
+                break;
+            case 'scale-up':
+                element.style.animation = 'scaleUp 0.6s ease forwards';
+                break;
+            case 'typewriter':
+                this.typewriterEffect(element);
+                break;
+            case 'glitch':
+                this.glitchEffect(element);
+                break;
+            case 'float':
+                element.style.animation = 'float 3s ease-in-out infinite';
+                break;
+        }
+        
+        element.classList.add('animated');
+    }
+    
+    typewriterEffect(element) {
+        const text = element.textContent;
+        element.textContent = '';
+        element.style.width = 'fit-content';
+        
+        let i = 0;
+        const type = () => {
+            if (i < text.length) {
+                element.textContent += text.charAt(i);
+                i++;
+                setTimeout(type, 50);
+            }
+        };
+        type();
+    }
+    
+    glitchEffect(element) {
+        element.classList.add('glitch');
+        setTimeout(() => {
+            element.classList.remove('glitch');
+        }, 1000);
+    }
+    
+    setupParallax() {
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const rate = scrolled * -0.5;
+            
+            document.querySelectorAll('[data-parallax]').forEach(el => {
+                const speed = el.dataset.parallaxSpeed || 0.5;
+                el.style.transform = `translateY(${rate * speed}px)`;
+            });
+            
+            // Hero text parallax
+            const heroText = document.querySelector('.hero-text');
+            if (heroText) {
+                heroText.style.transform = `translateY(${scrolled * 0.3}px)`;
+            }
+        });
+    }
+    
+    setupMouseEffects() {
+        document.addEventListener('mousemove', (e) => {
+            const mouseX = e.clientX / window.innerWidth;
+            const mouseY = e.clientY / window.innerHeight;
+            
+            // Move background elements
+            document.querySelectorAll('.floating-element').forEach(el => {
+                const speed = el.dataset.speed || 0.1;
+                const x = (mouseX - 0.5) * 50 * speed;
+                const y = (mouseY - 0.5) * 50 * speed;
+                el.style.transform = `translate(${x}px, ${y}px)`;
+            });
+            
+            // Cursor trail effect
+            this.createCursorTrail(e);
+        });
+        
+        // Custom cursor
+        this.setupCustomCursor();
+    }
+    
+    createCursorTrail(e) {
+        const trail = document.createElement('div');
+        trail.className = 'cursor-trail';
+        trail.style.left = e.pageX + 'px';
+        trail.style.top = e.pageY + 'px';
+        document.body.appendChild(trail);
+        
+        setTimeout(() => {
+            trail.remove();
+        }, 1000);
+    }
+    
+    setupCustomCursor() {
+        const cursor = document.createElement('div');
+        cursor.className = 'custom-cursor';
+        document.body.appendChild(cursor);
+        
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.pageX + 'px';
+            cursor.style.top = e.pageY + 'px';
+        });
+        
+        document.addEventListener('mousedown', () => {
+            cursor.classList.add('click');
+        });
+        
+        document.addEventListener('mouseup', () => {
+            cursor.classList.remove('click');
+        });
+        
+        // Hide on elements that don't need custom cursor
+        document.querySelectorAll('a, button').forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.classList.add('hover');
+            });
+            el.addEventListener('mouseleave', () => {
+                cursor.classList.remove('hover');
+            });
+        });
+    }
+    
+    setupPageLoader() {
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const loader = document.querySelector('.page-loader');
+                if (loader) {
+                    loader.style.opacity = '0';
+                    setTimeout(() => {
+                        loader.style.display = 'none';
+                        
+                        // Initial page animations
+                        this.animatePageEntrance();
+                    }, 1000);
+                }
+            }, 2000);
+        });
+    }
+    
+    animatePageEntrance() {
+        // Animate header
+        const header = document.querySelector('.header');
+        header.style.animation = 'slideDown 0.8s ease forwards';
+        
+        // Animate hero section
+        const heroTitle = document.querySelector('.hero-main-title');
+        const heroName = document.querySelector('.hero-name');
+        const heroButtons = document.querySelector('.hero-buttons');
+        
+        if (heroTitle) {
+            setTimeout(() => {
+                heroTitle.style.animation = 'fadeUp 0.8s ease forwards 0.2s';
+            }, 300);
+        }
+        
+        if (heroName) {
+            setTimeout(() => {
+                heroName.style.animation = 'fadeUp 0.8s ease forwards 0.4s';
+            }, 500);
+        }
+        
+        if (heroButtons) {
+            setTimeout(() => {
+                heroButtons.style.animation = 'fadeUp 0.8s ease forwards 0.6s';
+            }, 700);
+        }
+        
+        // Start particle system
+        this.startParticleSystem();
+    }
+    
+    startParticleSystem() {
+        const container = document.querySelector('.particles-container');
+        if (!container) return;
+        
+        for (let i = 0; i < 50; i++) {
+            this.createParticle(container);
+        }
+    }
+    
+    createParticle(container) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        
+        // Random properties
+        const size = Math.random() * 10 + 2;
+        const posX = Math.random() * 100;
+        const posY = Math.random() * 100;
+        const duration = Math.random() * 20 + 10;
+        const delay = Math.random() * 5;
+        
+        particle.style.cssText = `
+            width: ${size}px;
+            height: ${size}px;
+            left: ${posX}%;
+            top: ${posY}%;
+            background: rgba(255, ${Math.random() * 100}, ${Math.random() * 100}, ${Math.random() * 0.5 + 0.1});
+            animation: particleFloat ${duration}s linear infinite ${delay}s;
+        `;
+        
+        container.appendChild(particle);
+        
+        // Remove after animation
+        setTimeout(() => {
+            particle.remove();
+            this.createParticle(container);
+        }, duration * 1000);
+    }
+}
+
+// Initialize animations
+document.addEventListener('DOMContentLoaded', () => {
+    const animations = new ScrollAnimations();
+});
+</script>
+<script>
+  // Add this for extra effects
+class ExtraAnimations {
+    constructor() {
+        this.init();
+    }
+    
+    init() {
+        this.setupScrollIndicator();
+        this.setupBackgroundEffects();
+        this.setupClickEffects();
+        this.setupNavHoverEffects();
+    }
+    
+    setupScrollIndicator() {
+        const indicator = document.createElement('div');
+        indicator.className = 'scroll-indicator';
+        indicator.innerHTML = '<i class="fas fa-chevron-up"></i>';
+        document.body.appendChild(indicator);
+        
+        // Scroll to top
+        indicator.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Show/hide based on scroll
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                indicator.classList.add('visible');
+                indicator.innerHTML = '<i class="fas fa-chevron-up"></i>';
+            } else {
+                indicator.classList.remove('visible');
+            }
+        });
+    }
+    
+    setupBackgroundEffects() {
+        // Create animated grid background
+        const grid = document.createElement('div');
+        grid.className = 'animated-grid';
+        document.querySelector('.content').prepend(grid);
+        
+        // Add gradient overlay
+        const gradient = document.createElement('div');
+        gradient.className = 'gradient-overlay';
+        document.body.appendChild(gradient);
+    }
+    
+    setupClickEffects() {
+        document.addEventListener('click', (e) => {
+            this.createRippleEffect(e);
+            
+            // Add sound effect (optional)
+            if (e.target.closest('button, a')) {
+                this.playClickSound();
+            }
+        });
+    }
+    
+    createRippleEffect(e) {
+        const ripple = document.createElement('div');
+        ripple.className = 'ripple-effect';
+        
+        const size = 100;
+        const x = e.pageX - size / 2;
+        const y = e.pageY - size / 2;
+        
+        ripple.style.cssText = `
+            width: ${size}px;
+            height: ${size}px;
+            left: ${x}px;
+            top: ${y}px;
+            background: radial-gradient(circle, 
+                rgba(255, 0, 0, 0.3) 0%, 
+                transparent 70%);
+            pointer-events: none;
+            z-index: 9997;
+        `;
+        
+        document.body.appendChild(ripple);
+        
+        setTimeout(() => {
+            ripple.remove();
+        }, 1000);
+    }
+    
+    playClickSound() {
+        // Optional: Add subtle click sound
+        const audio = new Audio('data:audio/wav;base64,UklGRigAAABXQVZFZm10IBIAAAABAAEAQB8AAEAfAAABAAgAZGF0YQ');
+        audio.volume = 0.1;
+        audio.play().catch(() => {});
+    }
+    
+    setupNavHoverEffects() {
+        const navLinks = document.querySelectorAll('.nav-link');
+        
+        navLinks.forEach(link => {
+            link.addEventListener('mouseenter', () => {
+                link.style.transform = 'translateY(-5px)';
+                link.style.boxShadow = '0 10px 20px rgba(255, 0, 0, 0.3)';
+            });
+            
+            link.addEventListener('mouseleave', () => {
+                link.style.transform = '';
+                link.style.boxShadow = '';
+            });
+        });
+    }
+}
+
+// Initialize extra animations
+document.addEventListener('DOMContentLoaded', () => {
+    new ExtraAnimations();
+});
+</script>
+<style>
+  /* ========== RIPPLE EFFECT ========== */
+.ripple-effect {
+    position: absolute;
+    border-radius: 50%;
+    animation: ripple 1s ease-out forwards;
+}
+
+@keyframes ripple {
+    from {
+        transform: scale(0);
+        opacity: 1;
+    }
+    to {
+        transform: scale(3);
+        opacity: 0;
+    }
+}
+
+/* ========== ANIMATED GRID BACKGROUND ========== */
+.animated-grid {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(rgba(255, 0, 0, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 0, 0, 0.05) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: gridMove 20s linear infinite;
+    pointer-events: none;
+    z-index: 0;
+}
+
+@keyframes gridMove {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 50px 50px;
+    }
+}
+
+/* ========== GRADIENT OVERLAY ========== */
+.gradient-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(
+        circle at 20% 50%,
+        rgba(255, 0, 0, 0.05) 0%,
+        transparent 50%
+    ),
+    radial-gradient(
+        circle at 80% 20%,
+        rgba(255, 0, 0, 0.03) 0%,
+        transparent 50%
+    );
+    pointer-events: none;
+    z-index: 0;
+    animation: gradientShift 10s ease-in-out infinite alternate;
+}
+
+@keyframes gradientShift {
+    from {
+        transform: translate(0, 0);
+    }
+    to {
+        transform: translate(50px, 50px);
+    }
+}
+
+/* ========== TYPEWRITER CURSOR ========== */
+.typewriter::after {
+    content: '|';
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* ========== NEON GLOW ========== */
+.neon-glow {
+    text-shadow: 
+        0 0 5px var(--primary),
+        0 0 10px var(--primary),
+        0 0 20px var(--primary),
+        0 0 40px var(--primary);
+    animation: neonPulse 2s ease-in-out infinite;
+}
+
+@keyframes neonPulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+</style>
+
 <div class="project-notification" id="projectNotification">
     <div class="notification-content">
         <button class="notification-close" id="closeNotification">×</button>
