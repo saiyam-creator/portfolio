@@ -4788,7 +4788,7 @@ textarea.form-input {
 </section>
     </div>
 
- <!-- Scripts -->
+<!-- Scripts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <!-- Firebase Scripts -->
@@ -4796,30 +4796,30 @@ textarea.form-input {
 <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
 
 <script>
-    // ============= CONFIGURATION =============
-    const SITE_CONFIG = {
-        personal: {
-            name: "Saiyam Jain",
-            phone: "+91 6398068797",
-            email: "saiyamjain2405@gmail.com",
-            location: "Muzaffarnagar",
-            availability: "Mon-Fri: 10AM - 7PM"
-        },
+// ============= CONFIGURATION =============
+const SITE_CONFIG = {
+    personal: {
+        name: "Saiyam Jain",
+        phone: "+91 6398068797",
+        email: "saiyamjain2405@gmail.com",
+        location: "Muzaffarnagar",
+        availability: "Mon-Fri: 10AM - 7PM"
+    },
 
-        social: {
-            github: "https://github.com/saiyam-creator",
-            twitter: "https://x.com/saiyam2405",
-            instagram: "https://instagram.com/saiiyam_jain"
-        },
+    social: {
+        github: "https://github.com/saiyam-creator",
+        twitter: "https://x.com/saiyam2405",
+        instagram: "https://instagram.com/saiiyam_jain"
+    },
 
-        projects: [
-            {
-                id: 'project1',
-                title: 'Stock Calculator',
-                description: 'Advanced stock calculator which can calculate your P&L according to your investment.',
-                tags: ['AI', 'Python', 'JAVA'],
-                demoLink: 'https://saiyam-creator.github.io/stock-calculator/',
-                codeLink: 'https://github.com/saiyam-creator/stock-calculator'
+    projects: [
+        {
+            id: 'project1',
+            title: 'Stock Calculator',
+            description: 'Advanced stock calculator which can calculate your P&L according to your investment.',
+            tags: ['AI', 'Python', 'JAVA'],
+            demoLink: 'https://saiyam-creator.github.io/stock-calculator/',
+            codeLink: 'https://github.com/saiyam-creator/stock-calculator'
             },
             {
                 id: 'project2',
@@ -4886,167 +4886,168 @@ textarea.form-input {
     };
 
     // ============= FIREBASE CONFIGURATION =============
-    const firebaseConfig = {
-        apiKey: "AIzaSyBfp3xzEFjsfxcqkKIgc2-W0uVAxytNGEU",
-        authDomain: "sai-portfolio-reviews.firebaseapp.com",
-        projectId: "sai-portfolio-reviews",
-        storageBucket: "sai-portfolio-reviews.firebasestorage.app",
-        messagingSenderId: "146249023788",
-        appId: "1:146249023788:web:b75a21ffa16514e67c2c89",
-        measurementId: "G-8GV80F6RTF"
-    };
+    // ============= FIREBASE CONFIGURATION =============
+const firebaseConfig = {
+    apiKey: "AIzaSyBfp3xzEFjsfxcqkKIgc2-W0uVAxytNGEU",
+    authDomain: "sai-portfolio-reviews.firebaseapp.com",
+    projectId: "sai-portfolio-reviews",
+    storageBucket: "sai-portfolio-reviews.firebasestorage.app",
+    messagingSenderId: "146249023788",
+    appId: "1:146249023788:web:b75a21ffa16514e67c2c89",
+    measurementId: "G-8GV80F6RTF"
+};
 
-    // Initialize Firebase
-    let db;
+// Initialize Firebase
+let db;
+try {
+    firebase.initializeApp(firebaseConfig);
+    db = firebase.firestore();
+    console.log('✅ Firebase initialized successfully');
+} catch (error) {
+    console.error('❌ Firebase initialization failed:', error);
+    db = null;
+}
+
+// ============= SIMPLE THREE.JS BACKGROUND =============
+function init3DBackground() {
+    const canvas = document.getElementById('canvas3d');
+    if (!canvas) return;
+
     try {
-        firebase.initializeApp(firebaseConfig);
-        db = firebase.firestore();
-        console.log('✅ Firebase initialized successfully');
-    } catch (error) {
-        console.error('❌ Firebase initialization failed:', error);
-        db = null;
-    }
-
-    // ============= SIMPLE THREE.JS BACKGROUND =============
-    function init3DBackground() {
-        const canvas = document.getElementById('canvas3d');
-        if (!canvas) {
-            console.log('Canvas not found');
-            return;
-        }
-
-        try {
-            if (typeof THREE === 'undefined') {
-                console.error('Three.js not loaded');
-                canvas.style.display = 'none';
-                return;
-            }
-
-            const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-            camera.position.z = 5;
-            
-            const renderer = new THREE.WebGLRenderer({ 
-                canvas: canvas,
-                alpha: true,
-                antialias: true 
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.z = 5;
+        
+        const renderer = new THREE.WebGLRenderer({ 
+            canvas: canvas,
+            alpha: true,
+            antialias: true 
+        });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setClearColor(0x000000, 0);
+        
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+        scene.add(ambientLight);
+        
+        const pointLight = new THREE.PointLight(0xff0000, 1, 100);
+        pointLight.position.set(10, 10, 10);
+        scene.add(pointLight);
+        
+        const geometries = [];
+        const colors = [0xff0000, 0xff3333, 0xff6666];
+        
+        for (let i = 0; i < 15; i++) {
+            const geometry = new THREE.IcosahedronGeometry(0.2 + Math.random() * 0.3, 0);
+            const material = new THREE.MeshStandardMaterial({
+                color: colors[Math.floor(Math.random() * colors.length)],
+                transparent: true,
+                opacity: 0.6,
+                wireframe: true
             });
+            
+            const mesh = new THREE.Mesh(geometry, material);
+            
+            mesh.position.x = (Math.random() - 0.5) * 20;
+            mesh.position.y = (Math.random() - 0.5) * 20;
+            mesh.position.z = (Math.random() - 0.5) * 10;
+            
+            mesh.userData = {
+                rotationSpeed: {
+                    x: (Math.random() - 0.5) * 0.02,
+                    y: (Math.random() - 0.5) * 0.02,
+                    z: (Math.random() - 0.5) * 0.02
+                },
+                floatSpeed: Math.random() * 0.01
+            };
+            
+            scene.add(mesh);
+            geometries.push(mesh);
+        }
+        
+        let mouseX = 0;
+        let mouseY = 0;
+        
+        document.addEventListener('mousemove', (event) => {
+            mouseX = (event.clientX / window.innerWidth) * 2 - 1;
+            mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
+        });
+        
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            camera.position.x += (mouseX * 2 - camera.position.x) * 0.05;
+            camera.position.y += (mouseY * 2 - camera.position.y) * 0.05;
+            camera.lookAt(scene.position);
+            
+            const time = Date.now() * 0.001;
+            
+            geometries.forEach((mesh, i) => {
+                mesh.rotation.x += mesh.userData.rotationSpeed.x;
+                mesh.rotation.y += mesh.userData.rotationSpeed.y;
+                mesh.rotation.z += mesh.userData.rotationSpeed.z;
+                
+                mesh.position.y += Math.sin(time + i) * 0.002;
+                mesh.position.x += Math.cos(time + i * 0.5) * 0.001;
+            });
+            
+            renderer.render(scene, camera);
+        }
+        
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
             renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.setClearColor(0x000000, 0);
-            
-            const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-            scene.add(ambientLight);
-            
-            const pointLight = new THREE.PointLight(0xff0000, 1, 100);
-            pointLight.position.set(10, 10, 10);
-            scene.add(pointLight);
-            
-            const geometries = [];
-            const colors = [0xff0000, 0xff3333, 0xff6666];
-            
-            for (let i = 0; i < 15; i++) {
-                const geometry = new THREE.IcosahedronGeometry(0.2 + Math.random() * 0.3, 0);
-                const material = new THREE.MeshStandardMaterial({
-                    color: colors[Math.floor(Math.random() * colors.length)],
-                    transparent: true,
-                    opacity: 0.6,
-                    wireframe: true
-                });
-                
-                const mesh = new THREE.Mesh(geometry, material);
-                
-                mesh.position.x = (Math.random() - 0.5) * 20;
-                mesh.position.y = (Math.random() - 0.5) * 20;
-                mesh.position.z = (Math.random() - 0.5) * 10;
-                
-                mesh.userData = {
-                    rotationSpeed: {
-                        x: (Math.random() - 0.5) * 0.02,
-                        y: (Math.random() - 0.5) * 0.02,
-                        z: (Math.random() - 0.5) * 0.02
-                    },
-                    floatSpeed: Math.random() * 0.01
-                };
-                
-                scene.add(mesh);
-                geometries.push(mesh);
-            }
-            
-            let mouseX = 0;
-            let mouseY = 0;
-            
-            document.addEventListener('mousemove', (event) => {
-                mouseX = (event.clientX / window.innerWidth) * 2 - 1;
-                mouseY = -(event.clientY / window.innerHeight) * 2 + 1;
-            });
-            
-            function animate() {
-                requestAnimationFrame(animate);
-                
-                camera.position.x += (mouseX * 2 - camera.position.x) * 0.05;
-                camera.position.y += (mouseY * 2 - camera.position.y) * 0.05;
-                camera.lookAt(scene.position);
-                
-                const time = Date.now() * 0.001;
-                
-                geometries.forEach((mesh, i) => {
-                    mesh.rotation.x += mesh.userData.rotationSpeed.x;
-                    mesh.rotation.y += mesh.userData.rotationSpeed.y;
-                    mesh.rotation.z += mesh.userData.rotationSpeed.z;
-                    
-                    mesh.position.y += Math.sin(time + i) * 0.002;
-                    mesh.position.x += Math.cos(time + i * 0.5) * 0.001;
-                });
-                
-                renderer.render(scene, camera);
-            }
-            
-            function onWindowResize() {
-                camera.aspect = window.innerWidth / window.innerHeight;
-                camera.updateProjectionMatrix();
-                renderer.setSize(window.innerWidth, window.innerHeight);
-            }
-            
-            window.addEventListener('resize', onWindowResize, false);
-            animate();
-            
-        } catch (error) {
-            console.error('Three.js initialization error:', error);
-            canvas.style.display = 'none';
         }
+        
+        window.addEventListener('resize', onWindowResize, false);
+        animate();
+        
+    } catch (error) {
+        console.error('Three.js initialization error:', error);
+        canvas.style.display = 'none';
     }
+}
 
-    // ============= PROJECT MANAGER =============
-  
-
-    // ============= CONTACT MANAGER WITH FIREBASE =============
+// ============= SINGLE CONTACT MANAGER =============
 class ContactManager {
     constructor() {
         this.db = db;
-        console.log('📱 ContactManager initialized', this.db ? 'Firebase connected' : 'Firebase offline');
+        console.log('📱 ContactManager initialized');
+        this.setupEventListeners();
+    }
+
+    setupEventListeners() {
+        const sendBtn = document.getElementById('sendMessageBtn');
+        if (!sendBtn) {
+            console.error('Send button not found');
+            return;
+        }
+
+        sendBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            this.sendMessage();
+        });
+
+        // Also attach to form submit
+        const contactForm = document.querySelector('.contact-form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                this.sendMessage();
+            });
+        }
     }
 
     async sendMessage() {
-        // Get form elements safely
-        const nameInput = document.getElementById('contactName');
-        const emailInput = document.getElementById('contactEmail');
-        const projectTypeInput = document.getElementById('projectType');
-        const projectTimelineInput = document.getElementById('projectTimeline');
-        const messageInput = document.getElementById('contactMessage');
+        // Get form values
+        const name = document.getElementById('contactName')?.value.trim();
+        const email = document.getElementById('contactEmail')?.value.trim();
+        const projectType = document.getElementById('projectType')?.value || 'general';
+        const timeline = document.getElementById('projectTimeline')?.value || 'not-specified';
+        const message = document.getElementById('contactMessage')?.value.trim();
         
-        // Check if elements exist before getting values
-        if (!nameInput || !emailInput || !messageInput) {
-            console.error('❌ Form elements not found!');
-            this.showNotification('Form error. Please refresh the page.', 'error');
-            return;
-        }
-        
-        const name = nameInput.value.trim();
-        const email = emailInput.value.trim();
-        const projectType = projectTypeInput ? projectTypeInput.value : 'not-specified';
-        const timeline = projectTimelineInput ? projectTimelineInput.value : 'not-specified';
-        const message = messageInput.value.trim();
-        
+        console.log('Form data:', { name, email, projectType, timeline, message });
+
         // Validation
         if (!name || !email || !message) {
             this.showNotification('Please fill all required fields!', 'error');
@@ -5058,7 +5059,7 @@ class ContactManager {
             return;
         }
 
-        // Create message object - ONLY fields that exist!
+        // Create message data - NO SUBJECT FIELD
         const messageData = {
             name: name,
             email: email,
@@ -5068,123 +5069,94 @@ class ContactManager {
             date: new Date().toISOString(),
             timestamp: new Date().getTime(),
             status: 'unread',
-            source: 'portfolio-website' // Add source for tracking
+            source: 'portfolio-website'
         };
 
         console.log('📨 Sending message:', messageData);
 
         // Show loading
-        const sendBtn = document.querySelector('[data-action="send-message"]');
-        const originalContent = sendBtn?.innerHTML || 'Send Message';
-        if (sendBtn) {
-            sendBtn.innerHTML = '<div class="loading"></div> Sending...';
-            sendBtn.disabled = true;
-        }
+        const sendBtn = document.getElementById('sendMessageBtn');
+        const originalContent = sendBtn.innerHTML;
+        sendBtn.innerHTML = '<div class="loading"></div> Sending...';
+        sendBtn.disabled = true;
 
         try {
             // Save to Firebase
-            const success = await this.saveMessageToFirebase(messageData);
-
-            if (success) {
+            if (this.db) {
+                const docRef = await this.db.collection('messages').add({
+                    ...messageData,
+                    serverTimestamp: firebase.firestore.FieldValue.serverTimestamp()
+                });
+                console.log('✅ Message saved to Firebase with ID:', docRef.id);
+                
                 this.showNotification('✅ Message sent successfully! I\'ll get back to you soon.', 'success');
-                this.resetContactForm();
+                this.resetForm();
             } else {
+                console.log('Firebase not available, saving locally');
+                this.saveToLocalStorage(messageData);
                 this.showNotification('⚠️ Message saved locally. Will sync when online.', 'warning');
-                this.resetContactForm();
+                this.resetForm();
             }
         } catch (error) {
             console.error('❌ Error sending message:', error);
+            
+            // Specific error handling
+            if (error.message.includes('Unsupported field value')) {
+                console.error('Data validation error:', error.message);
+                // Try with clean data
+                const cleanData = { ...messageData };
+                Object.keys(cleanData).forEach(key => {
+                    if (cleanData[key] === undefined) delete cleanData[key];
+                });
+                
+                try {
+                    if (this.db) {
+                        await this.db.collection('messages').add(cleanData);
+                        this.showNotification('✅ Message sent successfully!', 'success');
+                        this.resetForm();
+                        return;
+                    }
+                } catch (retryError) {
+                    console.error('Retry failed:', retryError);
+                }
+            }
+            
             this.showNotification('❌ Failed to send message. Please try again.', 'error');
         } finally {
             // Reset button
-            if (sendBtn) {
-                sendBtn.innerHTML = originalContent;
-                sendBtn.disabled = false;
-            }
+            sendBtn.innerHTML = originalContent;
+            sendBtn.disabled = false;
         }
     }
 
-    async saveMessageToFirebase(messageData) {
-        if (!this.db) {
-            console.log('Firebase not available, saving locally');
-            this.saveMessageToLocalStorage(messageData);
-            return false;
-        }
-
-        try {
-            // ✅ Save to 'messages' collection
-            const docRef = await this.db.collection('messages').add({
-                ...messageData, // Spread operator to include all fields
-                serverTimestamp: firebase.firestore.FieldValue.serverTimestamp()
-            });
-            
-            console.log('✅ Message saved to Firebase with ID:', docRef.id);
-            return true;
-        } catch (error) {
-            console.error('❌ Failed to save message to Firebase:', error);
-            
-            // Detailed error check
-            if (error.code === 'permission-denied') {
-                console.error('❌ Permission denied! Check Firestore rules.');
-                this.showNotification('❌ Database permission error. Please check Firebase rules.', 'error');
-            } else if (error.message.includes('Unsupported field value')) {
-                console.error('❌ Invalid data format:', error.message);
-                this.showNotification('❌ Form data error. Please check all fields.', 'error');
-            }
-            
-            this.saveMessageToLocalStorage(messageData);
-            return false;
-        }
-    }
-
-    // ... rest of your methods remain the same
     isValidEmail(email) {
         const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return re.test(email);
     }
 
-    resetContactForm() {
-        // Reset all form fields safely
-        const nameInput = document.getElementById('contactName');
-        const emailInput = document.getElementById('contactEmail');
-        const projectTypeInput = document.getElementById('projectType');
-        const projectTimelineInput = document.getElementById('projectTimeline');
-        const messageInput = document.getElementById('contactMessage');
-        const newsletterInput = document.getElementById('newsletterOptIn');
-        
-        if (nameInput) nameInput.value = '';
-        if (emailInput) emailInput.value = '';
-        if (projectTypeInput) projectTypeInput.value = '';
-        if (projectTimelineInput) projectTimelineInput.value = '';
-        if (messageInput) messageInput.value = '';
-        if (newsletterInput) newsletterInput.checked = false;
+    resetForm() {
+        document.getElementById('contactName').value = '';
+        document.getElementById('contactEmail').value = '';
+        document.getElementById('projectType').value = '';
+        document.getElementById('projectTimeline').value = '';
+        document.getElementById('contactMessage').value = '';
+        const newsletter = document.getElementById('newsletterOptIn');
+        if (newsletter) newsletter.checked = false;
     }
 
-    saveMessageToLocalStorage(messageData) {
+    saveToLocalStorage(data) {
         try {
-            const messages = this.getMessagesFromLocalStorage();
-            messages.push(messageData);
-            localStorage.setItem('sai_portfolio_messages', JSON.stringify(messages));
-            console.log('💾 Message saved locally:', messageData);
+            const messages = JSON.parse(localStorage.getItem('portfolio_messages') || '[]');
+            messages.push(data);
+            localStorage.setItem('portfolio_messages', JSON.stringify(messages));
         } catch (error) {
-            console.error('Error saving to local storage:', error);
-        }
-    }
-
-    getMessagesFromLocalStorage() {
-        try {
-            const messages = localStorage.getItem('sai_portfolio_messages');
-            return messages ? JSON.parse(messages) : [];
-        } catch (error) {
-            console.error('Error reading local storage:', error);
-            return [];
+            console.error('Error saving to localStorage:', error);
         }
     }
 
     showNotification(message, type = 'info') {
-        // Remove existing notifications
-        const existing = document.querySelector('.notification');
-        if (existing) existing.remove();
+        // Remove existing
+        document.querySelectorAll('.notification').forEach(n => n.remove());
 
         const notification = document.createElement('div');
         notification.className = `notification ${type}`;
@@ -5205,165 +5177,172 @@ class ContactManager {
     }
 }
 
-    // ============= NAVIGATION MANAGER =============
-    class NavigationManager {
-        constructor() {
-            this.projectManager = null;
-            this.contactManager = null;
-        }
+// ============= NAVIGATION =============
+class NavigationManager {
+    constructor() {
+        this.init();
+    }
 
-        initialize(projectManager, contactManager) {
-            this.projectManager = projectManager;
-            this.contactManager = contactManager;
-            
-            this.setupNavigation();
-            this.setupEventListeners();
-            this.addAlertStyles();
-        }
+    init() {
+        this.setupNavigation();
+    }
 
-        setupNavigation() {
-            const sections = document.querySelectorAll('section');
-            const navDots = document.querySelectorAll('.nav-dot');
-            const navLinks = document.querySelectorAll('.nav-link');
+    setupNavigation() {
+        const sections = document.querySelectorAll('section');
+        const navDots = document.querySelectorAll('.nav-dot');
+        const navLinks = document.querySelectorAll('.nav-link');
 
-            const updateActiveSection = () => {
-                let current = '';
-                sections.forEach(section => {
-                    const sectionTop = section.offsetTop;
-                    if (window.scrollY >= sectionTop - 300) {
-                        current = section.getAttribute('id');
-                    }
-                });
-
-                navDots.forEach(dot => {
-                    dot.classList.remove('active');
-                    if (dot.getAttribute('data-section') === current) {
-                        dot.classList.add('active');
-                    }
-                });
-
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href') === `#${current}`) {
-                        link.classList.add('active');
-                    }
-                });
-            };
-
-            window.addEventListener('scroll', updateActiveSection);
+        const updateActiveSection = () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (window.scrollY >= sectionTop - 300) {
+                    current = section.getAttribute('id');
+                }
+            });
 
             navDots.forEach(dot => {
-                dot.addEventListener('click', () => {
-                    const section = dot.getAttribute('data-section');
-                    this.scrollToSection(section);
-                });
+                dot.classList.remove('active');
+                if (dot.getAttribute('data-section') === current) {
+                    dot.classList.add('active');
+                }
             });
 
             navLinks.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const href = link.getAttribute('href');
-                    if (href.startsWith('#')) {
-                        this.scrollToSection(href.substring(1));
-                    }
-                });
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
             });
-        }
+        };
 
-        setupEventListeners() {
-    document.addEventListener('click', (e) => {
-        const button = e.target.closest('[data-action="send-message"]');
-        if (button && this.contactManager) {
-            e.preventDefault(); // Prevent form submission
-            this.contactManager.sendMessage();
-        }
-        
-        // Other button handlers remain the same
-        const viewButton = e.target.closest('[data-action="view-project"], [data-action="view-code"]');
-        if (viewButton) {
-            const link = viewButton.getAttribute('data-link');
-            if (link && link !== '#') {
-                window.open(link, '_blank');
-            }
-        }
-    });
+        window.addEventListener('scroll', updateActiveSection);
 
-    // Also attach to form submit
-    const contactForm = document.querySelector('.contact-form');
-    if (contactForm && this.contactManager) {
-        contactForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            this.contactManager.sendMessage();
+        // Dot click
+        navDots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                const section = dot.getAttribute('data-section');
+                this.scrollToSection(section);
+            });
         });
+
+        // Link click
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const href = link.getAttribute('href');
+                if (href.startsWith('#')) {
+                    this.scrollToSection(href.substring(1));
+                }
+            });
+        });
+    }
+
+    scrollToSection(id) {
+        const element = document.getElementById(id);
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
     }
 }
 
-        addAlertStyles() {
-            const styleSheet = document.createElement('style');
-            styleSheet.textContent = `
-                .form-alert {
-                    padding: 12px 20px;
-                    margin-bottom: 20px;
-                    border-radius: 10px;
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    animation: slideIn 0.3s ease;
-                    font-size: 14px;
-                }
-                .form-alert-success {
-                    background: rgba(0, 255, 0, 0.1);
-                    border: 1px solid #00cc00;
-                    color: #00cc00;
-                }
-                .form-alert-error {
-                    background: rgba(255, 0, 0, 0.1);
-                    border: 1px solid #ff3333;
-                    color: #ff3333;
-                }
-                .form-alert-warning {
-                    background: rgba(255, 165, 0, 0.1);
-                    border: 1px solid #ff9900;
-                    color: #ff9900;
-                }
-                .alert-close {
-                    background: none;
-                    border: none;
-                    color: inherit;
-                    font-size: 18px;
-                    cursor: pointer;
-                    margin-left: 10px;
-                    padding: 0;
-                    line-height: 1;
-                }
-                @keyframes slideIn {
-                    from { transform: translateY(-10px); opacity: 0; }
-                    to { transform: translateY(0); opacity: 1; }
-                }
-                .loading {
-                    display: inline-block;
-                    width: 16px;
-                    height: 16px;
-                    border: 2px solid rgba(255, 255, 255, 0.3);
-                    border-top-color: white;
-                    border-radius: 50%;
-                    animation: spin 1s linear infinite;
-                    margin-right: 8px;
-                }
-                @keyframes spin {
-                    to { transform: rotate(360deg); }
-                }
-            `;
-            document.head.appendChild(styleSheet);
+// ============= PROJECT LOADER =============
+function loadProjects() {
+    const projects = [
+        {
+            title: 'Stock Calculator',
+            description: 'Advanced stock calculator which can calculate your P&L according to your investment.',
+            tags: ['AI', 'Python', 'JAVA'],
+            demoLink: 'https://saiyam-creator.github.io/stock-calculator/',
+            codeLink: 'https://github.com/saiyam-creator/stock-calculator'
+        },
+        {
+            title: 'Investment Calculator',
+            description: 'Calculate your investment returns with advanced algorithms.',
+            tags: ['HTML', 'CSS', 'JavaScript'],
+            demoLink: 'https://saiyam-creator.github.io/investment-calculate/',
+            codeLink: 'https://github.com/saiyam-creator/investment-calculate'
+        },
+        {
+            title: 'English Corrector',
+            description: 'Improve your English grammar with this AI-powered tool.',
+            tags: ['HTML', 'CSS', 'JS'],
+            demoLink: 'https://saiyam-creator.github.io/correct-english/',
+            codeLink: 'https://github.com/saiyam-creator/correct-english'
+        },
+        {
+            title: 'Solar System',
+            description: 'Explore our solar system in interactive 3D view.',
+            tags: ['AI', '3D'],
+            demoLink: 'https://saiyam-creator.github.io/solar-system/',
+            codeLink: 'https://github.com/saiyam-creator/solar-system'
+        },
+        {
+            title: 'All About Shapes',
+            description: 'Educational app teaching kids about shapes using interactive visuals.',
+            tags: ['JS', 'HTML', 'CSS'],
+            demoLink: 'https://saiyam-creator.github.io/all-about-shapes/',
+            codeLink: 'https://github.com/saiyam-creator/all-about-shapes'
+        },
+        {
+            title: 'Life GPS',
+            description: 'AI-powered life coaching app to help you navigate personal and professional challenges.',
+            tags: ['React', 'AI', 'Web App'],
+            demoLink: 'https://life-gps-coral.vercel.app/',
+            codeLink: 'https://github.com/saiyam-creator/life-gps'
+        },
+        {
+            title: 'WorthIT',
+            description: 'AI-driven personal finance app to help users manage expenses and investments effectively.',
+            tags: ['React', 'AI', 'Finance'],
+            demoLink: 'https://saiyam-creator.github.io/worthit-app/',
+            codeLink: 'https://github.com/saiyam-creator/worthit-app'
+        },
+        {
+            title: 'gita ka gyan',
+            description: 'shlokas of bhagwat gita with meaning according to your feeling.',
+            tags: ['HTML', 'CSS', 'JS', 'AI', 'Web App'],
+            demoLink: 'https://saiyam-creator.github.io/krishna-path/',
+            codeLink: 'https://github.com/saiyam-creator/krishna-path'
         }
+    ];
 
-        scrollToSection(id) {
-            const element = document.getElementById(id);
-            if (element) {
-                element.scrollIntoView({ behavior: 'smooth' });
-            }
-        }
-    }
+    const grid = document.getElementById('projectsGrid');
+    if (!grid) return;
+
+    grid.innerHTML = '';
+
+    projects.forEach(project => {
+        const card = document.createElement('div');
+        card.className = 'project-card';
+        card.innerHTML = `
+            <div class="project-header">
+                <div class="project-title">${project.title}</div>
+            </div>
+            
+            <div class="project-desc">
+                ${project.description}
+            </div>
+            
+            <div class="project-tags">
+                ${project.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+            </div>
+            
+            <div class="project-actions">
+                <button class="btn-small btn-view" onclick="window.open('${project.demoLink}', '_blank')">
+                    <span class="btn-icon">🌐</span>
+                    Live Demo
+                </button>
+                <button class="btn-small btn-secondary" onclick="window.open('${project.codeLink}', '_blank')">
+                    <span class="btn-icon">👨‍💻</span>
+                    Source Code
+                </button>
+            </div>
+        `;
+        grid.appendChild(card);
+    });
+}
+
 
     // ============= INITIALIZE EVERYTHING =============
     document.addEventListener('DOMContentLoaded', async () => {
