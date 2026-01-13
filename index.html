@@ -1971,6 +1971,844 @@
         }
     }
 }
+
+/* ========== HERO UPDATES ========== */
+.hero-tagline {
+    display: flex;
+    gap: 15px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+
+.tagline-item {
+    background: rgba(255, 0, 0, 0.1);
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border: 1px solid rgba(255, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.hero-highlights {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 25px 0;
+}
+
+.highlight-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--text-gray);
+    font-size: 0.95rem;
+}
+
+.highlight-icon {
+    width: 30px;
+    height: 30px;
+    background: rgba(255, 0, 0, 0.1);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255, 0, 0, 0.3);
+}
+
+/* ========== PROFESSIONAL ABOUT SECTION ========== */
+.about-header {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 0, 0, 0.2);
+}
+
+.about-header h3 {
+    font-size: 2.5rem;
+    color: var(--primary);
+    margin-bottom: 10px;
+}
+
+.about-title {
+    font-size: 1.2rem;
+    color: var(--text-gray);
+    font-weight: 600;
+}
+
+.about-intro {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 30px;
+    color: var(--text-light);
+}
+
+.about-expertise {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin: 30px 0;
+}
+
+@media (max-width: 768px) {
+    .about-expertise {
+        grid-template-columns: 1fr;
+    }
+}
+
+.about-expertise h4 {
+    color: var(--primary);
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.expertise-list {
+    list-style: none;
+}
+
+.expertise-list li {
+    color: var(--text-gray);
+    margin-bottom: 12px;
+    padding-left: 25px;
+    position: relative;
+    line-height: 1.6;
+}
+
+.expertise-list li:before {
+    content: "▶";
+    color: var(--primary);
+    position: absolute;
+    left: 0;
+    font-size: 0.8rem;
+}
+
+.about-cta {
+    background: rgba(255, 0, 0, 0.05);
+    padding: 25px;
+    border-radius: 15px;
+    border-left: 4px solid var(--primary);
+    margin-top: 30px;
+}
+
+.about-cta p {
+    color: var(--text-light);
+    font-style: italic;
+    margin: 0;
+    line-height: 1.7;
+}
+
+/* ========== UPDATED PROJECT CARDS ========== */
+.project-problem,
+.project-solution,
+.project-tech {
+    margin-bottom: 20px;
+}
+
+.project-problem h4,
+.project-solution h4,
+.project-tech h4 {
+    color: var(--primary);
+    font-size: 1rem;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.project-problem p,
+.project-solution p {
+    color: var(--text-gray);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.project-tech h4 {
+    margin-bottom: 12px;
+}
+
+.tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tech-tag {
+    background: rgba(255, 0, 0, 0.1);
+    color: var(--primary);
+    padding: 6px 12px;
+    border-radius: 15px;
+    font-size: 0.85rem;
+    border: 1px solid rgba(255, 0, 0, 0.3);
+}
+
+/* ========== SKILL GALLERY UPDATES ========== */
+/* Remove percentage display from skill gallery */
+.ring-value {
+    /* Remove the percentage text */
+    content: " ";
+    background: rgba(255, 0, 0, 0.1);
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0;
+}
+
+/* Optional: Add experience level text instead */
+.ring-value::after {
+    content: "Expert";
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--primary);
+}
+
+/* Adjust for different skill levels */
+.carousel-item:nth-child(2) .ring-value::after {
+    content: "Advanced";
+}
+
+.carousel-item:nth-child(3) .ring-value::after {
+    content: "Expert";
+}
+
+.carousel-item:nth-child(4) .ring-value::after {
+    content: "Advanced";
+}
+
+.carousel-item:nth-child(5) .ring-value::after {
+    content: "Expert";
+}
+
+.carousel-item:nth-child(6) .ring-value::after {
+    content: "Advanced";
+}
+
+/* ========== PROFESSIONAL CONTACT SECTION ========== */
+.contact-intro {
+    max-width: 800px;
+    margin: 0 auto 50px;
+    text-align: center;
+    padding: 25px;
+    background: rgba(255, 0, 0, 0.05);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 0, 0, 0.1);
+}
+
+.contact-intro p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-light);
+    margin: 0;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.contact-card {
+    background: linear-gradient(145deg, 
+        rgba(30, 30, 30, 0.95), 
+        rgba(40, 10, 10, 0.9));
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 0, 0, 0.2);
+    border-radius: 25px;
+    padding: 35px;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--primary);
+    box-shadow: 0 25px 50px rgba(255, 0, 0, 0.3);
+}
+
+.contact-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary), #ff3333);
+}
+
+.contact-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 0, 0, 0.1);
+}
+
+.contact-icon {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, var(--primary), #ff3333);
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: var(--secondary);
+    box-shadow: 0 10px 20px rgba(255, 0, 0, 0.3);
+}
+
+.contact-title {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--primary);
+    flex: 1;
+}
+
+/* Contact Info Items */
+.contact-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 18px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.contact-item:hover {
+    background: rgba(255, 0, 0, 0.1);
+    border-color: rgba(255, 0, 0, 0.3);
+    transform: translateX(5px);
+}
+
+.item-icon {
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 0, 0, 0.1);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    color: var(--primary);
+    border: 1px solid rgba(255, 0, 0, 0.3);
+    flex-shrink: 0;
+}
+
+.item-details {
+    flex: 1;
+}
+
+.item-details h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-light);
+    margin-bottom: 6px;
+}
+
+.item-details p {
+    color: var(--text-gray);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin: 2px 0;
+}
+
+.contact-email {
+    color: var(--primary) !important;
+    font-weight: 600;
+    font-family: 'Courier New', monospace;
+}
+
+.contact-timezone {
+    font-size: 0.85rem !important;
+    color: rgba(255, 255, 255, 0.6) !important;
+    font-style: italic;
+}
+
+.copy-hint {
+    display: inline-block;
+    font-size: 0.75rem;
+    color: rgba(255, 0, 0, 0.7);
+    background: rgba(255, 0, 0, 0.1);
+    padding: 3px 10px;
+    border-radius: 10px;
+    margin-top: 5px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.contact-item:hover .copy-hint {
+    opacity: 1;
+}
+
+/* Professional Networks */
+.contact-networks {
+    margin-top: 30px;
+    padding-top: 25px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.contact-networks h4 {
+    color: var(--primary);
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.social-links {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.social-link {
+    position: relative;
+    width: 55px;
+    height: 55px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-light);
+    text-decoration: none;
+    font-size: 1.4rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.social-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 0, 0, 0.2), transparent);
+    transition: left 0.6s ease;
+}
+
+.social-link:hover::before {
+    left: 100%;
+}
+
+.social-link:hover {
+    background: linear-gradient(135deg, var(--primary), #ff3333);
+    color: var(--secondary);
+    transform: translateY(-5px) rotate(5deg);
+    box-shadow: 0 10px 20px rgba(255, 0, 0, 0.3);
+}
+
+.social-tooltip {
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 1000;
+}
+
+.social-link:hover .social-tooltip {
+    opacity: 1;
+}
+
+/* Contact Form */
+.contact-form {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    gap: 5px;
+}
+
+.label-text {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.required {
+    color: #ff3333;
+    font-weight: bold;
+}
+
+.form-input {
+    width: 100%;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    color: var(--text-light);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: var(--primary);
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
+}
+
+.form-input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.form-hint {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.5);
+    margin-top: 5px;
+}
+
+textarea.form-input {
+    resize: vertical;
+    min-height: 120px;
+}
+
+/* Checkbox */
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--primary);
+}
+
+.checkbox-text {
+    font-size: 0.9rem;
+    color: var(--text-gray);
+}
+
+/* Form Actions */
+.form-actions {
+    margin-top: auto;
+    padding-top: 25px;
+}
+
+#sendMessageBtn {
+    width: 100%;
+    padding: 18px;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    transition: all 0.3s ease;
+}
+
+.btn-icon {
+    font-size: 1.3rem;
+}
+
+.btn-text {
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.form-note {
+    margin-top: 20px;
+    padding: 15px;
+    background: rgba(255, 0, 0, 0.05);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 0, 0, 0.1);
+}
+
+.form-note p {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 5px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Response Timeline */
+.contact-response {
+    background: linear-gradient(145deg, 
+        rgba(40, 20, 20, 0.95), 
+        rgba(50, 10, 10, 0.9));
+}
+
+.response-timeline {
+    margin: 25px 0;
+}
+
+.timeline-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    margin-bottom: 25px;
+    position: relative;
+}
+
+.timeline-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 24px;
+    top: 40px;
+    bottom: -25px;
+    width: 2px;
+    background: rgba(255, 0, 0, 0.2);
+}
+
+.timeline-marker {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, var(--primary), #ff3333);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 1.2rem;
+    color: white;
+    flex-shrink: 0;
+    z-index: 1;
+    box-shadow: 0 5px 15px rgba(255, 0, 0, 0.3);
+}
+
+.timeline-content {
+    flex: 1;
+    padding-top: 10px;
+}
+
+.timeline-content h4 {
+    color: var(--text-light);
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+    font-weight: 700;
+}
+
+.timeline-content p {
+    color: var(--text-gray);
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* Expertise Tags */
+.contact-expertise {
+    margin: 30px 0;
+    padding-top: 25px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.contact-expertise h4 {
+    color: var(--primary);
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.expertise-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.expertise-tag {
+    background: rgba(255, 0, 0, 0.1);
+    color: var(--primary);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    border: 1px solid rgba(255, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.expertise-tag:hover {
+    background: rgba(255, 0, 0, 0.2);
+    transform: translateY(-2px);
+}
+
+/* Contact CTA */
+.contact-cta {
+    margin-top: auto;
+    padding: 25px;
+    background: rgba(255, 0, 0, 0.05);
+    border-radius: 15px;
+    text-align: center;
+    border: 1px solid rgba(255, 0, 0, 0.1);
+}
+
+.contact-cta p {
+    color: var(--text-light);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .contact-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .contact-card:last-child {
+        grid-column: span 2;
+    }
+}
+
+@media (max-width: 768px) {
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .contact-card:last-child {
+        grid-column: span 1;
+    }
+    
+    .contact-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+    
+    .contact-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.8rem;
+    }
+    
+    .contact-title {
+        font-size: 1.6rem;
+        text-align: center;
+    }
+    
+    .social-links {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-card {
+        padding: 25px;
+    }
+    
+    .contact-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    
+    .item-icon {
+        width: 45px;
+        height: 45px;
+        font-size: 1.2rem;
+    }
+    
+    .timeline-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    
+    .timeline-item:not(:last-child)::after {
+        left: 22px;
+        top: 45px;
+        height: calc(100% + 15px);
+    }
+}
+
+/* Scroll to form animation */
+.scroll-to-form {
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.scroll-to-form:hover {
+    transform: translateY(-2px);
+}
+
+/* Success/Error Messages */
+.notification {
+    position: fixed;
+    top: 100px;
+    right: 30px;
+    padding: 20px;
+    border-radius: 15px;
+    background: rgba(30, 30, 30, 0.95);
+    border: 1px solid;
+    backdrop-filter: blur(20px);
+    z-index: 9999;
+    animation: slideInRight 0.5s ease, fadeOut 0.5s ease 4s forwards;
+    max-width: 300px;
+}
+
+.notification.success {
+    border-color: rgba(0, 255, 0, 0.3);
+    background: linear-gradient(145deg, rgba(30, 50, 30, 0.95), rgba(0, 50, 0, 0.9));
+}
+
+.notification.error {
+    border-color: rgba(255, 0, 0, 0.3);
+    background: linear-gradient(145deg, rgba(50, 30, 30, 0.95), rgba(50, 0, 0, 0.9));
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(400px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        transform: translateX(0) scale(1);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(400px) scale(0.8);
+        opacity: 0;
+    }
+}
     </style>
 </head>
 <body>
@@ -2008,75 +2846,138 @@
 
     <!-- Main Content -->
     <div class="content">
-        <!-- UPDATED HERO SECTION -->
-        <section class="hero" id="hero">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <h1 class="hero-title">
-                        <span class="hero-title-main">Sai Tech</span>
-                        AI Orchestrator 🧑‍💻
-                    </h1>
-                    
-                    <p class="hero-description">
-                        Hey there! I'm passionate about building intelligent systems that actually solve problems. When I'm not training neural networks, you'll find me exploring new ML architectures or contributing to open source.
-                    </p>
-                    
-                    <div class="hero-divider"></div>
-                    
-                    <div class="hero-social-links">
-                        <a href="https://github.com/saiyam-creator" target="_blank" class="hero-social-link">
-                            <span class="hero-social-icon">🐙</span>
-                            <span>GitHub</span>
-                        </a>
-                       
-                        <a href="#contact" class="hero-social-link">
-                            <span class="hero-social-icon">📧</span>
-                            <span>Contact Me</span>
-                        </a>
+       <!-- UPDATED HERO SECTION -->
+<section class="hero" id="hero">
+    <div class="hero-content">
+        <div class="hero-text">
+            <h1 class="hero-title">
+                <span class="hero-title-main">Saiyam Jain</span>
+                AI & Full-Stack Developer
+            </h1>
+            
+            <div class="hero-tagline">
+                <span class="tagline-item">🤖 AI Engineering</span>
+                <span class="tagline-item">🌐 Full-Stack Development</span>
+                <span class="tagline-item">🚀 Scalable Solutions</span>
+            </div>
+            
+            <p class="hero-description">
+                I architect intelligent systems that bridge the gap between complex algorithms and user-friendly experiences. 
+                Specializing in AI integration, responsive web applications, and scalable software solutions that deliver 
+                measurable business value.
+            </p>
+            
+            <div class="hero-highlights">
+                <div class="highlight-item">
+                    <span class="highlight-icon">⚡</span>
+                    <span>AI-Powered Solutions</span>
+                </div>
+                <div class="highlight-item">
+                    <span class="highlight-icon">🔧</span>
+                    <span>Clean Code Architecture</span>
+                </div>
+                <div class="highlight-item">
+                    <span class="highlight-icon">🎯</span>
+                    <span>Problem-First Approach</span>
+                </div>
+            </div>
+            
+            <div class="hero-divider"></div>
+            
+            <div class="hero-social-links">
+                <a href="https://github.com/saiyam-creator" target="_blank" class="hero-social-link">
+                    <span class="hero-social-icon">🐙</span>
+                    <span>GitHub Portfolio</span>
+                </a>
+                <a href="#contact" class="hero-social-link">
+                    <span class="hero-social-icon">💼</span>
+                    <span>Professional Inquiry</span>
+                </a>
+            </div>
+            
+            <div class="hero-buttons">
+                <a href="#projects" class="btn btn-primary">View My Work</a>
+                <a href="#contact" class="btn btn-secondary">Start a Project</a>
+            </div>
+        </div>
+        
+        <div class="hero-visual">
+            <div class="hero-visual-container">
+                <div class="floating-element element-1">
+                    <div class="element-content">
+                        <div class="element-icon">🤖</div>
+                        <div class="element-text">AI Integration</div>
+                    </div>
+                </div>
+                <div class="floating-element element-2">
+                    <div class="element-content">
+                        <div class="element-icon">💻</div>
+                        <div class="element-text">Full-Stack Dev</div>
+                    </div>
+                </div>
+                <div class="floating-element element-3">
+                    <div class="element-content">
+                        <div class="element-icon">🚀</div>
+                        <div class="element-text">Scalable Systems</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+        <!-- About Section -->
+       <!-- PROFESSIONAL ABOUT SECTION -->
+<section id="about">
+    <h2 class="section-title">Professional Profile</h2>
+    <div class="about-card">
+        <div class="about-content">
+            <div class="about-header">
+                <h3>Saiyam Jain</h3>
+                <div class="about-title">AI & Full-Stack Developer</div>
+            </div>
+            
+            <div class="about-body">
+                <p class="about-intro">
+                    I am a results-driven developer specializing in creating intelligent systems 
+                    that solve real-world problems. With expertise spanning artificial intelligence, 
+                    full-stack web development, and modern software architecture, I deliver solutions 
+                    that are both technically robust and user-centric.
+                </p>
+                
+                <div class="about-expertise">
+                    <div class="expertise-column">
+                        <h4>Core Competencies</h4>
+                        <ul class="expertise-list">
+                            <li>AI/ML Integration & Model Development</li>
+                            <li>Full-Stack Web Application Development</li>
+                            <li>API Design & Microservices Architecture</li>
+                            <li>Real-time Data Processing Systems</li>
+                            <li>Cloud Infrastructure & Deployment</li>
+                        </ul>
                     </div>
                     
-                    <div class="hero-buttons">
-                        <a href="#projects" class="btn btn-primary">View Projects</a>
+                    <div class="expertise-column">
+                        <h4>Development Philosophy</h4>
+                        <ul class="expertise-list">
+                            <li>Problem-first approach to solution design</li>
+                            <li>Clean, maintainable code architecture</li>
+                            <li>Agile methodologies & iterative development</li>
+                            <li>Performance optimization & scalability</li>
+                            <li>Security-first development practices</li>
+                        </ul>
                     </div>
                 </div>
                 
-                <div class="hero-visual">
-                    <div class="hero-visual-container">
-                        <div class="floating-element element-1">
-                            <div class="element-content">
-                                <div class="element-icon">🤖</div>
-                                <div class="element-text">AI Engineer</div>
-                            </div>
-                        </div>
-                        <div class="floating-element element-2">
-                            <div class="element-content">
-                                <div class="element-icon">💻</div>
-                                <div class="element-text">Full-Stack Dev</div>
-                            </div>
-                        </div>
-                        <div class="floating-element element-3">
-                            <div class="element-content">
-                                <div class="element-icon">🚀</div>
-                                <div class="element-text">ML Architectures</div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="about-cta">
+                    <p>
+                        Currently focused on advancing AI applications in practical domains and 
+                        building scalable solutions. Open to challenging projects and innovative collaborations.
+                    </p>
                 </div>
             </div>
-        </section>
-
-        <!-- About Section -->
-        <section id="about">
-            <h2 class="section-title">About Me</h2>
-            <div class="about-card">
-                <div class="about-content">
-                    <h3>👋 Hello, I'm Saiyam!</h3>
-                    <p>I'm a passionate AI developer and tech enthusiast dedicated to building innovative solutions that push the boundaries of what's possible. With expertise in machine learning, web development, and creative problem-solving, I transform ideas into reality.</p>
-                    <p>My journey in tech has been driven by curiosity and a desire to create meaningful impact through technology. I specialize in AI applications, full-stack development, and building intuitive user experiences.</p>
-                    <p>🚀 Currently working on exciting AI projects and always open to collaboration!</p>
-                </div>
-            </div>
-        </section>
+        </div>
+    </div>
+</section>
 
        <!-- Skills Section - 3D ROTATING GALLERY -->
 <section id="skills">
@@ -2463,13 +3364,13 @@
     </div>
 </section>
 
-        <!-- Projects Section -->
-        <section id="projects">
-            <h2 class="section-title">Projects</h2>
-            <div class="projects-grid" id="projectsGrid">
-                <!-- Projects will be loaded here -->
-            </div>
-        </section>
+       <!-- Projects Section -->
+<section id="projects">
+    <h2 class="section-title">Project Portfolio</h2>
+    <div class="projects-grid" id="projectsGrid">
+        <!-- Projects will be loaded here -->
+    </div>
+</section>
 
         <!-- Upcoming Projects Section -->
         <section id="upcoming">
@@ -2520,110 +3421,254 @@
             </div>
         </section>
 
-        <!-- Contact Section -->
-        <section id="contact" class="contact-section">
-            <h2 class="section-title">Get In Touch</h2>
-            <div class="contact-grid">
-                <!-- Contact Info Card -->
-                <div class="contact-card">
-                    <div class="contact-header">
-                        <div class="contact-icon">📞</div>
-                        <h3 class="contact-title">Contact Info</h3>
-                    </div>
-                    
-                    <div class="contact-info">
-                        <!-- Phone -->
-                        <div class="contact-item">
-                            <div class="item-icon">📱</div>
-                            <div class="item-details">
-                                <h4>Phone Number</h4>
-                                <p>+91 6398068797</p>
-                            </div>
-                        </div>
-                        
-                        <!-- Email -->
-                        <div class="contact-item">
-                            <div class="item-icon">✉️</div>
-                            <div class="item-details">
-                                <h4>Email Address</h4>
-                                <p>saiyamjain2405@gmail.com</p>
-                            </div>
-                        </div>
-                        
-                        <!-- Location -->
-                        <div class="contact-item">
-                            <div class="item-icon">📍</div>
-                            <div class="item-details">
-                                <h4>Location</h4>
-                                <p>Muzaffarnagar</p>
-                            </div>
-                        </div>
-                        
-                        <!-- Availability -->
-                        <div class="contact-item">
-                            <div class="item-icon">⏰</div>
-                            <div class="item-details">
-                                <h4>Availability</h4>
-                                <p>Mon-Fri: 10AM - 7PM</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Social Media -->
-                    <h4 style="color: var(--primary); margin: 2rem 0 1rem; font-size: 1.2rem;">Connect With Me</h4>
-                    <div class="social-links">
-                        <a href="https://github.com/saiyam-creator" target="_blank" class="social-link">
-                            <i class="fab fa-github"></i>
-                        </a>
-                        
-                        <a href="https://x.com/saiyam2405" target="_blank" class="social-link">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="https://instagram.com/saiiyam_jain" target="_blank" class="social-link">
-                            <i class="fab fa-instagram"></i>
-                        </a>
+       <!-- ========== PROFESSIONAL CONTACT SECTION ========== -->
+<section id="contact" class="contact-section">
+    <h2 class="section-title">Let's Collaborate</h2>
+    
+    <div class="contact-intro">
+        <p>Ready to bring your ideas to life? Whether you're looking to build an AI solution, 
+        develop a web application, or discuss innovative tech projects, I'm here to help.</p>
+    </div>
+
+    <div class="contact-grid">
+        <!-- Contact Information Card -->
+        <div class="contact-card">
+            <div class="contact-header">
+                <div class="contact-icon">📧</div>
+                <h3 class="contact-title">Contact Details</h3>
+            </div>
+            
+            <div class="contact-info">
+                <!-- Professional Email -->
+                <div class="contact-item" onclick="copyToClipboard('saiyamjain2405@gmail.com', 'Email')">
+                    <div class="item-icon">✉️</div>
+                    <div class="item-details">
+                        <h4>Professional Email</h4>
+                        <p class="contact-email">saiyamjain2405@gmail.com</p>
+                        <span class="copy-hint">Click to copy</span>
                     </div>
                 </div>
-
-                <!-- Quick Message Card -->
-                <div class="contact-card">
-                    <div class="contact-header">
-                        <div class="contact-icon">💬</div>
-                        <h3 class="contact-title">Quick Message</h3>
+                
+                <!-- Location -->
+                <div class="contact-item">
+                    <div class="item-icon">📍</div>
+                    <div class="item-details">
+                        <h4>Location</h4>
+                        <p>Muzaffarnagar, India</p>
+                        <p class="contact-timezone">IST (GMT+5:30)</p>
                     </div>
-                    
-                    <div class="contact-form">
-                        <div class="form-group">
-                            <label>Your Name</label>
-                            <input type="text" class="form-input" placeholder="Enter your name" id="contactName">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label>Email Address</label>
-                            <input type="email" class="form-input" placeholder="your@email.com" id="contactEmail">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label>Subject</label>
-                            <select class="form-input" id="contactSubject">
-                                <option value="project">Project Inquiry</option>
-                                <option value="collab">Collaboration</option>
-                                <option value="other">Other</option>
-                            </select>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label>Message</label>
-                            <textarea class="form-input" placeholder="Hi Sai, I'd like to discuss..." id="contactMessage"></textarea>
-                        </div>
-                        
-                        <button class="btn btn-primary" style="width: 100%;" data-action="send-message">
-                            <i class="fas fa-paper-plane"></i> Send Message
-                        </button>
+                </div>
+                
+                <!-- Professional Availability -->
+                <div class="contact-item">
+                    <div class="item-icon">⏰</div>
+                    <div class="item-details">
+                        <h4>Availability</h4>
+                        <p><strong>Mon-Fri:</strong> 10:00 - 19:00 IST</p>
+                        <p><strong>Weekends:</strong> Project-based availability</p>
+                        <p><strong>Response Time:</strong> Within 24 hours</p>
+                    </div>
+                </div>
+                
+                <!-- Preferred Contact -->
+                <div class="contact-item">
+                    <div class="item-icon">📞</div>
+                    <div class="item-details">
+                        <h4>Preferred Contact Method</h4>
+                        <p>Email for professional inquiries</p>
+                        <p>GitHub for technical discussions</p>
                     </div>
                 </div>
             </div>
-        </section>
+            
+            <!-- Professional Networks -->
+            <div class="contact-networks">
+                <h4>Connect Professionally</h4>
+                <div class="social-links">
+                    <a href="https://github.com/saiyam-creator" target="_blank" class="social-link" 
+                       title="GitHub Portfolio - View my code and projects">
+                        <i class="fab fa-github"></i>
+                        <span class="social-tooltip">GitHub</span>
+                    </a>
+                    
+                    <a href="https://x.com/saiyam2405" target="_blank" class="social-link" 
+                       title="Twitter - Tech insights and updates">
+                        <i class="fab fa-twitter"></i>
+                        <span class="social-tooltip">Twitter</span>
+                    </a>
+                    
+                    <a href="https://instagram.com/saiiyam_jain" target="_blank" class="social-link" 
+                       title="Instagram - Personal portfolio">
+                        <i class="fab fa-instagram"></i>
+                        <span class="social-tooltip">Instagram</span>
+                    </a>
+                    
+                    <a href="#contact-form" class="social-link scroll-to-form" 
+                       title="Direct message form">
+                        <i class="fas fa-envelope"></i>
+                        <span class="social-tooltip">Email Form</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Contact Form -->
+        <div class="contact-card" id="contact-form">
+            <div class="contact-header">
+                <div class="contact-icon">💬</div>
+                <h3 class="contact-title">Send Message</h3>
+            </div>
+            
+            <div class="contact-form">
+                <div class="form-group">
+                    <label class="form-label">
+                        <span class="label-text">Your Name</span>
+                        <span class="required">*</span>
+                    </label>
+                    <input type="text" class="form-input" 
+                           placeholder="Enter your full name" 
+                           id="contactName" 
+                           required>
+                    <div class="form-hint">How should I address you?</div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">
+                        <span class="label-text">Email Address</span>
+                        <span class="required">*</span>
+                    </label>
+                    <input type="email" class="form-input" 
+                           placeholder="your@email.com" 
+                           id="contactEmail" 
+                           required>
+                    <div class="form-hint">I'll respond to this email</div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">
+                        <span class="label-text">Project Type</span>
+                        <span class="required">*</span>
+                    </label>
+                    <select class="form-input" id="projectType">
+                        <option value="">Select project category</option>
+                        <option value="ai-ml">AI/ML Development</option>
+                        <option value="web-app">Web Application</option>
+                        <option value="consulting">Technical Consulting</option>
+                        <option value="collaboration">Open Source Collaboration</option>
+                        <option value="other">Other Inquiry</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">
+                        <span class="label-text">Project Timeline</span>
+                    </label>
+                    <select class="form-input" id="projectTimeline">
+                        <option value="">Select timeline</option>
+                        <option value="urgent">Urgent (Within 1 month)</option>
+                        <option value="short">Short-term (1-3 months)</option>
+                        <option value="medium">Medium-term (3-6 months)</option>
+                        <option value="long">Long-term (6+ months)</option>
+                        <option value="flexible">Flexible/Exploring</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">
+                        <span class="label-text">Project Description</span>
+                        <span class="required">*</span>
+                    </label>
+                    <textarea class="form-input" 
+                              placeholder="Briefly describe your project, goals, and requirements..." 
+                              id="contactMessage" 
+                              rows="5"
+                              required></textarea>
+                    <div class="form-hint">Please include key features, target audience, and technical requirements</div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="newsletterOptIn">
+                        <span class="checkbox-text">Subscribe to occasional tech insights and project updates</span>
+                    </label>
+                </div>
+                
+                <div class="form-actions">
+                    <button class="btn btn-primary" data-action="send-message" id="sendMessageBtn">
+                        <span class="btn-icon">🚀</span>
+                        <span class="btn-text">Send Project Inquiry</span>
+                    </button>
+                    
+                    <div class="form-note">
+                        <p>✉️ You'll receive a confirmation email within 24 hours</p>
+                        <p>🔒 Your information is secure and confidential</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Response Time Card -->
+        <div class="contact-card contact-response">
+            <div class="contact-header">
+                <div class="contact-icon">⚡</div>
+                <h3 class="contact-title">What to Expect</h3>
+            </div>
+            
+            <div class="response-timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker">1</div>
+                    <div class="timeline-content">
+                        <h4>Initial Response</h4>
+                        <p>Within 24 hours of your inquiry</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-marker">2</div>
+                    <div class="timeline-content">
+                        <h4>Project Discussion</h4>
+                        <p>Detailed requirements gathering</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-marker">3</div>
+                    <div class="timeline-content">
+                        <h4>Proposal & Timeline</h4>
+                        <p>Customized solution with timeline</p>
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-marker">4</div>
+                    <div class="timeline-content">
+                        <h4>Project Kickoff</h4>
+                        <p>Regular updates and transparent communication</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-expertise">
+                <h4>Areas of Expertise</h4>
+                <div class="expertise-tags">
+                    <span class="expertise-tag">AI/ML Integration</span>
+                    <span class="expertise-tag">Full-Stack Development</span>
+                    <span class="expertise-tag">Web Applications</span>
+                    <span class="expertise-tag">API Development</span>
+                    <span class="expertise-tag">Cloud Solutions</span>
+                    <span class="expertise-tag">Technical Consulting</span>
+                </div>
+            </div>
+            
+            <div class="contact-cta">
+                <p>Let's build something amazing together!</p>
+                <a href="#contact-form" class="btn btn-secondary scroll-to-form">
+                    Start Your Project
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
     </div>
 
  <!-- Scripts -->
@@ -2855,41 +3900,7 @@
     }
 
     // ============= PROJECT MANAGER =============
-    class ProjectManager {
-        constructor() {
-            this.currentProjectId = null;
-        }
-
-        async loadProjects() {
-            const grid = document.getElementById('projectsGrid');
-            if (!grid) return;
-
-            grid.innerHTML = '';
-
-            for (const project of SITE_CONFIG.projects) {
-                const card = document.createElement('div');
-                card.className = 'project-card';
-                card.innerHTML = `
-                    <div class="project-header">
-                        <div class="project-title">${project.title}</div>
-                    </div>
-                    <p class="project-desc">${project.description}</p>
-                    <div class="project-tags">
-                        ${project.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
-                    </div>
-                    <div class="project-actions">
-                        <button class="btn-small btn-view" data-action="view-project" data-link="${project.demoLink}">
-                            View Demo
-                        </button>
-                        <button class="btn-small btn-view" data-action="view-code" data-link="${project.codeLink}">
-                            View Code
-                        </button>
-                    </div>
-                `;
-                grid.appendChild(card);
-            }
-        }
-    }
+  
 
     // ============= CONTACT MANAGER WITH FIREBASE =============
     class ContactManager {
@@ -3762,6 +4773,837 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 </style>
+
+<script>
+  // ============= CONTACT SECTION FUNCTIONALITY =============
+class ContactSection {
+    constructor() {
+        this.init();
+    }
+    
+    init() {
+        this.setupCopyToClipboard();
+        this.setupScrollToForm();
+        this.setupFormValidation();
+        this.setupMessageSending();
+    }
+    
+    setupCopyToClipboard() {
+        const emailElement = document.querySelector('.contact-email');
+        if (emailElement) {
+            emailElement.parentElement.addEventListener('click', () => {
+                this.copyToClipboard('saiyamjain2405@gmail.com', 'Email');
+            });
+        }
+    }
+    
+    copyToClipboard(text, type) {
+        navigator.clipboard.writeText(text).then(() => {
+            this.showNotification(`✅ ${type} copied to clipboard!`, 'success');
+        }).catch(err => {
+            console.error('Failed to copy:', err);
+            this.showNotification('❌ Failed to copy. Please copy manually.', 'error');
+        });
+    }
+    
+    setupScrollToForm() {
+        document.querySelectorAll('.scroll-to-form').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const form = document.getElementById('contact-form');
+                if (form) {
+                    form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    
+                    // Add highlight effect
+                    form.style.boxShadow = '0 0 30px rgba(255, 0, 0, 0.5)';
+                    setTimeout(() => {
+                        form.style.boxShadow = '';
+                    }, 1500);
+                }
+            });
+        });
+    }
+    
+    setupFormValidation() {
+        const form = document.querySelector('.contact-form');
+        const inputs = form.querySelectorAll('.form-input[required]');
+        
+        inputs.forEach(input => {
+            input.addEventListener('blur', () => {
+                this.validateInput(input);
+            });
+            
+            input.addEventListener('input', () => {
+                this.clearInputError(input);
+            });
+        });
+    }
+    
+    validateInput(input) {
+        const value = input.value.trim();
+        const type = input.type;
+        const isEmail = type === 'email' || input.id === 'contactEmail';
+        const isSelect = input.tagName === 'SELECT';
+        
+        if (isSelect && value === '') {
+            this.showInputError(input, 'Please select an option');
+            return false;
+        }
+        
+        if (isEmail && value && !this.isValidEmail(value)) {
+            this.showInputError(input, 'Please enter a valid email address');
+            return false;
+        }
+        
+        if (!value) {
+            this.showInputError(input, 'This field is required');
+            return false;
+        }
+        
+        this.showInputSuccess(input);
+        return true;
+    }
+    
+    isValidEmail(email) {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email);
+    }
+    
+    showInputError(input, message) {
+        this.clearInputError(input);
+        input.style.borderColor = '#ff3333';
+        
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'form-error';
+        errorDiv.textContent = message;
+        errorDiv.style.cssText = `
+            color: #ff3333;
+            font-size: 0.85rem;
+            margin-top: 5px;
+            animation: slideIn 0.3s ease;
+        `;
+        
+        input.parentNode.appendChild(errorDiv);
+    }
+    
+    showInputSuccess(input) {
+        this.clearInputError(input);
+        input.style.borderColor = '#00cc00';
+        
+        setTimeout(() => {
+            input.style.borderColor = '';
+        }, 2000);
+    }
+    
+    clearInputError(input) {
+        input.style.borderColor = '';
+        const errorDiv = input.parentNode.querySelector('.form-error');
+        if (errorDiv) {
+            errorDiv.remove();
+        }
+    }
+    
+    setupMessageSending() {
+        const sendBtn = document.getElementById('sendMessageBtn');
+        if (!sendBtn) return;
+        
+        sendBtn.addEventListener('click', async () => {
+            const isValid = this.validateForm();
+            
+            if (isValid) {
+                await this.sendMessage();
+            }
+        });
+    }
+    
+    validateForm() {
+        const form = document.querySelector('.contact-form');
+        const requiredInputs = form.querySelectorAll('.form-input[required]');
+        let isValid = true;
+        
+        requiredInputs.forEach(input => {
+            if (!this.validateInput(input)) {
+                isValid = false;
+            }
+        });
+        
+        return isValid;
+    }
+    
+    async sendMessage() {
+        const formData = {
+            name: document.getElementById('contactName').value.trim(),
+            email: document.getElementById('contactEmail').value.trim(),
+            projectType: document.getElementById('projectType').value,
+            timeline: document.getElementById('projectTimeline').value,
+            message: document.getElementById('contactMessage').value.trim(),
+            newsletter: document.getElementById('newsletterOptIn').checked,
+            date: new Date().toISOString()
+        };
+        
+        const sendBtn = document.getElementById('sendMessageBtn');
+        const originalHTML = sendBtn.innerHTML;
+        
+        // Show loading state
+        sendBtn.innerHTML = `
+            <div class="loading"></div>
+            <span>Sending...</span>
+        `;
+        sendBtn.disabled = true;
+        
+        try {
+            // Save to Firebase (using existing ContactManager)
+            const contactManager = new ContactManager();
+            const success = await contactManager.saveMessageToFirebase(formData);
+            
+            if (success) {
+                this.showNotification('✅ Message sent successfully! I\'ll respond within 24 hours.', 'success');
+                this.resetForm();
+            } else {
+                this.showNotification('⚠️ Message saved locally. Will sync when online.', 'warning');
+                this.resetForm();
+            }
+        } catch (error) {
+            console.error('Error sending message:', error);
+            this.showNotification('❌ Failed to send message. Please try again.', 'error');
+        } finally {
+            // Reset button
+            sendBtn.innerHTML = originalHTML;
+            sendBtn.disabled = false;
+        }
+    }
+    
+    resetForm() {
+        document.getElementById('contactName').value = '';
+        document.getElementById('contactEmail').value = '';
+        document.getElementById('projectType').value = '';
+        document.getElementById('projectTimeline').value = '';
+        document.getElementById('contactMessage').value = '';
+        document.getElementById('newsletterOptIn').checked = false;
+        
+        // Clear any error messages
+        document.querySelectorAll('.form-error').forEach(error => error.remove());
+        document.querySelectorAll('.form-input').forEach(input => {
+            input.style.borderColor = '';
+        });
+    }
+    
+    showNotification(message, type = 'info') {
+        // Remove existing notifications
+        document.querySelectorAll('.notification').forEach(n => n.remove());
+        
+        const notification = document.createElement('div');
+        notification.className = `notification ${type}`;
+        notification.innerHTML = `
+            <div class="notification-content">
+                <p>${message}</p>
+            </div>
+        `;
+        
+        document.body.appendChild(notification);
+        
+        // Auto remove after 5 seconds
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.remove();
+            }
+        }, 5000);
+    }
+}
+
+// Initialize contact section when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    const contactSection = new ContactSection();
+    console.log('✅ Contact section initialized');
+});
+</script>
+
+<script>
+  // ============= UPDATED PROJECT MANAGER WITH ALL PROJECTS =============
+class ProjectManager {
+    constructor() {
+        this.currentProjectId = null;
+        this.projectData = [
+            {
+                id: 'project1',
+                title: 'Stock Calculator',
+                problem: 'Investors struggle to accurately calculate profit/loss across multiple trades with varying entry/exit points. Manual calculations are time-consuming and prone to errors.',
+                solution: 'Advanced stock calculator that automatically computes P&L, ROI, and performance metrics with real-time data integration and intuitive visualization.',
+                description: 'Professional-grade investment analysis tool for precise financial calculations.',
+                techStack: ['AI Algorithms', 'Python', 'JavaScript', 'Financial APIs', 'Data Visualization'],
+                tags: ['AI', 'Finance', 'Analytics', 'Investment'],
+                demoLink: 'https://saiyam-creator.github.io/stock-calculator/',
+                codeLink: 'https://github.com/saiyam-creator/stock-calculator'
+            },
+            {
+                id: 'project2',
+                title: 'Investment Calculator',
+                problem: 'Users need to forecast investment growth with complex variables like compound interest, regular contributions, and market fluctuations.',
+                solution: 'Comprehensive investment calculator with scenario modeling, inflation adjustments, and visual projections for informed financial planning.',
+                description: 'Calculate your investment returns with advanced algorithms and realistic projections.',
+                techStack: ['HTML5', 'CSS3', 'JavaScript ES6+', 'Chart.js', 'Financial Formulas'],
+                tags: ['Finance', 'Calculator', 'Web App', 'Investment'],
+                demoLink: 'https://saiyam-creator.github.io/investment-calculate/',
+                codeLink: 'https://github.com/saiyam-creator/investment-calculate'
+            },
+            {
+                id: 'project3',
+                title: 'English Corrector',
+                problem: 'Non-native English speakers face challenges with grammar, punctuation, and writing style in professional communications.',
+                solution: 'AI-powered writing assistant that provides real-time grammar correction, style suggestions, and vocabulary enhancement.',
+                description: 'Improve your English writing with intelligent corrections and learning insights.',
+                techStack: ['Natural Language Processing', 'JavaScript', 'HTML/CSS', 'AI Algorithms'],
+                tags: ['AI', 'Education', 'Writing', 'Grammar'],
+                demoLink: 'https://saiyam-creator.github.io/correct-english/',
+                codeLink: 'https://github.com/saiyam-creator/correct-english'
+            },
+            {
+                id: 'project4',
+                title: 'Solar System',
+                problem: 'Educational content about space often lacks interactivity, making it difficult to grasp planetary relationships and orbital mechanics.',
+                solution: 'Interactive 3D solar system model with accurate orbital mechanics, planetary information, and immersive space exploration.',
+                description: 'Explore our solar system in an interactive 3D environment with educational insights.',
+                techStack: ['Three.js', 'WebGL', 'JavaScript', '3D Animation', 'Astronomy API'],
+                tags: ['3D', 'Education', 'Space', 'Interactive'],
+                demoLink: 'https://saiyam-creator.github.io/solar-system/',
+                codeLink: 'https://github.com/saiyam-creator/solar-system'
+            },
+            {
+                id: 'project5',
+                title: 'All About Shapes',
+                problem: 'Young learners struggle to understand geometric concepts through traditional 2D diagrams and textbooks.',
+                solution: 'Interactive educational platform that brings shapes to life with animations, games, and progressive learning paths.',
+                description: 'Educational app teaching kids about shapes using interactive visuals and games.',
+                techStack: ['JavaScript', 'HTML5 Canvas', 'CSS Animations', 'Game Development'],
+                tags: ['Education', 'Games', 'Kids', 'Interactive'],
+                demoLink: 'https://saiyam-creator.github.io/all-about-shapes/',
+                codeLink: 'https://github.com/saiyam-creator/all-about-shapes'
+            },
+            {
+                id: 'project6',
+                title: 'Life GPS',
+                problem: 'People often feel lost in personal/professional development without clear guidance, goal tracking, and actionable insights.',
+                solution: 'AI-powered life coaching platform that provides personalized roadmaps, progress tracking, and milestone-based guidance.',
+                description: 'AI-powered life coaching app to help you navigate personal and professional challenges.',
+                techStack: ['React.js', 'AI/ML Integration', 'Node.js', 'MongoDB', 'Charting Libraries'],
+                tags: ['AI', 'Life Coaching', 'Productivity', 'Web App'],
+                demoLink: 'https://life-gps-coral.vercel.app/',
+                codeLink: 'https://github.com/saiyam-creator/life-gps'
+            },
+            {
+                id: 'project7',
+                title: 'WorthIT',
+                problem: 'Individuals lack a consolidated view of their financial health, making it difficult to track expenses, investments, and savings goals.',
+                solution: 'Comprehensive personal finance dashboard with expense tracking, investment monitoring, and AI-powered financial insights.',
+                description: 'AI-driven personal finance app to help users manage expenses and investments effectively.',
+                techStack: ['React', 'Firebase', 'Chart.js', 'AI Analytics', 'Financial APIs'],
+                tags: ['Finance', 'AI', 'Dashboard', 'Productivity'],
+                demoLink: 'https://saiyam-creator.github.io/worthit-app/',
+                codeLink: 'https://github.com/saiyam-creator/worthit-app'
+            },
+            {
+                id: 'project8',
+                title: 'Gita Ka Gyan',
+                problem: 'Modern readers find ancient texts inaccessible due to language barriers and lack of contextual, personalized interpretations.',
+                solution: 'AI-powered Bhagavad Gita platform that provides personalized shlokas with modern interpretations based on emotional context.',
+                description: 'Shlokas of Bhagavad Gita with meaning according to your feelings and situations.',
+                techStack: ['HTML/CSS', 'JavaScript', 'AI Integration', 'Natural Language Processing', 'API Integration'],
+                tags: ['AI', 'Spiritual', 'Education', 'Web App'],
+                demoLink: 'https://saiyam-creator.github.io/krishna-path/',
+                codeLink: 'https://github.com/saiyam-creator/krishna-path'
+            }
+        ];
+    }
+
+    async loadProjects() {
+        const grid = document.getElementById('projectsGrid');
+        if (!grid) return;
+
+        grid.innerHTML = '';
+
+        for (const project of this.projectData) {
+            const card = document.createElement('div');
+            card.className = 'project-card';
+            card.innerHTML = `
+                <div class="project-header">
+                    <div class="project-title">${project.title}</div>
+                    <div class="project-id">${project.id.replace('project', 'Project ')}</div>
+                </div>
+                
+                <div class="project-problem">
+                    <div class="section-icon">🔍</div>
+                    <div class="section-content">
+                        <h4>Problem Statement</h4>
+                        <p>${project.problem}</p>
+                    </div>
+                </div>
+                
+                <div class="project-solution">
+                    <div class="section-icon">💡</div>
+                    <div class="section-content">
+                        <h4>My Solution</h4>
+                        <p>${project.solution}</p>
+                    </div>
+                </div>
+                
+                <div class="project-tech">
+                    <div class="section-icon">⚙️</div>
+                    <div class="section-content">
+                        <h4>Tech Stack</h4>
+                        <div class="tech-tags">
+                            ${project.techStack.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-tags">
+                    ${project.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                </div>
+                
+                <div class="project-actions">
+                    <button class="btn-small btn-view" data-action="view-project" data-link="${project.demoLink}" title="View Live Demo">
+                        <span class="btn-icon">🌐</span>
+                        Live Demo
+                    </button>
+                    <button class="btn-small btn-secondary" data-action="view-code" data-link="${project.codeLink}" title="View Source Code">
+                        <span class="btn-icon">👨‍💻</span>
+                        Source Code
+                    </button>
+                </div>
+            `;
+            grid.appendChild(card);
+        }
+    }
+}
+
+// ============= PROJECT SECTION STYLES =============
+// Add this CSS to your existing styles
+const projectStyles = `
+/* ========== UPDATED PROJECT CARD STYLES ========== */
+.project-card {
+    background: linear-gradient(145deg, 
+        rgba(30, 30, 30, 0.95), 
+        rgba(40, 10, 10, 0.9));
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 30px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.project-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    border-color: var(--primary);
+    box-shadow: 
+        0 25px 50px rgba(255, 0, 0, 0.3),
+        0 0 100px rgba(255, 0, 0, 0.1);
+}
+
+.project-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255, 0, 0, 0.1), 
+        transparent);
+    transition: left 0.7s ease;
+}
+
+.project-card:hover::before {
+    left: 100%;
+}
+
+.project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 0, 0, 0.2);
+}
+
+.project-title {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--primary);
+    background: linear-gradient(135deg, var(--primary), #ff6666);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.project-id {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.05);
+    padding: 5px 12px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Problem & Solution Sections */
+.project-problem,
+.project-solution,
+.project-tech {
+    margin-bottom: 25px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 15px;
+    border-left: 4px solid transparent;
+    display: flex;
+    gap: 15px;
+    transition: all 0.3s ease;
+}
+
+.project-problem:hover {
+    background: rgba(255, 0, 0, 0.05);
+    border-left-color: #ff3333;
+}
+
+.project-solution:hover {
+    background: rgba(0, 255, 0, 0.05);
+    border-left-color: #00cc00;
+}
+
+.project-tech:hover {
+    background: rgba(0, 150, 255, 0.05);
+    border-left-color: #0066cc;
+}
+
+.section-icon {
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.project-problem .section-icon {
+    color: #ff3333;
+    background: rgba(255, 0, 0, 0.1);
+    border-color: rgba(255, 0, 0, 0.3);
+}
+
+.project-solution .section-icon {
+    color: #00cc00;
+    background: rgba(0, 255, 0, 0.1);
+    border-color: rgba(0, 255, 0, 0.3);
+}
+
+.project-tech .section-icon {
+    color: #0066cc;
+    background: rgba(0, 150, 255, 0.1);
+    border-color: rgba(0, 150, 255, 0.3);
+}
+
+.section-content {
+    flex: 1;
+}
+
+.section-content h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--text-light);
+}
+
+.project-problem h4 {
+    color: #ff3333;
+}
+
+.project-solution h4 {
+    color: #00cc00;
+}
+
+.project-tech h4 {
+    color: #0066cc;
+}
+
+.section-content p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-gray);
+    margin: 0;
+}
+
+/* Tech Tags */
+.tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.tech-tag {
+    background: rgba(0, 150, 255, 0.1);
+    color: #0066cc;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border: 1px solid rgba(0, 150, 255, 0.3);
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.tech-tag:hover {
+    background: rgba(0, 150, 255, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 150, 255, 0.2);
+}
+
+/* Project Tags */
+.project-tags {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 20px 0 25px;
+}
+
+.tag {
+    background: rgba(255, 0, 0, 0.1);
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    color: var(--primary);
+    border: 1px solid rgba(255, 0, 0, 0.3);
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.tag:hover {
+    background: rgba(255, 0, 0, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 0, 0, 0.2);
+}
+
+/* Project Actions */
+.project-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: auto;
+}
+
+.btn-small {
+    padding: 12px 25px;
+    font-size: 0.95rem;
+    border-radius: 15px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-small::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.2), 
+        transparent);
+    transition: left 0.6s ease;
+}
+
+.btn-small:hover::before {
+    left: 100%;
+}
+
+.btn-view {
+    background: linear-gradient(135deg, var(--primary), #ff3333);
+    color: var(--secondary);
+    box-shadow: 0 5px 20px rgba(255, 0, 0, 0.3);
+}
+
+.btn-view:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 10px 30px rgba(255, 0, 0, 0.5);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--secondary);
+    border: 2px solid var(--primary);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 0, 0, 0.2);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(255, 0, 0, 0.3);
+}
+
+.btn-icon {
+    font-size: 1.1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .project-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .project-id {
+        align-self: flex-start;
+    }
+    
+    .project-problem,
+    .project-solution,
+    .project-tech {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .section-icon {
+        width: 60px;
+        height: 60px;
+        margin: 0 auto;
+    }
+    
+    .project-actions {
+        flex-direction: column;
+    }
+    
+    .btn-small {
+        width: 100%;
+    }
+}
+
+/* Animation for project cards */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.project-card {
+    animation: fadeInUp 0.6s ease forwards;
+    opacity: 0;
+}
+
+.project-card:nth-child(1) { animation-delay: 0.1s; }
+.project-card:nth-child(2) { animation-delay: 0.2s; }
+.project-card:nth-child(3) { animation-delay: 0.3s; }
+.project-card:nth-child(4) { animation-delay: 0.4s; }
+.project-card:nth-child(5) { animation-delay: 0.5s; }
+.project-card:nth-child(6) { animation-delay: 0.6s; }
+.project-card:nth-child(7) { animation-delay: 0.7s; }
+.project-card:nth-child(8) { animation-delay: 0.8s; }
+
+/* Status Indicators */
+.project-status {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 5px 15px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.status-live {
+    background: rgba(0, 255, 0, 0.1);
+    color: #00cc00;
+    border: 1px solid rgba(0, 255, 0, 0.3);
+}
+
+.status-beta {
+    background: rgba(255, 165, 0, 0.1);
+    color: #ff9900;
+    border: 1px solid rgba(255, 165, 0, 0.3);
+}
+
+/* Project Difficulty Indicator */
+.project-difficulty {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+.difficulty-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.difficulty-dot.active {
+    background: var(--primary);
+    box-shadow: 0 0 10px var(--primary);
+}
+`;
+
+// Add the styles to the page
+const styleSheet = document.createElement('style');
+styleSheet.textContent = projectStyles;
+document.head.appendChild(styleSheet);
+
+// ============= INITIALIZE PROJECTS =============
+document.addEventListener('DOMContentLoaded', async () => {
+    const projectManager = new ProjectManager();
+    await projectManager.loadProjects();
+    
+    // Add click handlers for project buttons
+    document.addEventListener('click', (e) => {
+        const button = e.target.closest('[data-action]');
+        if (!button) return;
+
+        const action = button.getAttribute('data-action');
+        const link = button.getAttribute('data-link');
+
+        if (action === 'view-project' || action === 'view-code') {
+            if (link && link !== '#') {
+                window.open(link, '_blank', 'noopener,noreferrer');
+                
+                // Add animation feedback
+                button.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    button.style.transform = '';
+                }, 200);
+            }
+        }
+    });
+    
+    console.log('✅ Project section loaded with 8 professional projects!');
+});
+</script>
 <div class="project-notification" id="projectNotification">
     <div class="notification-content">
         <button class="notification-close" id="closeNotification">×</button>
@@ -3777,4 +5619,3 @@ document.addEventListener('DOMContentLoaded', function() {
 </div>
 </body>
 </html>
-
