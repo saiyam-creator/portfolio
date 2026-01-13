@@ -5020,18 +5020,32 @@ textarea.form-input {
   
 
     // ============= CONTACT MANAGER WITH FIREBASE =============
-  class ContactManager {
+class ContactManager {
     constructor() {
         this.db = db;
         console.log('📱 ContactManager initialized', this.db ? 'Firebase connected' : 'Firebase offline');
     }
 
     async sendMessage() {
-        const name = document.getElementById('contactName')?.value.trim();
-        const email = document.getElementById('contactEmail')?.value.trim();
-        const projectType = document.getElementById('projectType')?.value || 'general';
-        const timeline = document.getElementById('projectTimeline')?.value || 'not-specified';
-        const message = document.getElementById('contactMessage')?.value.trim();
+        // Get form elements safely
+        const nameInput = document.getElementById('contactName');
+        const emailInput = document.getElementById('contactEmail');
+        const projectTypeInput = document.getElementById('projectType');
+        const projectTimelineInput = document.getElementById('projectTimeline');
+        const messageInput = document.getElementById('contactMessage');
+        
+        // Check if elements exist before getting values
+        if (!nameInput || !emailInput || !messageInput) {
+            console.error('❌ Form elements not found!');
+            this.showNotification('Form error. Please refresh the page.', 'error');
+            return;
+        }
+        
+        const name = nameInput.value.trim();
+        const email = emailInput.value.trim();
+        const projectType = projectTypeInput ? projectTypeInput.value : 'not-specified';
+        const timeline = projectTimelineInput ? projectTimelineInput.value : 'not-specified';
+        const message = messageInput.value.trim();
         
         // Validation
         if (!name || !email || !message) {
@@ -5044,7 +5058,7 @@ textarea.form-input {
             return;
         }
 
-        // Create message object
+        // Create message object - ONLY fields that exist!
         const messageData = {
             name: name,
             email: email,
@@ -5053,7 +5067,8 @@ textarea.form-input {
             message: message,
             date: new Date().toISOString(),
             timestamp: new Date().getTime(),
-            status: 'unread'
+            status: 'unread',
+            source: 'portfolio-website' // Add source for tracking
         };
 
         console.log('📨 Sending message:', messageData);
@@ -5097,9 +5112,9 @@ textarea.form-input {
         }
 
         try {
-            // ✅ Important: Firestore me 'messages' collection me add karo
+            // ✅ Save to 'messages' collection
             const docRef = await this.db.collection('messages').add({
-                ...messageData,
+                ...messageData, // Spread operator to include all fields
                 serverTimestamp: firebase.firestore.FieldValue.serverTimestamp()
             });
             
@@ -5111,7 +5126,10 @@ textarea.form-input {
             // Detailed error check
             if (error.code === 'permission-denied') {
                 console.error('❌ Permission denied! Check Firestore rules.');
-                this.showNotification('❌ Database permission error. Please contact admin.', 'error');
+                this.showNotification('❌ Database permission error. Please check Firebase rules.', 'error');
+            } else if (error.message.includes('Unsupported field value')) {
+                console.error('❌ Invalid data format:', error.message);
+                this.showNotification('❌ Form data error. Please check all fields.', 'error');
             }
             
             this.saveMessageToLocalStorage(messageData);
@@ -5119,21 +5137,27 @@ textarea.form-input {
         }
     }
 
+    // ... rest of your methods remain the same
     isValidEmail(email) {
         const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         return re.test(email);
     }
 
     resetContactForm() {
-        const form = document.getElementById('contact-form');
-        if (form) {
-            form.querySelector('#contactName').value = '';
-            form.querySelector('#contactEmail').value = '';
-            form.querySelector('#projectType').value = '';
-            form.querySelector('#projectTimeline').value = '';
-            form.querySelector('#contactMessage').value = '';
-            form.querySelector('#newsletterOptIn').checked = false;
-        }
+        // Reset all form fields safely
+        const nameInput = document.getElementById('contactName');
+        const emailInput = document.getElementById('contactEmail');
+        const projectTypeInput = document.getElementById('projectType');
+        const projectTimelineInput = document.getElementById('projectTimeline');
+        const messageInput = document.getElementById('contactMessage');
+        const newsletterInput = document.getElementById('newsletterOptIn');
+        
+        if (nameInput) nameInput.value = '';
+        if (emailInput) emailInput.value = '';
+        if (projectTypeInput) projectTypeInput.value = '';
+        if (projectTimelineInput) projectTimelineInput.value = '';
+        if (messageInput) messageInput.value = '';
+        if (newsletterInput) newsletterInput.checked = false;
     }
 
     saveMessageToLocalStorage(messageData) {
@@ -5163,20 +5187,14 @@ textarea.form-input {
         if (existing) existing.remove();
 
         const notification = document.createElement('div');
-        notification.className = `notification notification-${type}`;
+        notification.className = `notification ${type}`;
         notification.innerHTML = `
             <div class="notification-content">
                 <p>${message}</p>
-                <button class="notification-close">&times;</button>
             </div>
         `;
 
         document.body.appendChild(notification);
-
-        // Close button
-        notification.querySelector('.notification-close').addEventListener('click', () => {
-            notification.remove();
-        });
 
         // Auto remove
         setTimeout(() => {
@@ -5253,37 +5271,32 @@ textarea.form-input {
         }
 
         setupEventListeners() {
-            document.addEventListener('click', (e) => {
-                const button = e.target.closest('[data-action]');
-                if (!button) return;
-
-                const action = button.getAttribute('data-action');
-                const link = button.getAttribute('data-link');
-
-                switch(action) {
-                    case 'view-project':
-                    case 'view-code':
-                        if (link && link !== '#') {
-                            window.open(link, '_blank');
-                        }
-                        break;
-                        
-                    case 'send-message':
-                        if (this.contactManager) {
-                            this.contactManager.sendMessage();
-                        }
-                        break;
-                }
-            });
-
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape') {
-                    document.querySelectorAll('.modal.active').forEach(modal => {
-                        modal.classList.remove('active');
-                    });
-                }
-            });
+    document.addEventListener('click', (e) => {
+        const button = e.target.closest('[data-action="send-message"]');
+        if (button && this.contactManager) {
+            e.preventDefault(); // Prevent form submission
+            this.contactManager.sendMessage();
         }
+        
+        // Other button handlers remain the same
+        const viewButton = e.target.closest('[data-action="view-project"], [data-action="view-code"]');
+        if (viewButton) {
+            const link = viewButton.getAttribute('data-link');
+            if (link && link !== '#') {
+                window.open(link, '_blank');
+            }
+        }
+    });
+
+    // Also attach to form submit
+    const contactForm = document.querySelector('.contact-form');
+    if (contactForm && this.contactManager) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            this.contactManager.sendMessage();
+        });
+    }
+}
 
         addAlertStyles() {
             const styleSheet = document.createElement('style');
