@@ -3773,7 +3773,453 @@ textarea.form-input {
         display: none;
     }
 }
+
+
     </style>
+
+<!-- ENHANCED FUTURISTIC CIRCUIT LOGO -->
+<style>
+/* ========== ULTIMATE CIRCUIT LOGO ========== */
+.circuit-logo-ultimate {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.circuit-logo-ultimate:hover {
+    transform: translateY(-2px);
+}
+
+/* Main Circuit Container */
+.circuit-icon-advanced {
+    width: 60px;
+    height: 60px;
+    position: relative;
+    filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.5));
+}
+
+/* Outer Circuit Frame */
+.circuit-frame {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    border: 2px solid rgba(255, 0, 0, 0.8);
+    border-radius: 15px;
+    clip-path: polygon(
+        0% 0%, 100% 0%, 100% 100%, 0% 100%,
+        0% 0%, 
+        /* Top line with breaks */
+        10% 0%, 10% 10%, 25% 10%, 25% 0%,
+        40% 0%, 40% 10%, 55% 10%, 55% 0%,
+        70% 0%, 70% 10%, 85% 10%, 85% 0%,
+        /* Right line */
+        100% 10%, 90% 10%, 90% 25%, 100% 25%,
+        100% 40%, 90% 40%, 90% 55%, 100% 55%,
+        100% 70%, 90% 70%, 90% 85%, 100% 85%,
+        /* Bottom line */
+        85% 100%, 85% 90%, 70% 90%, 70% 100%,
+        55% 100%, 55% 90%, 40% 90%, 40% 100%,
+        25% 100%, 25% 90%, 10% 90%, 10% 100%,
+        /* Left line */
+        0% 85%, 10% 85%, 10% 70%, 0% 70%,
+        0% 55%, 10% 55%, 10% 40%, 0% 40%,
+        0% 25%, 10% 25%, 10% 10%, 0% 10%
+    );
+    animation: circuitFlow 4s linear infinite;
+}
+
+/* Inner Circuit Grid */
+.circuit-grid {
+    width: 80%;
+    height: 80%;
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 3px;
+}
+
+.grid-cell {
+    position: relative;
+    overflow: hidden;
+}
+
+.grid-cell.active::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent 40%, rgba(255, 0, 0, 0.6) 50%, transparent 60%);
+    animation: gridShine 2s infinite;
+}
+
+/* Animated Circuit Paths */
+.circuit-paths {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.path-line {
+    position: absolute;
+    background: linear-gradient(90deg, transparent, #ff0000, transparent);
+    height: 2px;
+    animation: pathMove 3s linear infinite;
+}
+
+.path-line.horizontal-1 {
+    top: 30%;
+    left: 0;
+    width: 100%;
+    animation-delay: 0s;
+}
+
+.path-line.horizontal-2 {
+    top: 70%;
+    left: 0;
+    width: 100%;
+    animation-delay: 1s;
+}
+
+.path-line.vertical-1 {
+    left: 30%;
+    top: 0;
+    height: 100%;
+    width: 2px;
+    background: linear-gradient(180deg, transparent, #ff0000, transparent);
+    animation: pathMoveVertical 3s linear infinite;
+}
+
+.path-line.vertical-2 {
+    left: 70%;
+    top: 0;
+    height: 100%;
+    width: 2px;
+    background: linear-gradient(180deg, transparent, #ff0000, transparent);
+    animation: pathMoveVertical 3s linear infinite 1.5s;
+}
+
+/* Data Nodes */
+.data-nodes {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.node {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: #ff0000;
+    border-radius: 50%;
+    box-shadow: 
+        0 0 10px #ff0000,
+        0 0 20px #ff3333;
+    animation: nodePulse 2s infinite;
+}
+
+.node:nth-child(1) { top: 20%; left: 20%; animation-delay: 0s; }
+.node:nth-child(2) { top: 20%; left: 50%; animation-delay: 0.4s; }
+.node:nth-child(3) { top: 20%; left: 80%; animation-delay: 0.8s; }
+.node:nth-child(4) { top: 50%; left: 20%; animation-delay: 1.2s; }
+.node:nth-child(5) { top: 50%; left: 80%; animation-delay: 1.6s; }
+.node:nth-child(6) { top: 80%; left: 20%; animation-delay: 2s; }
+.node:nth-child(7) { top: 80%; left: 50%; animation-delay: 2.4s; }
+.node:nth-child(8) { top: 80%; left: 80%; animation-delay: 2.8s; }
+
+/* Central AI Core */
+.ai-core {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, rgba(255,0,0,0.8) 0%, rgba(255,0,0,0.2) 70%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 900;
+    color: white;
+    text-shadow: 0 0 10px rgba(255,0,0,0.8);
+    box-shadow: 
+        0 0 20px rgba(255,0,0,0.6),
+        inset 0 0 20px rgba(255,255,255,0.1);
+    animation: corePulse 2s infinite;
+    z-index: 10;
+}
+
+/* Logo Text */
+.logo-text-cyber {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.logo-main-text {
+    font-size: 32px;
+    font-weight: 900;
+    background: linear-gradient(45deg, 
+        #ff0000 0%, 
+        #ff3333 25%, 
+        #ff6666 50%, 
+        #ff3333 75%, 
+        #ff0000 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    background-size: 200% 200%;
+    animation: cyberGlitch 3s infinite;
+    position: relative;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.logo-main-text::before,
+.logo-main-text::after {
+    content: 'SAI TECH';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.5;
+}
+
+.logo-main-text::before {
+    animation: glitch-1 2s infinite;
+    color: #00ff00;
+    z-index: -1;
+}
+
+.logo-main-text::after {
+    animation: glitch-2 3s infinite;
+    color: #0000ff;
+    z-index: -2;
+}
+
+.logo-sub-text {
+    font-size: 12px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.8);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    position: relative;
+    padding-left: 10px;
+}
+
+.logo-sub-text::before {
+    content: '▶';
+    position: absolute;
+    left: 0;
+    color: #ff0000;
+    animation: blink 1s infinite;
+}
+
+/* Logo Status Indicator */
+.logo-status {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    width: 12px;
+    height: 12px;
+    background: #00ff00;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #00ff00;
+    animation: statusPulse 2s infinite;
+}
+
+.logo-status::after {
+    content: 'LIVE';
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 8px;
+    color: #00ff00;
+    font-weight: 700;
+    white-space: nowrap;
+    opacity: 0;
+    animation: statusText 3s infinite;
+}
+
+/* ========== ANIMATIONS ========== */
+@keyframes circuitFlow {
+    0% { 
+        border-color: rgba(255, 0, 0, 0.8);
+        box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+    }
+    33% { 
+        border-color: rgba(255, 51, 51, 0.8);
+        box-shadow: 0 0 15px rgba(255, 51, 51, 0.6);
+    }
+    66% { 
+        border-color: rgba(255, 102, 102, 0.8);
+        box-shadow: 0 0 20px rgba(255, 102, 102, 0.7);
+    }
+    100% { 
+        border-color: rgba(255, 0, 0, 0.8);
+        box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+    }
+}
+
+@keyframes pathMove {
+    0% { 
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { 
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+@keyframes pathMoveVertical {
+    0% { 
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { 
+        transform: translateY(100%);
+        opacity: 0;
+    }
+}
+
+@keyframes gridShine {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+@keyframes nodePulse {
+    0%, 100% { 
+        transform: scale(1);
+        box-shadow: 
+            0 0 10px #ff0000,
+            0 0 20px #ff3333;
+    }
+    50% { 
+        transform: scale(1.2);
+        box-shadow: 
+            0 0 20px #ff0000,
+            0 0 40px #ff3333,
+            0 0 60px #ff6666;
+    }
+}
+
+@keyframes corePulse {
+    0%, 100% { 
+        transform: translate(-50%, -50%) scale(1);
+        box-shadow: 
+            0 0 20px rgba(255,0,0,0.6),
+            inset 0 0 20px rgba(255,255,255,0.1);
+    }
+    50% { 
+        transform: translate(-50%, -50%) scale(1.1);
+        box-shadow: 
+            0 0 40px rgba(255,0,0,0.8),
+            inset 0 0 30px rgba(255,255,255,0.2);
+    }
+}
+
+@keyframes cyberGlitch {
+    0%, 100% { 
+        background-position: 0% 50%;
+        transform: translateX(0);
+    }
+    94% { transform: translateX(0); }
+    95% { transform: translateX(2px); }
+    96% { transform: translateX(-2px); }
+    97% { transform: translateX(1px); }
+    98% { transform: translateX(-1px); }
+    99% { transform: translateX(0); }
+}
+
+@keyframes glitch-1 {
+    0%, 100% { transform: translate(0); opacity: 0.5; }
+    94% { transform: translate(0); }
+    95% { transform: translate(2px, -2px); opacity: 0.8; }
+    96% { transform: translate(-2px, 2px); opacity: 0.8; }
+    97% { transform: translate(1px, -1px); opacity: 0.8; }
+    98% { transform: translate(-1px, 1px); opacity: 0.8; }
+    99% { transform: translate(0); opacity: 0.5; }
+}
+
+@keyframes glitch-2 {
+    0%, 100% { transform: translate(0); opacity: 0.3; }
+    93% { transform: translate(0); }
+    94% { transform: translate(-3px, 3px); opacity: 0.6; }
+    95% { transform: translate(3px, -3px); opacity: 0.6; }
+    96% { transform: translate(-1px, 1px); opacity: 0.6; }
+    97% { transform: translate(1px, -1px); opacity: 0.6; }
+    98% { transform: translate(0); opacity: 0.3; }
+}
+
+@keyframes statusPulse {
+    0%, 100% { 
+        box-shadow: 0 0 5px #00ff00;
+        transform: scale(1);
+    }
+    50% { 
+        box-shadow: 0 0 20px #00ff00;
+        transform: scale(1.2);
+    }
+}
+
+@keyframes statusText {
+    0%, 90%, 100% { opacity: 0; transform: translateX(-50%) translateY(0); }
+    95% { opacity: 1; transform: translateX(-50%) translateY(-5px); }
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+/* Hover Effects */
+.circuit-logo-ultimate:hover .circuit-frame {
+    animation-speed: 2s;
+    filter: brightness(1.5);
+}
+
+.circuit-logo-ultimate:hover .node {
+    animation-duration: 1s;
+}
+
+.circuit-logo-ultimate:hover .ai-core {
+    animation-duration: 1s;
+}
+
+/* Mobile Optimization */
+@media (max-width: 768px) {
+    .circuit-icon-advanced {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .logo-main-text {
+        font-size: 26px;
+    }
+    
+    .logo-sub-text {
+        font-size: 10px;
+        letter-spacing: 3px;
+    }
+}
+</style>
+
+<!-- ========== LOGO HTM
+
 </head>
 <body>
   <!-- Add this RIGHT after <body> tag -->
@@ -3804,23 +4250,70 @@ textarea.form-input {
 <!-- Add this for particle effects -->
 <div class="particles-container"></div>
     <!-- Header -->
-    <header class="header">
-        <div class="logo">SAI TECH</div>
+<header class="header">
+    <div class="circuit-logo-ultimate">
+        <!-- Status Indicator -->
+        <div class="logo-status"></div>
         
-        <nav class="header-nav" id="headerNav">
-            <a href="#hero" class="nav-link active">Home</a>
-            <a href="#about" class="nav-link">About</a>
-            <a href="#skills" class="nav-link">Skills</a>
-            <a href="#projects" class="nav-link">Projects</a>
-            <a href="#upcoming" class="nav-link">Upcoming Projects</a>
-            <a href="#contact" class="nav-link">Contact</a>
-        </nav>
-
-        <!-- Removed mobile menu button -->
-        <div class="header-actions">
-            <!-- No hamburger menu button here -->
+        <!-- Circuit Icon -->
+        <div class="circuit-icon-advanced">
+            <!-- Outer Circuit Frame -->
+            <div class="circuit-frame"></div>
+            
+            <!-- Inner Circuit Grid -->
+            <div class="circuit-grid">
+                <div class="grid-cell active"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell active"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell active"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell active"></div>
+                <div class="grid-cell"></div>
+                <div class="grid-cell active"></div>
+            </div>
+            
+            <!-- Animated Circuit Paths -->
+            <div class="circuit-paths">
+                <div class="path-line horizontal-1"></div>
+                <div class="path-line horizontal-2"></div>
+                <div class="path-line vertical-1"></div>
+                <div class="path-line vertical-2"></div>
+            </div>
+            
+            <!-- Data Nodes -->
+            <div class="data-nodes">
+                <div class="node"></div>
+                <div class="node"></div>
+                <div class="node"></div>
+                <div class="node"></div>
+                <div class="node"></div>
+                <div class="node"></div>
+                <div class="node"></div>
+                <div class="node"></div>
+            </div>
+            
+            <!-- Central AI Core -->
+            <div class="ai-core">ST</div>
         </div>
-    </header>
+        
+        <!-- Logo Text -->
+        <div class="logo-text-cyber">
+            <div class="logo-main-text">SAI TECH</div>
+            <div class="logo-sub-text">NEURAL SYSTEMS</div>
+        </div>
+    </div>
+    
+    <!-- Rest of your header navigation -->
+    <nav class="header-nav" id="headerNav">
+        <a href="#hero" class="nav-link active">Home</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#skills" class="nav-link">Skills</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#upcoming" class="nav-link">Upcoming</a>
+        <a href="#contact" class="nav-link">Contact</a>
+    </nav>
+</header>
 
     <!-- Canvas -->
     <canvas id="canvas3d"></canvas>
@@ -3856,7 +4349,7 @@ textarea.form-input {
             <!-- Professional Title -->
             <div class="hero-profession">
                 <span class="profession-icon">|</span>
-                <span class="profession-text">AI Developer & Full-Stack Engineer</span>
+                <span class="profession-text">AI Orchestrator 🧑‍💻 & Vibe coder</span>
                 <span class="profession-icon">|</span>
             </div>
             
@@ -6990,6 +7483,45 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 <script>
+// Optional hover sound effect
+document.querySelector('.circuit-logo-ultimate').addEventListener('mouseenter', () => {
+    // Create subtle circuit sound
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    const oscillator = audioContext.createOscillator();
+    const gainNode = audioContext.createGain();
+    
+    oscillator.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+    
+    oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
+    oscillator.frequency.exponentialRampToValueAtTime(400, audioContext.currentTime + 0.1);
+    
+    gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2);
+    
+    oscillator.start();
+    oscillator.stop(audioContext.currentTime + 0.2);
+});
+
+// Optional click effect
+document.querySelector('.circuit-logo-ultimate').addEventListener('click', () => {
+    // Add visual feedback
+    const logo = document.querySelector('.circuit-logo-ultimate');
+    logo.style.transform = 'scale(0.95)';
+    
+    // Flash effect
+    document.querySelector('.ai-core').style.boxShadow = '0 0 60px rgba(255, 0, 0, 1)';
+    
+    setTimeout(() => {
+        logo.style.transform = '';
+        document.querySelector('.ai-core').style.boxShadow = '';
+    }, 300);
+    
+    // Scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+</script>
+<script>
   // Add this for extra effects
 class ExtraAnimations {
     constructor() {
@@ -7228,4 +7760,3 @@ document.addEventListener('DOMContentLoaded', () => {
 </div>
 </body>
 </html>
-
