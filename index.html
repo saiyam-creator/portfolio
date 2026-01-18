@@ -4216,9 +4216,751 @@ textarea.form-input {
         letter-spacing: 3px;
     }
 }
-</style>
+/* ========== PROJECT CATEGORIES & FILTERS ========== */
+.project-filters {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 40px 0 60px;
+    flex-wrap: wrap;
+}
 
-<!-- ========== LOGO HTM
+.filter-btn {
+    padding: 12px 30px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 0, 0, 0.3);
+    border-radius: 50px;
+    color: var(--text-light);
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.filter-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 0, 0, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.filter-btn:hover::before {
+    left: 100%;
+}
+
+.filter-btn:hover {
+    background: rgba(255, 0, 0, 0.1);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(255, 0, 0, 0.2);
+}
+
+.filter-btn.active {
+    background: linear-gradient(135deg, var(--primary), #ff3333);
+    color: var(--secondary);
+    border-color: var(--primary);
+    box-shadow: 0 10px 30px rgba(255, 0, 0, 0.4);
+}
+
+.filter-count {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 800;
+}
+
+/* Project Categories Display */
+.project-category-badge {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    z-index: 2;
+}
+
+.category-finance {
+    background: linear-gradient(135deg, #00cc00, #33ff33);
+    color: #000;
+}
+
+.category-education {
+    background: linear-gradient(135deg, #0066cc, #3399ff);
+    color: white;
+}
+
+.category-ai {
+    background: linear-gradient(135deg, #ff3366, #ff6699);
+    color: white;
+}
+
+.category-showcase {
+    background: linear-gradient(135deg, #ff9900, #ffcc00);
+    color: #000;
+}
+
+/* Project Difficulty */
+.project-difficulty {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 3px;
+}
+
+.difficulty-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.difficulty-dot.active {
+    background: var(--primary);
+    box-shadow: 0 0 8px var(--primary);
+}
+
+/* Completion Date */
+.project-date {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Favorite Star */
+.project-favorite {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    font-size: 1.5rem;
+    color: rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 2;
+}
+
+.project-favorite:hover {
+    transform: scale(1.2);
+}
+
+.project-favorite.active {
+    color: #ffcc00;
+    text-shadow: 0 0 10px #ffcc00;
+    animation: pulse 2s infinite;
+}
+
+/* Stats Bar */
+.project-stats {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-value {
+    font-size: 1.2rem;
+    font-weight: 900;
+    color: var(--primary);
+    font-family: 'Courier New', monospace;
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Project View Toggle */
+.view-toggle {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.view-btn {
+    padding: 10px 25px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 25px;
+    color: var(--text-light);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.view-btn.active {
+    background: rgba(255, 0, 0, 0.2);
+    border-color: var(--primary);
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-gray);
+}
+
+.empty-state-icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    opacity: 0.3;
+}
+
+/* Animation for filtering */
+.project-card {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.project-card.hidden {
+    opacity: 0;
+    transform: scale(0.8);
+    pointer-events: none;
+    position: absolute;
+}
+
+/* Projects Grid Container */
+.projects-container {
+    position: relative;
+    min-height: 500px;
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 30px;
+    transition: all 0.4s ease;
+}
+</style>
+<style>
+    .project-card {
+    background: linear-gradient(145deg, 
+        rgba(30, 30, 30, 0.95), 
+        rgba(40, 10, 10, 0.9));
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 30px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.project-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    border-color: var(--primary);
+    box-shadow: 
+        0 25px 50px rgba(255, 0, 0, 0.3),
+        0 0 100px rgba(255, 0, 0, 0.1);
+}
+
+.project-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255, 0, 0, 0.1), 
+        transparent);
+    transition: left 0.7s ease;
+}
+
+.project-card:hover::before {
+    left: 100%;
+}
+
+.project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 0, 0, 0.2);
+}
+
+.project-title {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--primary);
+    background: linear-gradient(135deg, var(--primary), #ff6666);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.project-id {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.05);
+    padding: 5px 12px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Problem & Solution Sections */
+.project-problem,
+.project-solution,
+.project-tech {
+    margin-bottom: 25px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 15px;
+    border-left: 4px solid transparent;
+    display: flex;
+    gap: 15px;
+    transition: all 0.3s ease;
+}
+
+.project-problem:hover {
+    background: rgba(255, 0, 0, 0.05);
+    border-left-color: #ff3333;
+}
+
+.project-solution:hover {
+    background: rgba(0, 255, 0, 0.05);
+    border-left-color: #00cc00;
+}
+
+.project-tech:hover {
+    background: rgba(0, 150, 255, 0.05);
+    border-left-color: #0066cc;
+}
+
+.section-icon {
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.project-problem .section-icon {
+    color: #ff3333;
+    background: rgba(255, 0, 0, 0.1);
+    border-color: rgba(255, 0, 0, 0.3);
+}
+
+.project-solution .section-icon {
+    color: #00cc00;
+    background: rgba(0, 255, 0, 0.1);
+    border-color: rgba(0, 255, 0, 0.3);
+}
+
+.project-tech .section-icon {
+    color: #0066cc;
+    background: rgba(0, 150, 255, 0.1);
+    border-color: rgba(0, 150, 255, 0.3);
+}
+
+.section-content {
+    flex: 1;
+}
+
+.section-content h4 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--text-light);
+}
+
+.project-problem h4 {
+    color: #ff3333;
+}
+
+.project-solution h4 {
+    color: #00cc00;
+}
+
+.project-tech h4 {
+    color: #0066cc;
+}
+
+.section-content p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-gray);
+    margin: 0;
+}
+
+/* Tech Tags */
+.tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.tech-tag {
+    background: rgba(0, 150, 255, 0.1);
+    color: #0066cc;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border: 1px solid rgba(0, 150, 255, 0.3);
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.tech-tag:hover {
+    background: rgba(0, 150, 255, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 150, 255, 0.2);
+}
+
+/* Project Tags */
+.project-tags {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin: 20px 0 25px;
+}
+
+.tag {
+    background: rgba(255, 0, 0, 0.1);
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    color: var(--primary);
+    border: 1px solid rgba(255, 0, 0, 0.3);
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.tag:hover {
+    background: rgba(255, 0, 0, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 0, 0, 0.2);
+}
+
+/* Project Actions */
+.project-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: auto;
+}
+
+.btn-small {
+    padding: 12px 25px;
+    font-size: 0.95rem;
+    border-radius: 15px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-small::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.2), 
+        transparent);
+    transition: left 0.6s ease;
+}
+
+.btn-small:hover::before {
+    left: 100%;
+}
+
+.btn-view {
+    background: linear-gradient(135deg, var(--primary), #ff3333);
+    color: var(--secondary);
+    box-shadow: 0 5px 20px rgba(255, 0, 0, 0.3);
+}
+
+.btn-view:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 10px 30px rgba(255, 0, 0, 0.5);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--secondary);
+    border: 2px solid var(--primary);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 0, 0, 0.2);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(255, 0, 0, 0.3);
+}
+
+.btn-icon {
+    font-size: 1.1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .project-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .project-id {
+        align-self: flex-start;
+    }
+    
+    .project-problem,
+    .project-solution,
+    .project-tech {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .section-icon {
+        width: 60px;
+        height: 60px;
+        margin: 0 auto;
+    }
+    
+    .project-actions {
+        flex-direction: column;
+    }
+    
+    .btn-small {
+        width: 100%;
+    }
+}
+
+/* Animation for project cards */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.project-card {
+    animation: fadeInUp 0.6s ease forwards;
+    opacity: 0;
+}
+
+.project-card:nth-child(1) { animation-delay: 0.1s; }
+.project-card:nth-child(2) { animation-delay: 0.2s; }
+.project-card:nth-child(3) { animation-delay: 0.3s; }
+.project-card:nth-child(4) { animation-delay: 0.4s; }
+.project-card:nth-child(5) { animation-delay: 0.5s; }
+.project-card:nth-child(6) { animation-delay: 0.6s; }
+.project-card:nth-child(7) { animation-delay: 0.7s; }
+.project-card:nth-child(8) { animation-delay: 0.8s; }
+
+/* Status Indicators */
+.project-status {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 5px 15px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.status-live {
+    background: rgba(0, 255, 0, 0.1);
+    color: #00cc00;
+    border: 1px solid rgba(0, 255, 0, 0.3);
+}
+
+.status-beta {
+    background: rgba(255, 165, 0, 0.1);
+    color: #ff9900;
+    border: 1px solid rgba(255, 165, 0, 0.3);
+}
+
+/* Project Difficulty Indicator */
+.project-difficulty {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+.difficulty-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.difficulty-dot.active {
+    background: var(--primary);
+    box-shadow: 0 0 10px var(--primary);
+}
+
+/* ========== UPDATED PROJECT CARD STYLES ========== */
+.project-title-container {
+    flex: 1;
+}
+
+.project-category {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.category-icon {
+    font-size: 1rem;
+}
+
+.category-name {
+    color: var(--primary);
+    background: rgba(255, 0, 0, 0.1);
+    padding: 3px 10px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 0, 0, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 0.75rem;
+}
+
+/* Compact Tags */
+.project-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin: 15px 0;
+}
+
+.tag {
+    background: rgba(255, 255, 255, 0.08);
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    color: var(--text-gray);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    font-weight: 500;
+}
+
+.tag-more {
+    background: rgba(255, 0, 0, 0.1);
+    color: var(--primary);
+    border-color: rgba(255, 0, 0, 0.3);
+}
+
+/* Compact Stats */
+.project-stats {
+    display: flex;
+    gap: 15px;
+    margin: 15px 0;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 10px;
+}
+
+.stat-item {
+    text-align: center;
+    flex: 1;
+}
+
+.stat-value {
+    font-size: 1rem;
+    font-weight: 900;
+    color: var(--primary);
+    font-family: 'Courier New', monospace;
+}
+
+.stat-label {
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Compact Actions */
+.project-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: auto;
+}
+
+.btn-small {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+}
+
+.btn-icon {
+    font-size: 1rem;
+}
+
+/* Remove Problem Statement, Solution, Tech Stack sections */
+.project-problem,
+.project-solution,
+.project-tech {
+    display: none !important;
+}
+
+/* Adjust header spacing */
+.project-header {
+    margin-bottom: 15px;
+}
+
+/* Make description compact */
+.project-desc {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 15px;
+    color: var(--text-gray);
+}
+</style>
 
 </head>
 <body>
@@ -4974,11 +5716,62 @@ textarea.form-input {
     </div>
 </section>
 
-       <!-- Projects Section -->
+      <!-- ========== ORGANIZED PROJECTS SECTION ========== -->
+<!-- ========== ORGANIZED PROJECTS SECTION ========== -->
 <section id="projects">
     <h2 class="section-title">Project Portfolio</h2>
-    <div class="projects-grid" id="projectsGrid">
-        <!-- Projects will be loaded here -->
+    
+    <!-- View Toggle -->
+    <div class="view-toggle">
+        <button class="view-btn active" data-view="grid">
+            <span class="btn-icon">🧱</span> Grid View
+        </button>
+        <button class="view-btn" data-view="list">
+            <span class="btn-icon">📋</span> List View
+        </button>
+    </div>
+    
+    <!-- Category Filters -->
+    <div class="project-filters">
+        <button class="filter-btn active" data-category="all">
+            <span class="filter-icon">🌟</span>
+            All Projects
+            <span class="filter-count" id="count-all">8</span>
+        </button>
+        <button class="filter-btn" data-category="finance">
+            <span class="filter-icon">💰</span>
+            Finance & Investment
+            <span class="filter-count" id="count-finance">3</span>
+        </button>
+        <button class="filter-btn" data-category="education">
+            <span class="filter-icon">🎓</span>
+            Educational Tools
+            <span class="filter-count" id="count-education">3</span>
+        </button>
+        <button class="filter-btn" data-category="ai">
+            <span class="filter-icon">🤖</span>
+            AI & Life Tools
+            <span class="filter-count" id="count-ai">2</span>
+        </button>
+        <button class="filter-btn" data-category="showcase">
+            <span class="filter-icon">🚀</span>
+            Showcase Projects
+            <span class="filter-count" id="count-showcase">4</span>
+        </button>
+    </div>
+    
+    <!-- Projects Container -->
+    <div class="projects-container">
+        <div class="projects-grid" id="projectsGrid">
+            <!-- Projects will load here -->
+        </div>
+        
+        <!-- Empty State -->
+        <div class="empty-state" id="emptyState" style="display: none;">
+            <div class="empty-state-icon">🔍</div>
+            <h3>No projects found in this category</h3>
+            <p>Try selecting a different category</p>
+        </div>
     </div>
 </section>
 
@@ -5298,85 +6091,151 @@ const SITE_CONFIG = {
         location: "Muzaffarnagar",
         availability: "Mon-Fri: 10AM - 7PM"
     },
-
     social: {
         github: "https://github.com/saiyam-creator",
         twitter: "https://x.com/saiyam2405",
         instagram: "https://instagram.com/saiiyam_jain"
     },
-
     projects: [
         {
             id: 'project1',
             title: 'Stock Calculator',
+            category: ['finance', 'showcase'],
+            difficulty: 3,
+            date: '2024-12-15',
             description: 'Advanced stock calculator which can calculate your P&L according to your investment.',
-            tags: ['AI', 'Python', 'JAVA'],
+            tags: ['AI', 'Python', 'JAVA', 'Finance'],
             demoLink: 'https://saiyam-creator.github.io/stock-calculator/',
-            codeLink: 'https://github.com/saiyam-creator/stock-calculator'
+            codeLink: 'https://github.com/saiyam-creator/stock-calculator',
+            stats: {
+                users: '500+',
+                rating: '4.8',
+                updates: '12'
             },
-            {
-                id: 'project2',
-                title: 'Investment Calculator',
-                description: 'Calculate your investment returns with advanced algorithms.',
-                tags: ['HTML', 'CSS', 'JavaScript'],
-                demoLink: 'https://saiyam-creator.github.io/investment-calculate/',
-                codeLink: 'https://github.com/saiyam-creator/investment-calculate'
+            favorite: true
+        },
+        {
+            id: 'project2',
+            title: 'Investment Calculator',
+            category: ['finance'],
+            difficulty: 2,
+            date: '2024-11-20',
+            description: 'Calculate your investment returns with advanced algorithms.',
+            tags: ['HTML', 'CSS', 'JavaScript', 'Finance'],
+            demoLink: 'https://saiyam-creator.github.io/investment-calculate/',
+            codeLink: 'https://github.com/saiyam-creator/investment-calculate',
+            stats: {
+                users: '300+',
+                rating: '4.5',
+                updates: '8'
             },
-            {
-                id: 'project3',
-                title: 'English Corrector',
-                description: 'Improve your English grammar with this AI-powered tool.',
-                tags: ['HTML', 'CSS', 'JS'],
-                demoLink: 'https://saiyam-creator.github.io/correct-english/',
-                codeLink: 'https://github.com/saiyam-creator/correct-english'
+            favorite: false
+        },
+        {
+            id: 'project3',
+            title: 'English Corrector',
+            category: ['education'],
+            difficulty: 3,
+            date: '2024-10-05',
+            description: 'Improve your English grammar with this AI-powered tool.',
+            tags: ['HTML', 'CSS', 'JS', 'Education'],
+            demoLink: 'https://saiyam-creator.github.io/correct-english/',
+            codeLink: 'https://github.com/saiyam-creator/correct-english',
+            stats: {
+                users: '1000+',
+                rating: '4.9',
+                updates: '15'
             },
-            {
-                id: 'project4',
-                title: 'Solar System',
-                description: 'Explore our solar system in interactive 3D view.',
-                tags: ['AI', '3D'],
-                demoLink: 'https://saiyam-creator.github.io/solar-system/',
-                codeLink: 'https://github.com/saiyam-creator/solar-system'
+            favorite: true
+        },
+        {
+            id: 'project4',
+            title: 'Solar System',
+            category: ['education', 'showcase'],
+            difficulty: 4,
+            date: '2024-09-15',
+            description: 'Explore our solar system in interactive 3D view.',
+            tags: ['AI', '3D', 'Education'],
+            demoLink: 'https://saiyam-creator.github.io/solar-system/',
+            codeLink: 'https://github.com/saiyam-creator/solar-system',
+            stats: {
+                users: '2000+',
+                rating: '4.7',
+                updates: '10'
             },
-            {
-                id: 'project5',
-                title: 'All About Shapes',
-                description: 'Educational app teaching kids about shapes using interactive visuals.',
-                tags: ['JS', 'HTML', 'CSS'],
-                demoLink: 'https://saiyam-creator.github.io/all-about-shapes/',
-                codeLink: 'https://github.com/saiyam-creator/all-about-shapes'
+            favorite: true
+        },
+        {
+            id: 'project5',
+            title: 'All About Shapes',
+            category: ['education'],
+            difficulty: 2,
+            date: '2024-08-10',
+            description: 'Educational app teaching kids about shapes using interactive visuals.',
+            tags: ['JS', 'HTML', 'CSS', 'Education'],
+            demoLink: 'https://saiyam-creator.github.io/all-about-shapes/',
+            codeLink: 'https://github.com/saiyam-creator/all-about-shapes',
+            stats: {
+                users: '800+',
+                rating: '4.6',
+                updates: '6'
             },
+            favorite: false
+        },
+        {
+            id: 'project6',
+            title: 'Life GPS',
+            category: ['ai', 'showcase'],
+            difficulty: 5,
+            date: '2024-07-25',
+            description: 'AI-powered life coaching app to help you navigate personal and professional challenges.',
+            tags: ['React', 'AI', 'Web App', 'Life Tools'],
+            demoLink: 'https://life-gps-coral.vercel.app/',
+            codeLink: 'https://github.com/saiyam-creator/life-gps',
+            stats: {
+                users: '1500+',
+                rating: '4.8',
+                updates: '20'
+            },
+            favorite: true
+        },
+        {
+            id: 'project7',
+            title: 'WorthIT',
+            category: ['finance'],
+            difficulty: 4,
+            date: '2024-06-30',
+            description: 'AI-driven personal finance app to help users manage expenses and investments effectively.',
+            tags: ['React', 'AI', 'Finance', 'Dashboard'],
+            demoLink: 'https://saiyam-creator.github.io/worthit-app/',
+            codeLink: 'https://github.com/saiyam-creator/worthit-app',
+            stats: {
+                users: '1200+',
+                rating: '4.7',
+                updates: '18'
+            },
+            favorite: false
+        },
+        {
+            id: 'project8',
+            title: 'Gita Ka Gyan',
+            category: ['ai', 'showcase'],
+            difficulty: 4,
+            date: '2024-05-15',
+            description: 'Shlokas of Bhagavad Gita with meaning according to your feeling.',
+            tags: ['HTML', 'CSS', 'JS', 'AI', 'Web App', 'Spiritual'],
+            demoLink: 'https://saiyam-creator.github.io/krishna-path/',
+            codeLink: 'https://github.com/saiyam-creator/krishna-path',
+            stats: {
+                users: '2500+',
+                rating: '4.9',
+                updates: '25'
+            },
+            favorite: true
+        }
+    ]
+};
 
-{
-                id: 'project6',
-                title: 'Life GPS',
-                description: 'AI-powered life coaching app to help you navigate personal and professional challenges.',
-                tags: ['React', 'AI', 'Web App'],
-                demoLink: 'https://life-gps-coral.vercel.app/',
-                codeLink: 'https://github.com/saiyam-creator/life-gps'
-            }
-            ,
-
-{
-                id: 'project7',
-                title: 'WorthIT',
-                description: 'AI-driven personal finance app to help users manage expenses and investments effectively.',
-                tags: ['React', 'AI', 'Finance'],
-                demoLink: 'https://saiyam-creator.github.io/worthit-app/',
-                codeLink: 'https://github.com/saiyam-creator/worthit-app'
-            }
-            ,
-
-{
-                id: 'project8',
-                title: 'gita ka gyan',
-                description: 'shlokas of bhagwat gita with meaning according to your feeling.',
-                tags: ['HTML', 'CSS', 'JS', 'AI', 'Web App'],
-                demoLink: 'https://saiyam-creator.github.io/krishna-path/',
-                codeLink: 'https://github.com/saiyam-creator/krishna-path'
-            }
-        ]
-    };
 
     // ============= FIREBASE CONFIGURATION =============
     // ============= FIREBASE CONFIGURATION =============
@@ -5742,63 +6601,143 @@ class NavigationManager {
 // ============= PROJECT LOADER =============
 function loadProjects() {
     const projects = [
-        {
-            title: 'Stock Calculator',
-            description: 'Advanced stock calculator which can calculate your P&L according to your investment.',
-            tags: ['AI', 'Python', 'JAVA'],
-            demoLink: 'https://saiyam-creator.github.io/stock-calculator/',
-            codeLink: 'https://github.com/saiyam-creator/stock-calculator'
+    {
+        id: 'project1',
+        title: 'Stock Calculator',
+        category: ['finance', 'showcase'],
+        difficulty: 3, // 1-5
+        date: '2024-12-15',
+        description: 'Advanced stock calculator which can calculate your P&L according to your investment.',
+        tags: ['AI', 'Python', 'JAVA', 'Finance'],
+        demoLink: 'https://saiyam-creator.github.io/stock-calculator/',
+        codeLink: 'https://github.com/saiyam-creator/stock-calculator',
+        stats: {
+            users: '500+',
+            rating: '4.8',
+            updates: '12'
         },
-        {
-            title: 'Investment Calculator',
-            description: 'Calculate your investment returns with advanced algorithms.',
-            tags: ['HTML', 'CSS', 'JavaScript'],
-            demoLink: 'https://saiyam-creator.github.io/investment-calculate/',
-            codeLink: 'https://github.com/saiyam-creator/investment-calculate'
+        favorite: true
+    },
+    {
+        id: 'project2',
+        title: 'Investment Calculator',
+        category: ['finance'],
+        difficulty: 2,
+        date: '2024-11-20',
+        description: 'Calculate your investment returns with advanced algorithms.',
+        tags: ['HTML', 'CSS', 'JavaScript', 'Finance'],
+        demoLink: 'https://saiyam-creator.github.io/investment-calculate/',
+        codeLink: 'https://github.com/saiyam-creator/investment-calculate',
+        stats: {
+            users: '300+',
+            rating: '4.5',
+            updates: '8'
         },
-        {
-            title: 'English Corrector',
-            description: 'Improve your English grammar with this AI-powered tool.',
-            tags: ['HTML', 'CSS', 'JS'],
-            demoLink: 'https://saiyam-creator.github.io/correct-english/',
-            codeLink: 'https://github.com/saiyam-creator/correct-english'
+        favorite: false
+    },
+    {
+        id: 'project3',
+        title: 'English Corrector',
+        category: ['education'],
+        difficulty: 3,
+        date: '2024-10-05',
+        description: 'Improve your English grammar with this AI-powered tool.',
+        tags: ['HTML', 'CSS', 'JS', 'Education'],
+        demoLink: 'https://saiyam-creator.github.io/correct-english/',
+        codeLink: 'https://github.com/saiyam-creator/correct-english',
+        stats: {
+            users: '1000+',
+            rating: '4.9',
+            updates: '15'
         },
-        {
-            title: 'Solar System',
-            description: 'Explore our solar system in interactive 3D view.',
-            tags: ['AI', '3D'],
-            demoLink: 'https://saiyam-creator.github.io/solar-system/',
-            codeLink: 'https://github.com/saiyam-creator/solar-system'
+        favorite: true
+    },
+    {
+        id: 'project4',
+        title: 'Solar System',
+        category: ['education', 'showcase'],
+        difficulty: 4,
+        date: '2024-09-15',
+        description: 'Explore our solar system in interactive 3D view.',
+        tags: ['AI', '3D', 'Education'],
+        demoLink: 'https://saiyam-creator.github.io/solar-system/',
+        codeLink: 'https://github.com/saiyam-creator/solar-system',
+        stats: {
+            users: '2000+',
+            rating: '4.7',
+            updates: '10'
         },
-        {
-            title: 'All About Shapes',
-            description: 'Educational app teaching kids about shapes using interactive visuals.',
-            tags: ['JS', 'HTML', 'CSS'],
-            demoLink: 'https://saiyam-creator.github.io/all-about-shapes/',
-            codeLink: 'https://github.com/saiyam-creator/all-about-shapes'
+        favorite: true
+    },
+    {
+        id: 'project5',
+        title: 'All About Shapes',
+        category: ['education'],
+        difficulty: 2,
+        date: '2024-08-10',
+        description: 'Educational app teaching kids about shapes using interactive visuals.',
+        tags: ['JS', 'HTML', 'CSS', 'Education'],
+        demoLink: 'https://saiyam-creator.github.io/all-about-shapes/',
+        codeLink: 'https://github.com/saiyam-creator/all-about-shapes',
+        stats: {
+            users: '800+',
+            rating: '4.6',
+            updates: '6'
         },
-        {
-            title: 'Life GPS',
-            description: 'AI-powered life coaching app to help you navigate personal and professional challenges.',
-            tags: ['React', 'AI', 'Web App'],
-            demoLink: 'https://life-gps-coral.vercel.app/',
-            codeLink: 'https://github.com/saiyam-creator/life-gps'
+        favorite: false
+    },
+    {
+        id: 'project6',
+        title: 'Life GPS',
+        category: ['ai', 'showcase'],
+        difficulty: 5,
+        date: '2024-07-25',
+        description: 'AI-powered life coaching app to help you navigate personal and professional challenges.',
+        tags: ['React', 'AI', 'Web App', 'Life Tools'],
+        demoLink: 'https://life-gps-coral.vercel.app/',
+        codeLink: 'https://github.com/saiyam-creator/life-gps',
+        stats: {
+            users: '1500+',
+            rating: '4.8',
+            updates: '20'
         },
-        {
-            title: 'WorthIT',
-            description: 'AI-driven personal finance app to help users manage expenses and investments effectively.',
-            tags: ['React', 'AI', 'Finance'],
-            demoLink: 'https://saiyam-creator.github.io/worthit-app/',
-            codeLink: 'https://github.com/saiyam-creator/worthit-app'
+        favorite: true
+    },
+    {
+        id: 'project7',
+        title: 'WorthIT',
+        category: ['finance'],
+        difficulty: 4,
+        date: '2024-06-30',
+        description: 'AI-driven personal finance app to help users manage expenses and investments effectively.',
+        tags: ['React', 'AI', 'Finance', 'Dashboard'],
+        demoLink: 'https://saiyam-creator.github.io/worthit-app/',
+        codeLink: 'https://github.com/saiyam-creator/worthit-app',
+        stats: {
+            users: '1200+',
+            rating: '4.7',
+            updates: '18'
         },
-        {
-            title: 'gita ka gyan',
-            description: 'shlokas of bhagwat gita with meaning according to your feeling.',
-            tags: ['HTML', 'CSS', 'JS', 'AI', 'Web App'],
-            demoLink: 'https://saiyam-creator.github.io/krishna-path/',
-            codeLink: 'https://github.com/saiyam-creator/krishna-path'
-        }
-    ];
+        favorite: false
+    },
+    {
+        id: 'project8',
+        title: 'Gita Ka Gyan',
+        category: ['ai', 'showcase'],
+        difficulty: 4,
+        date: '2024-05-15',
+        description: 'Shlokas of Bhagavad Gita with meaning according to your feeling.',
+        tags: ['HTML', 'CSS', 'JS', 'AI', 'Web App', 'Spiritual'],
+        demoLink: 'https://saiyam-creator.github.io/krishna-path/',
+        codeLink: 'https://github.com/saiyam-creator/krishna-path',
+        stats: {
+            users: '2500+',
+            rating: '4.9',
+            updates: '25'
+        },
+        favorite: true
+    }
+];
 
     const grid = document.getElementById('projectsGrid');
     if (!grid) return;
@@ -6640,159 +7579,152 @@ document.addEventListener('DOMContentLoaded', () => {
   // ============= UPDATED PROJECT MANAGER WITH ALL PROJECTS =============
 class ProjectManager {
     constructor() {
-        this.currentProjectId = null;
         this.projectData = [
-            {
-                id: 'project1',
-                title: 'Stock Calculator',
-                problem: 'Investors struggle to accurately calculate profit/loss across multiple trades with varying entry/exit points. Manual calculations are time-consuming and prone to errors.',
-                solution: 'Advanced stock calculator that automatically computes P&L, ROI, and performance metrics with real-time data integration and intuitive visualization.',
-                description: 'Professional-grade investment analysis tool for precise financial calculations.',
-                techStack: ['AI Algorithms', 'Python', 'JavaScript', 'Financial APIs', 'Data Visualization'],
-                tags: ['AI', 'Finance', 'Analytics', 'Investment'],
-                demoLink: 'https://saiyam-creator.github.io/stock-calculator/',
-                codeLink: 'https://github.com/saiyam-creator/stock-calculator'
+        {
+            id: 'project1',
+            title: 'Stock Calculator',
+            category: ['finance', 'showcase'],
+            difficulty: 3,
+            date: '2024-12-15',
+            description: 'Advanced stock calculator which can calculate your P&L according to your investment.',
+            tags: ['AI', 'Python', 'JAVA', 'Finance'],
+            demoLink: 'https://saiyam-creator.github.io/stock-calculator/',
+            codeLink: 'https://github.com/saiyam-creator/stock-calculator',
+            stats: {
+                users: '500+',
+                rating: '4.8',
+                updates: '12'
             },
-            {
-                id: 'project2',
-                title: 'Investment Calculator',
-                problem: 'Users need to forecast investment growth with complex variables like compound interest, regular contributions, and market fluctuations.',
-                solution: 'Comprehensive investment calculator with scenario modeling, inflation adjustments, and visual projections for informed financial planning.',
-                description: 'Calculate your investment returns with advanced algorithms and realistic projections.',
-                techStack: ['HTML5', 'CSS3', 'JavaScript ES6+', 'Chart.js', 'Financial Formulas'],
-                tags: ['Finance', 'Calculator', 'Web App', 'Investment'],
-                demoLink: 'https://saiyam-creator.github.io/investment-calculate/',
-                codeLink: 'https://github.com/saiyam-creator/investment-calculate'
+            favorite: true
+        },
+        {
+            id: 'project2',
+            title: 'Investment Calculator',
+            category: ['finance'],
+            difficulty: 2,
+            date: '2024-11-20',
+            description: 'Calculate your investment returns with advanced algorithms.',
+            tags: ['HTML', 'CSS', 'JavaScript', 'Finance'],
+            demoLink: 'https://saiyam-creator.github.io/investment-calculate/',
+            codeLink: 'https://github.com/saiyam-creator/investment-calculate',
+            stats: {
+                users: '300+',
+                rating: '4.5',
+                updates: '8'
             },
-            {
-                id: 'project3',
-                title: 'English Corrector',
-                problem: 'Non-native English speakers face challenges with grammar, punctuation, and writing style in professional communications.',
-                solution: 'AI-powered writing assistant that provides real-time grammar correction, style suggestions, and vocabulary enhancement.',
-                description: 'Improve your English writing with intelligent corrections and learning insights.',
-                techStack: ['Natural Language Processing', 'JavaScript', 'HTML/CSS', 'AI Algorithms'],
-                tags: ['AI', 'Education', 'Writing', 'Grammar'],
-                demoLink: 'https://saiyam-creator.github.io/correct-english/',
-                codeLink: 'https://github.com/saiyam-creator/correct-english'
+            favorite: false
+        },
+        {
+            id: 'project3',
+            title: 'English Corrector',
+            category: ['education'],
+            difficulty: 3,
+            date: '2024-10-05',
+            description: 'Improve your English grammar with this AI-powered tool.',
+            tags: ['HTML', 'CSS', 'JS', 'Education'],
+            demoLink: 'https://saiyam-creator.github.io/correct-english/',
+            codeLink: 'https://github.com/saiyam-creator/correct-english',
+            stats: {
+                users: '1000+',
+                rating: '4.9',
+                updates: '15'
             },
-            {
-                id: 'project4',
-                title: 'Solar System',
-                problem: 'Educational content about space often lacks interactivity, making it difficult to grasp planetary relationships and orbital mechanics.',
-                solution: 'Interactive 3D solar system model with accurate orbital mechanics, planetary information, and immersive space exploration.',
-                description: 'Explore our solar system in an interactive 3D environment with educational insights.',
-                techStack: ['Three.js', 'WebGL', 'JavaScript', '3D Animation', 'Astronomy API'],
-                tags: ['3D', 'Education', 'Space', 'Interactive'],
-                demoLink: 'https://saiyam-creator.github.io/solar-system/',
-                codeLink: 'https://github.com/saiyam-creator/solar-system'
+            favorite: true
+        },
+        {
+            id: 'project4',
+            title: 'Solar System',
+            category: ['education', 'showcase'],
+            difficulty: 4,
+            date: '2024-09-15',
+            description: 'Explore our solar system in interactive 3D view.',
+            tags: ['AI', '3D', 'Education'],
+            demoLink: 'https://saiyam-creator.github.io/solar-system/',
+            codeLink: 'https://github.com/saiyam-creator/solar-system',
+            stats: {
+                users: '2000+',
+                rating: '4.7',
+                updates: '10'
             },
-            {
-                id: 'project5',
-                title: 'All About Shapes',
-                problem: 'Young learners struggle to understand geometric concepts through traditional 2D diagrams and textbooks.',
-                solution: 'Interactive educational platform that brings shapes to life with animations, games, and progressive learning paths.',
-                description: 'Educational app teaching kids about shapes using interactive visuals and games.',
-                techStack: ['JavaScript', 'HTML5 Canvas', 'CSS Animations', 'Game Development'],
-                tags: ['Education', 'Games', 'Kids', 'Interactive'],
-                demoLink: 'https://saiyam-creator.github.io/all-about-shapes/',
-                codeLink: 'https://github.com/saiyam-creator/all-about-shapes'
+            favorite: true
+        },
+        {
+            id: 'project5',
+            title: 'All About Shapes',
+            category: ['education'],
+            difficulty: 2,
+            date: '2024-08-10',
+            description: 'Educational app teaching kids about shapes using interactive visuals.',
+            tags: ['JS', 'HTML', 'CSS', 'Education'],
+            demoLink: 'https://saiyam-creator.github.io/all-about-shapes/',
+            codeLink: 'https://github.com/saiyam-creator/all-about-shapes',
+            stats: {
+                users: '800+',
+                rating: '4.6',
+                updates: '6'
             },
-            {
-                id: 'project6',
-                title: 'Life GPS',
-                problem: 'People often feel lost in personal/professional development without clear guidance, goal tracking, and actionable insights.',
-                solution: 'AI-powered life coaching platform that provides personalized roadmaps, progress tracking, and milestone-based guidance.',
-                description: 'AI-powered life coaching app to help you navigate personal and professional challenges.',
-                techStack: ['React.js', 'AI/ML Integration', 'Node.js', 'MongoDB', 'Charting Libraries'],
-                tags: ['AI', 'Life Coaching', 'Productivity', 'Web App'],
-                demoLink: 'https://life-gps-coral.vercel.app/',
-                codeLink: 'https://github.com/saiyam-creator/life-gps'
+            favorite: false
+        },
+        {
+            id: 'project6',
+            title: 'Life GPS',
+            category: ['ai', 'showcase'],
+            difficulty: 5,
+            date: '2024-07-25',
+            description: 'AI-powered life coaching app to help you navigate personal and professional challenges.',
+            tags: ['React', 'AI', 'Web App', 'Life Tools'],
+            demoLink: 'https://life-gps-coral.vercel.app/',
+            codeLink: 'https://github.com/saiyam-creator/life-gps',
+            stats: {
+                users: '1500+',
+                rating: '4.8',
+                updates: '20'
             },
-            {
-                id: 'project7',
-                title: 'WorthIT',
-                problem: 'Individuals lack a consolidated view of their financial health, making it difficult to track expenses, investments, and savings goals.',
-                solution: 'Comprehensive personal finance dashboard with expense tracking, investment monitoring, and AI-powered financial insights.',
-                description: 'AI-driven personal finance app to help users manage expenses and investments effectively.',
-                techStack: ['React', 'Firebase', 'Chart.js', 'AI Analytics', 'Financial APIs'],
-                tags: ['Finance', 'AI', 'Dashboard', 'Productivity'],
-                demoLink: 'https://saiyam-creator.github.io/worthit-app/',
-                codeLink: 'https://github.com/saiyam-creator/worthit-app'
+            favorite: true
+        },
+        {
+            id: 'project7',
+            title: 'WorthIT',
+            category: ['finance'],
+            difficulty: 4,
+            date: '2024-06-30',
+            description: 'AI-driven personal finance app to help users manage expenses and investments effectively.',
+            tags: ['React', 'AI', 'Finance', 'Dashboard'],
+            demoLink: 'https://saiyam-creator.github.io/worthit-app/',
+            codeLink: 'https://github.com/saiyam-creator/worthit-app',
+            stats: {
+                users: '1200+',
+                rating: '4.7',
+                updates: '18'
             },
-            {
-                id: 'project8',
-                title: 'Gita Ka Gyan',
-                problem: 'Modern readers find ancient texts inaccessible due to language barriers and lack of contextual, personalized interpretations.',
-                solution: 'AI-powered Bhagavad Gita platform that provides personalized shlokas with modern interpretations based on emotional context.',
-                description: 'Shlokas of Bhagavad Gita with meaning according to your feelings and situations.',
-                techStack: ['HTML/CSS', 'JavaScript', 'AI Integration', 'Natural Language Processing', 'API Integration'],
-                tags: ['AI', 'Spiritual', 'Education', 'Web App'],
-                demoLink: 'https://saiyam-creator.github.io/krishna-path/',
-                codeLink: 'https://github.com/saiyam-creator/krishna-path'
-            }
-        ];
-    }
-
-    async loadProjects() {
-        const grid = document.getElementById('projectsGrid');
-        if (!grid) return;
-
-        grid.innerHTML = '';
-
-        for (const project of this.projectData) {
-            const card = document.createElement('div');
-            card.className = 'project-card';
-            card.innerHTML = `
-                <div class="project-header">
-                    <div class="project-title">${project.title}</div>
-                    <div class="project-id">${project.id.replace('project', 'Project ')}</div>
-                </div>
-                
-                <div class="project-problem">
-                    <div class="section-icon">🔍</div>
-                    <div class="section-content">
-                        <h4>Problem Statement</h4>
-                        <p>${project.problem}</p>
-                    </div>
-                </div>
-                
-                <div class="project-solution">
-                    <div class="section-icon">💡</div>
-                    <div class="section-content">
-                        <h4>My Solution</h4>
-                        <p>${project.solution}</p>
-                    </div>
-                </div>
-                
-                <div class="project-tech">
-                    <div class="section-icon">⚙️</div>
-                    <div class="section-content">
-                        <h4>Tech Stack</h4>
-                        <div class="tech-tags">
-                            ${project.techStack.map(tech => `<span class="tech-tag">${tech}</span>`).join('')}
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="project-tags">
-                    ${project.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
-                </div>
-                
-                <div class="project-actions">
-                    <button class="btn-small btn-view" data-action="view-project" data-link="${project.demoLink}" title="View Live Demo">
-                        <span class="btn-icon">🌐</span>
-                        Live Demo
-                    </button>
-                    <button class="btn-small btn-secondary" data-action="view-code" data-link="${project.codeLink}" title="View Source Code">
-                        <span class="btn-icon">👨‍💻</span>
-                        Source Code
-                    </button>
-                </div>
-            `;
-            grid.appendChild(card);
+            favorite: false
+        },
+        {
+            id: 'project8',
+            title: 'Gita Ka Gyan',
+            category: ['ai', 'showcase'],
+            difficulty: 4,
+            date: '2024-05-15',
+            description: 'Shlokas of Bhagavad Gita with meaning according to your feeling.',
+            tags: ['HTML', 'CSS', 'JS', 'AI', 'Web App', 'Spiritual'],
+            demoLink: 'https://saiyam-creator.github.io/krishna-path/',
+            codeLink: 'https://github.com/saiyam-creator/krishna-path',
+            stats: {
+                users: '2500+',
+                rating: '4.9',
+                updates: '25'
+            },
+            favorite: true
         }
+    ];
+    }
+      async loadProjects() {
+        // Return the project data directly
+        return this.projectData;
     }
 }
+
+     
 
 // ============= PROJECT SECTION STYLES =============
 // Add this CSS to your existing styles
@@ -7637,6 +8569,627 @@ class ExtraAnimations {
 // Initialize extra animations
 document.addEventListener('DOMContentLoaded', () => {
     new ExtraAnimations();
+});
+
+// ============= PROJECT FILTER SYSTEM =============
+class ProjectFilterSystem {
+    constructor() {
+        this.projects = [];
+        this.currentFilter = 'all';
+        this.currentView = 'grid';
+        this.favorites = JSON.parse(localStorage.getItem('project_favorites') || '[]');
+        this.init();
+    }
+    
+    init() {
+        this.setupEventListeners();
+        this.updateFilterCounts();
+    }
+    
+    setupEventListeners() {
+        // Filter buttons
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const category = btn.dataset.category;
+                this.setFilter(category);
+            });
+        });
+        
+        // View toggle buttons
+        document.querySelectorAll('.view-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const view = btn.dataset.view;
+                this.setView(view);
+            });
+        });
+        
+        // Favorite click (delegated)
+        document.addEventListener('click', (e) => {
+            if (e.target.closest('.project-favorite')) {
+                const projectId = e.target.closest('.project-card').dataset.id;
+                this.toggleFavorite(projectId);
+            }
+        });
+    }
+    
+    setFilter(category) {
+        this.currentFilter = category;
+        
+        // Update active button
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.category === category);
+        });
+        
+        // Filter projects
+        this.filterProjects();
+    }
+    
+    setView(view) {
+        this.currentView = view;
+        
+        // Update active button
+        document.querySelectorAll('.view-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.view === view);
+        });
+        
+        // Update grid layout
+        const grid = document.getElementById('projectsGrid');
+        if (view === 'list') {
+            grid.style.gridTemplateColumns = '1fr';
+            grid.style.maxWidth = '800px';
+            grid.style.margin = '0 auto';
+        } else {
+            grid.style.gridTemplateColumns = 'repeat(auto-fill, minmax(350px, 1fr))';
+            grid.style.maxWidth = 'none';
+        }
+    }
+    
+    filterProjects() {
+        const projects = document.querySelectorAll('.project-card');
+        let visibleCount = 0;
+        
+        projects.forEach(project => {
+            const categories = project.dataset.category.split(' ');
+            
+            if (this.currentFilter === 'all' || categories.includes(this.currentFilter)) {
+                project.classList.remove('hidden');
+                visibleCount++;
+            } else {
+                project.classList.add('hidden');
+            }
+        });
+        
+        // Show/hide empty state
+        const emptyState = document.getElementById('emptyState');
+        if (visibleCount === 0) {
+            emptyState.style.display = 'block';
+        } else {
+            emptyState.style.display = 'none';
+        }
+    }
+    
+    updateFilterCounts() {
+        const counts = {
+            all: this.projects.length,
+            finance: this.projects.filter(p => p.category.includes('finance')).length,
+            education: this.projects.filter(p => p.category.includes('education')).length,
+            ai: this.projects.filter(p => p.category.includes('ai')).length,
+            showcase: this.projects.filter(p => p.category.includes('showcase')).length
+        };
+        
+        // Update count displays
+        Object.keys(counts).forEach(category => {
+            const element = document.getElementById(`count-${category}`);
+            if (element) {
+                element.textContent = counts[category];
+            }
+        });
+    }
+    
+    toggleFavorite(projectId) {
+        const index = this.favorites.indexOf(projectId);
+        
+        if (index === -1) {
+            this.favorites.push(projectId);
+        } else {
+            this.favorites.splice(index, 1);
+        }
+        
+        // Save to localStorage
+        localStorage.setItem('project_favorites', JSON.stringify(this.favorites));
+        
+        // Update UI
+        const favoriteIcon = document.querySelector(`.project-card[data-id="${projectId}"] .project-favorite`);
+        if (favoriteIcon) {
+            favoriteIcon.classList.toggle('active');
+            
+            // Animation
+            favoriteIcon.style.transform = 'scale(1.5)';
+            setTimeout(() => {
+                favoriteIcon.style.transform = '';
+            }, 300);
+        }
+        
+        // Show notification
+        this.showNotification(
+            index === -1 ? '⭐ Added to favorites!' : '💔 Removed from favorites',
+            index === -1 ? 'success' : 'info'
+        );
+    }
+    
+    showNotification(message, type) {
+        const notification = document.createElement('div');
+        notification.className = `notification ${type}`;
+        notification.innerHTML = `
+            <div class="notification-content">
+                <p>${message}</p>
+            </div>
+        `;
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            notification.remove();
+        }, 3000);
+    }
+    
+    // Update project display function
+    renderProjects(projects) {
+        this.projects = projects;
+        this.updateFilterCounts();
+        
+        const grid = document.getElementById('projectsGrid');
+        grid.innerHTML = '';
+        
+        projects.forEach(project => {
+            const card = this.createProjectCard(project);
+            grid.appendChild(card);
+        });
+        
+        // Apply current filter
+        this.filterProjects();
+    }
+    
+    createProjectCard(project) {
+        const card = document.createElement('div');
+        card.className = 'project-card';
+        card.dataset.id = project.id;
+        card.dataset.category = project.category.join(' ');
+        
+        // Difficulty dots
+        const difficultyDots = Array(5).fill(0)
+            .map((_, i) => `<div class="difficulty-dot ${i < project.difficulty ? 'active' : ''}"></div>`)
+            .join('');
+        
+        // Category badge (show first category)
+        const mainCategory = project.category[0];
+        const categoryLabels = {
+            finance: '💰 Finance',
+            education: '🎓 Education',
+            ai: '🤖 AI Tools',
+            showcase: '🚀 Showcase'
+        };
+        
+        card.innerHTML = `
+            <!-- Category Badge -->
+            <div class="project-category-badge category-${mainCategory}">
+                ${categoryLabels[mainCategory] || mainCategory}
+            </div>
+            
+            <!-- Favorite Star -->
+            <div class="project-favorite ${this.favorites.includes(project.id) ? 'active' : ''}">
+                ★
+            </div>
+            
+            <!-- Difficulty -->
+            <div class="project-difficulty">
+                ${difficultyDots}
+            </div>
+            
+            <!-- Header -->
+            <div class="project-header">
+                <div class="project-title">${project.title}</div>
+                <div class="project-id">${project.id.replace('project', '#')}</div>
+            </div>
+            
+            <!-- Date -->
+            <div class="project-date">
+                <span class="date-icon">📅</span>
+                ${this.formatDate(project.date)}
+            </div>
+            
+            <!-- Description -->
+            <div class="project-desc">
+                ${project.description}
+            </div>
+            
+            <!-- Stats -->
+            <div class="project-stats">
+                <div class="stat-item">
+                    <div class="stat-value">${project.stats.users}</div>
+                    <div class="stat-label">Users</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">${project.stats.rating}/5</div>
+                    <div class="stat-label">Rating</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">${project.stats.updates}</div>
+                    <div class="stat-label">Updates</div>
+                </div>
+            </div>
+            
+            <!-- Tags -->
+            <div class="project-tags">
+                ${project.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+            </div>
+            
+            <!-- Actions -->
+            <div class="project-actions">
+                <button class="btn-small btn-view" data-action="view-project" data-link="${project.demoLink}">
+                    <span class="btn-icon">🌐</span>
+                    Live Demo
+                </button>
+                <button class="btn-small btn-secondary" data-action="view-code" data-link="${project.codeLink}">
+                    <span class="btn-icon">👨‍💻</span>
+                    Source Code
+                </button>
+            </div>
+        `;
+        
+        return card;
+    }
+    
+    formatDate(dateString) {
+        const options = { year: 'numeric', month: 'short', day: 'numeric' };
+        return new Date(dateString).toLocaleDateString('en-US', options);
+    }
+}
+
+// Initialize the filter system
+document.addEventListener('DOMContentLoaded', () => {
+    const projectManager = new ProjectManager();
+    const filterSystem = new ProjectFilterSystem();
+    
+    // Load projects and pass to filter system
+    projectManager.loadProjects().then(() => {
+        filterSystem.renderProjects(projectManager.projectData);
+    });
+    
+    console.log('✅ Project filter system loaded!');
+});
+
+// ============= INITIALIZE PROJECTS ON PAGE LOAD =============
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('🚀 Initializing Project Manager...');
+    
+    // Create ProjectManager instance
+    const projectManager = new ProjectManager();
+    
+    // Load and display projects immediately
+    projectManager.loadProjects().then(projects => {
+        console.log(`✅ Loaded ${projects.length} projects`);
+        
+        // Get the projects grid container
+        const grid = document.getElementById('projectsGrid');
+        const emptyState = document.getElementById('emptyState');
+        
+        if (!grid) {
+            console.error('Projects grid not found');
+            return;
+        }
+        
+        // Clear any existing content
+        grid.innerHTML = '';
+        
+        // Check if we have projects
+        if (projects && projects.length > 0) {
+            // Hide empty state
+            if (emptyState) emptyState.style.display = 'none';
+            
+            // Render each project
+            projects.forEach((project, index) => {
+                const card = document.createElement('div');
+                card.className = 'project-card';
+                card.dataset.id = project.id;
+                card.dataset.category = project.category.join(' ');
+                
+                // Add animation delay
+                card.style.animationDelay = `${index * 0.1}s`;
+                
+                card.innerHTML = `
+                    <!-- Category Badge -->
+                    ${project.category && project.category.length > 0 ? `
+                    <div class="project-category-badge category-${project.category[0]}">
+                        ${project.category[0] === 'finance' ? '💰 Finance' : 
+                          project.category[0] === 'education' ? '🎓 Education' : 
+                          project.category[0] === 'ai' ? '🤖 AI Tools' : 
+                          '🚀 Showcase'}
+                    </div>` : ''}
+                    
+                    <!-- Favorite Star -->
+                    <div class="project-favorite ${project.favorite ? 'active' : ''}" 
+                         onclick="toggleFavorite('${project.id}', this)">
+                        ★
+                    </div>
+                    
+                    <!-- Header -->
+                    <div class="project-header">
+                        <div class="project-title">${project.title}</div>
+                        <div class="project-id">${project.id.replace('project', '#')}</div>
+                    </div>
+                    
+                    <!-- Description -->
+                    <div class="project-desc">
+                        ${project.description}
+                    </div>
+                    
+                    <!-- Tags -->
+                    <div class="project-tags">
+                        ${project.tags ? project.tags.map(tag => `<span class="tag">${tag}</span>`).join('') : ''}
+                    </div>
+                    
+                    <!-- Actions -->
+                    <div class="project-actions">
+                        <button class="btn-small btn-view" onclick="window.open('${project.demoLink}', '_blank')">
+                            <span class="btn-icon">🌐</span>
+                            Live Demo
+                        </button>
+                        <button class="btn-small btn-secondary" onclick="window.open('${project.codeLink}', '_blank')">
+                            <span class="btn-icon">👨‍💻</span>
+                            Source Code
+                        </button>
+                    </div>
+                `;
+                
+                grid.appendChild(card);
+            });
+            
+            // Initialize filter system
+            initFilterSystem(projects);
+            
+        } else {
+            // Show empty state
+            if (emptyState) emptyState.style.display = 'block';
+            console.warn('No projects found to display');
+        }
+        
+    }).catch(error => {
+        console.error('❌ Error loading projects:', error);
+        if (emptyState) emptyState.style.display = 'block';
+    });
+    
+    // Simple filter system initialization
+    function initFilterSystem(projects) {
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const category = this.dataset.category;
+                
+                // Update active button
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Filter projects
+                const projectCards = document.querySelectorAll('.project-card');
+                let visibleCount = 0;
+                
+                projectCards.forEach(card => {
+                    const cardCategories = card.dataset.category.split(' ');
+                    
+                    if (category === 'all' || cardCategories.includes(category)) {
+                        card.style.display = 'flex';
+                        visibleCount++;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+                
+                // Show/hide empty state
+                const emptyState = document.getElementById('emptyState');
+                if (visibleCount === 0) {
+                    if (emptyState) emptyState.style.display = 'block';
+                } else {
+                    if (emptyState) emptyState.style.display = 'none';
+                }
+            });
+        });
+    }
+    
+    // Simple favorite toggle function
+    window.toggleFavorite = function(projectId, element) {
+        element.classList.toggle('active');
+        
+        // Animation
+        element.style.transform = 'scale(1.3)';
+        setTimeout(() => {
+            element.style.transform = '';
+        }, 300);
+        
+        // Save to localStorage
+        let favorites = JSON.parse(localStorage.getItem('project_favorites') || '[]');
+        const index = favorites.indexOf(projectId);
+        
+        if (index === -1) {
+            favorites.push(projectId);
+            showNotification('Added to favorites!', 'success');
+        } else {
+            favorites.splice(index, 1);
+            showNotification('Removed from favorites', 'info');
+        }
+        
+        localStorage.setItem('project_favorites', JSON.stringify(favorites));
+    };
+    
+    // Notification function
+    function showNotification(message, type) {
+        const notification = document.createElement('div');
+        notification.className = `notification ${type}`;
+        notification.innerHTML = `
+            <div class="notification-content">
+                <p>${message}</p>
+            </div>
+        `;
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            notification.remove();
+        }, 3000);
+    }
+    
+    // Also initialize the 3D gallery if it exists
+    if (typeof SkillGallery3D !== 'undefined') {
+        new SkillGallery3D();
+    }
+});
+
+// ============= INITIALIZE PROJECTS ON PAGE LOAD =============
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('🚀 Initializing Project Manager...');
+    
+    // Create ProjectManager instance
+    const projectManager = new ProjectManager();
+    
+    // Load and display projects immediately
+    projectManager.loadProjects().then(projects => {
+        console.log(`✅ Loaded ${projects.length} projects`);
+        
+        // Get the projects grid container
+        const grid = document.getElementById('projectsGrid');
+        const emptyState = document.getElementById('emptyState');
+        
+        if (!grid) {
+            console.error('Projects grid not found');
+            return;
+        }
+        
+        // Clear any existing content
+        grid.innerHTML = '';
+        
+        // Check if we have projects
+        if (projects && projects.length > 0) {
+            // Hide empty state
+            if (emptyState) emptyState.style.display = 'none';
+            
+            // Render each project
+            projects.forEach((project, index) => {
+                const card = document.createElement('div');
+                card.className = 'project-card';
+                card.dataset.id = project.id;
+                card.dataset.category = project.category.join(' ');
+                
+                // Add animation delay
+                card.style.animationDelay = `${index * 0.1}s`;
+                
+                // Category icon mapping
+                const categoryIcons = {
+                    'finance': '💰',
+                    'education': '🎓', 
+                    'ai': '🤖',
+                    'showcase': '🚀'
+                };
+                
+                // Get main category icon
+                const mainCategory = project.category[0];
+                const categoryIcon = categoryIcons[mainCategory] || '📁';
+                
+              card.innerHTML = `
+    <!-- Header with Category -->
+    <div class="project-header">
+        <div class="project-title-container">
+            <div class="project-title">${project.title}</div>
+            <div class="project-category">
+                <span class="category-icon">${categoryIcon}</span>
+                <span class="category-name">${mainCategory.toUpperCase()}</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Description -->
+    <div class="project-desc">
+        ${project.description}
+    </div>
+    
+    <!-- Tags -->
+    <div class="project-tags">
+        ${project.tags ? project.tags.slice(0, 4).map(tag => `
+            <span class="tag">${tag}</span>
+        `).join('') : ''}
+    </div>
+    
+    <!-- Actions -->
+    <div class="project-actions">
+        <button class="btn-small btn-view" onclick="window.open('${project.demoLink}', '_blank')">
+            <span class="btn-icon">🌐</span>
+            Live Demo
+        </button>
+        <button class="btn-small btn-secondary" onclick="window.open('${project.codeLink}', '_blank')">
+            <span class="btn-icon">👨‍💻</span>
+            Source Code
+        </button>
+    </div>
+`;
+                
+                grid.appendChild(card);
+            });
+            
+            // Initialize filter system
+            initFilterSystem(projects);
+            
+        } else {
+            // Show empty state
+            if (emptyState) emptyState.style.display = 'block';
+            console.warn('No projects found to display');
+        }
+        
+    }).catch(error => {
+        console.error('❌ Error loading projects:', error);
+        if (emptyState) emptyState.style.display = 'block';
+    });
+    
+    // Simple filter system initialization
+    function initFilterSystem(projects) {
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const category = this.dataset.category;
+                
+                // Update active button
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.remove('active'); // Remove active from all
+                this.classList.add('active'); // Add to clicked
+                
+                // Filter projects
+                const projectCards = document.querySelectorAll('.project-card');
+                let visibleCount = 0;
+                
+                projectCards.forEach(card => {
+                    const cardCategories = card.dataset.category.split(' ');
+                    
+                    if (category === 'all' || cardCategories.includes(category)) {
+                        card.style.display = 'flex';
+                        visibleCount++;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+                
+                // Show/hide empty state
+                const emptyState = document.getElementById('emptyState');
+                if (visibleCount === 0) {
+                    if (emptyState) emptyState.style.display = 'block';
+                } else {
+                    if (emptyState) emptyState.style.display = 'none';
+                }
+            });
+        });
+    }
+    
+    // Also initialize the 3D gallery if it exists
+    if (typeof SkillGallery3D !== 'undefined') {
+        new SkillGallery3D();
+    }
 });
 </script>
 <style>
