@@ -4960,6 +4960,540 @@ textarea.form-input {
     margin-bottom: 15px;
     color: var(--text-gray);
 }
+/* ========== CENTERED HERO SECTION ========== */
+.centered-hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.centered-hero .hero-text {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.centered-hero .hero-profession {
+    justify-content: center;
+}
+
+.centered-hero .hero-description {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    border-left: none;
+    border-radius: 10px;
+}
+
+.centered-hero .hero-buttons {
+    justify-content: center;
+}
+
+/* ========== NEW FLOATING ELEMENTS SECTION ========== */
+.floating-elements-section {
+    padding: 80px 20px;
+    
+    position: relative;
+    overflow: hidden;
+    min-height: 80vh;
+}
+
+.floating-elements-section .section-title {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.floating-elements-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+.floating-elements-section .floating-element {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    background: rgba(255, 0, 0, 0.1);
+    border: 1px solid rgba(255, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 10px 30px rgba(255, 0, 0, 0.1);
+    transition: all 0.5s ease;
+    opacity: 0.9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.floating-elements-section .floating-element:hover {
+    opacity: 1;
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: 0 15px 40px rgba(255, 0, 0, 0.2);
+    background: rgba(255, 0, 0, 0.15);
+}
+
+.floating-elements-section .element-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 12px;
+}
+
+.floating-elements-section .element-icon {
+    font-size: 3rem;
+    margin-bottom: 5px;
+    color: var(--primary);
+}
+
+.floating-elements-section .element-text {
+    font-size: 1.3rem;
+    color: var(--text-light);
+    font-weight: 700;
+}
+
+.floating-elements-section .element-subtext {
+    font-size: 0.9rem;
+    color: var(--text-gray);
+    opacity: 0.8;
+    line-height: 1.4;
+    max-width: 150px;
+}
+
+/* Animation for floating elements */
+.floating-elements-section .element-1 {
+    animation: floatElement 6s ease-in-out infinite;
+}
+.floating-elements-section .element-2 {
+    animation: floatElement 5s ease-in-out infinite 0.5s;
+}
+.floating-elements-section .element-3 {
+    animation: floatElement 7s ease-in-out infinite 1s;
+}
+.floating-elements-section .element-4 {
+    animation: floatElement 6.5s ease-in-out infinite 1.5s;
+}
+.floating-elements-section .element-5 {
+    animation: floatElement 5.5s ease-in-out infinite 2s;
+}
+.floating-elements-section .element-6 {
+    animation: floatElement 7.5s ease-in-out infinite 2.5s;
+}
+.floating-elements-section .element-7 {
+    animation: floatElement 6s ease-in-out infinite 3s;
+}
+.floating-elements-section .element-8 {
+    animation: floatElement 5.8s ease-in-out infinite 3.5s;
+}
+
+@keyframes floatElement {
+    0%, 100% { 
+        transform: translateY(0px) rotate(0deg); 
+    }
+    50% { 
+        transform: translateY(-15px) rotate(2deg); 
+    }
+}
+
+/* Background pattern for floating elements section */
+.floating-elements-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(255, 0, 0, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 0, 0, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(255, 0, 0, 0.03) 0%, transparent 50%);
+    animation: backgroundPulse 20s ease-in-out infinite;
+    z-index: 1;
+}
+
+@keyframes backgroundPulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 0.8; }
+}
+
+/* ========== UPDATE SIDE NAV DOTS ========== */
+/* Add floating-elements section to navigation */
+.nav .nav-dot[data-section="floatingElements"] {
+    display: block;
+}
+
+/* ========== RESPONSIVE DESIGN ========== */
+@media (max-width: 1024px) {
+    .floating-elements-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .floating-elements-container {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+    }
+    
+    .floating-elements-section .floating-element {
+        height: 180px;
+        padding: 20px;
+    }
+    
+    .floating-elements-section .element-icon {
+        font-size: 2.5rem;
+    }
+    
+    .floating-elements-section .element-text {
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .floating-elements-section {
+        padding: 60px 15px;
+    }
+    
+    .floating-elements-section .floating-element {
+        height: 160px;
+        padding: 15px;
+    }
+    
+    .floating-elements-section .element-icon {
+        font-size: 2rem;
+    }
+    
+    .floating-elements-section .element-text {
+        font-size: 1.1rem;
+    }
+}
+
+/* ========== FIX HERO SECTION CENTERING ========== */
+.hero-content.centered-hero {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.centered-hero .hero-main-title {
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+}
+
+.centered-hero .hero-main-title::after {
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 15px;
+}
+
+.centered-hero .hero-name {
+    justify-content: center;
+    text-align: center;
+    flex-wrap: nowrap;
+    gap: 10px;
+    margin: 20px auto;
+}
+
+.centered-hero .hero-profession {
+    justify-content: center;
+    margin: 15px auto;
+    width: 100%;
+    max-width: 600px;
+}
+
+.centered-hero .hero-profession .profession-text {
+    text-align: center;
+    white-space: normal;
+}
+
+.centered-hero .hero-description {
+    margin: 25px auto;
+    text-align: center;
+    border-left: none;
+    padding: 20px;
+    border-radius: 15px;
+    max-width: 700px;
+    background: rgba(255, 0, 0, 0.05);
+}
+
+.centered-hero .hero-buttons {
+    justify-content: center;
+    margin-top: 30px;
+}
+
+/* Fix name underlines */
+.centered-hero .name-first,
+.centered-hero .name-last {
+    display: inline-block;
+    text-align: center;
+}
+
+.centered-hero .name-last::after {
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+}
+
+/* Fix profession divider */
+.centered-hero .profession-icon {
+    opacity: 0.7;
+}
+
+/* Make hero responsive */
+@media (max-width: 768px) {
+    .centered-hero .hero-name {
+        flex-direction: column;
+        gap: 5px;
+    }
+    
+    .centered-hero .hero-profession {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .centered-hero .hero-profession .profession-text {
+        font-size: 1.3rem;
+    }
+    
+    .centered-hero .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .centered-hero .hero-buttons .btn {
+        width: 100%;
+        max-width: 280px;
+    }
+}
+
+/* ========== FIX FLOATING ELEMENTS SECTION ========== */
+.floating-elements-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columns */
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.floating-elements-section .floating-element {
+    width: 100%;
+    height: 140px; /* Reduced height */
+    background: rgba(255, 0, 0, 0.08);
+    border: 1px solid rgba(255, 0, 0, 0.2);
+    backdrop-filter: blur(8px);
+    border-radius: 15px;
+    padding: 15px;
+    transition: all 0.4s ease;
+    opacity: 0.9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.floating-elements-section .floating-element::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--primary), transparent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.floating-elements-section .floating-element:hover::before {
+    opacity: 1;
+}
+
+.floating-elements-section .floating-element:hover {
+    opacity: 1;
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(255, 0, 0, 0.15);
+    background: rgba(255, 0, 0, 0.12);
+}
+
+.floating-elements-section .element-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    height: 100%;
+}
+
+.floating-elements-section .element-icon {
+    font-size: 2rem; /* Smaller icon */
+    margin-bottom: 0;
+    color: var(--primary);
+    transition: transform 0.3s ease;
+}
+
+.floating-elements-section .floating-element:hover .element-icon {
+    transform: scale(1.1);
+}
+
+.floating-elements-section .element-text {
+    font-size: 1rem; /* Smaller text */
+    color: var(--text-light);
+    font-weight: 700;
+    margin: 0;
+}
+
+.floating-elements-section .element-subtext {
+    font-size: 0.8rem; /* Smaller subtext */
+    color: var(--text-gray);
+    opacity: 0.8;
+    line-height: 1.3;
+    max-width: 120px;
+    margin: 0;
+}
+
+/* Grid pattern for better alignment */
+.floating-elements-section .element-1 { grid-area: 1 / 1 / 2 / 2; }
+.floating-elements-section .element-2 { grid-area: 1 / 2 / 2 / 3; }
+.floating-elements-section .element-3 { grid-area: 1 / 3 / 2 / 4; }
+.floating-elements-section .element-4 { grid-area: 1 / 4 / 2 / 5; }
+.floating-elements-section .element-5 { grid-area: 2 / 1 / 3 / 2; }
+.floating-elements-section .element-6 { grid-area: 2 / 2 / 3 / 3; }
+.floating-elements-section .element-7 { grid-area: 2 / 3 / 3 / 4; }
+.floating-elements-section .element-8 { grid-area: 2 / 4 / 3 / 5; }
+
+/* New staggered animation */
+@keyframes staggeredFloat {
+    0%, 100% { 
+        transform: translateY(0) scale(1); 
+    }
+    50% { 
+        transform: translateY(-10px) scale(1.02); 
+    }
+}
+
+/* Apply different animation delays for staggered effect */
+.floating-elements-section .element-1 { animation: staggeredFloat 5s ease-in-out infinite; }
+.floating-elements-section .element-2 { animation: staggeredFloat 5s ease-in-out infinite 0.3s; }
+.floating-elements-section .element-3 { animation: staggeredFloat 5s ease-in-out infinite 0.6s; }
+.floating-elements-section .element-4 { animation: staggeredFloat 5s ease-in-out infinite 0.9s; }
+.floating-elements-section .element-5 { animation: staggeredFloat 5s ease-in-out infinite 1.2s; }
+.floating-elements-section .element-6 { animation: staggeredFloat 5s ease-in-out infinite 1.5s; }
+.floating-elements-section .element-7 { animation: staggeredFloat 5s ease-in-out infinite 1.8s; }
+.floating-elements-section .element-8 { animation: staggeredFloat 5s ease-in-out infinite 2.1s; }
+
+/* Responsive grid */
+@media (max-width: 1024px) {
+    .floating-elements-container {
+        grid-template-columns: repeat(3, 1fr); /* 3 columns on tablets */
+        gap: 18px;
+        max-width: 900px;
+    }
+    
+    .floating-elements-section .floating-element {
+        height: 130px;
+    }
+}
+
+@media (max-width: 768px) {
+    .floating-elements-container {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns on mobile */
+        gap: 15px;
+        max-width: 600px;
+    }
+    
+    .floating-elements-section .floating-element {
+        height: 120px;
+        padding: 12px;
+    }
+    
+    .floating-elements-section .element-icon {
+        font-size: 1.8rem;
+    }
+    
+    .floating-elements-section .element-text {
+        font-size: 0.95rem;
+    }
+    
+    .floating-elements-section .element-subtext {
+        font-size: 0.75rem;
+        max-width: 100px;
+    }
+}
+
+@media (max-width: 480px) {
+    .floating-elements-container {
+        grid-template-columns: 1fr; /* 1 column on small mobile */
+        max-width: 300px;
+        gap: 12px;
+    }
+    
+    .floating-elements-section .floating-element {
+        height: 110px;
+    }
+    
+    .floating-elements-section .element-icon {
+        font-size: 1.6rem;
+    }
+    
+    .floating-elements-section .element-text {
+        font-size: 0.9rem;
+    }
+    
+    .floating-elements-section .element-subtext {
+        font-size: 0.7rem;
+    }
+}
+
+/* Add some extra styling for the section */
+.floating-elements-section {
+    padding: 60px 20px;
+    position: relative;
+    min-height: auto;
+}
+
+.floating-elements-section .section-title {
+    margin-bottom: 40px;
+}
+
+/* Optional: Add connecting lines between elements (like a network) */
+.floating-elements-container::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 90%;
+    height: 90%;
+    transform: translate(-50%, -50%);
+    background: 
+        linear-gradient(90deg, transparent 49%, rgba(255, 0, 0, 0.05) 50%, transparent 51%),
+        linear-gradient(0deg, transparent 49%, rgba(255, 0, 0, 0.05) 50%, transparent 51%);
+    background-size: calc(100% / 4) calc(100% / 2);
+    z-index: 0;
+    opacity: 0.3;
+    pointer-events: none;
+}
 </style>
 
 </head>
@@ -5073,9 +5607,9 @@ textarea.form-input {
     <!-- Main Content -->
     <div class="content">
        <!-- UPDATED HERO SECTION -->
-<!-- UPDATED HERO SECTION -->
+<!-- UPDATED HERO SECTION (CENTERED) -->
 <section class="hero" id="hero">
-    <div class="hero-content">
+    <div class="hero-content centered-hero">
         <div class="hero-text">
             <!-- Updated Title with screenshot font style -->
             <h1 class="hero-main-title">
@@ -5114,27 +5648,71 @@ textarea.form-input {
                 </a>
             </div>
         </div>
-        
-        <!-- Visual Element -->
-        <div class="hero-visual">
-            <div class="hero-visual-container">
-                <div class="floating-element element-1">
-                    <div class="element-content">
-                        <div class="element-icon">🤖</div>
-                        <div class="element-text">AI Developer</div>
-                    </div>
+    </div>
+</section>
+
+<!-- Update the floating elements section with better structure -->
+<section class="floating-elements-section" id="floatingElements">
+    <div class="container">
+        <h2 class="section-title">Tech Stack & Expertise</h2>
+        <div class="floating-elements-container">
+            <!-- First Row -->
+            <div class="floating-element element-1">
+                <div class="element-content">
+                    <div class="element-icon">🤖</div>
+                    <div class="element-text">AI/ML</div>
+                    <div class="element-subtext">TensorFlow, PyTorch</div>
                 </div>
-                <div class="floating-element element-2">
-                    <div class="element-content">
-                        <div class="element-icon">💻</div>
-                        <div class="element-text">Full-Stack</div>
-                    </div>
+            </div>
+            <div class="floating-element element-2">
+                <div class="element-content">
+                    <div class="element-icon">🌐</div>
+                    <div class="element-text">Web Dev</div>
+                    <div class="element-subtext">React, Node.js</div>
                 </div>
-                <div class="floating-element element-3">
-                    <div class="element-content">
-                        <div class="element-icon">🚀</div>
-                        <div class="element-text">Innovator</div>
-                    </div>
+            </div>
+            <div class="floating-element element-3">
+                <div class="element-content">
+                    <div class="element-icon">🎨</div>
+                    <div class="element-text">UI/UX</div>
+                    <div class="element-subtext">Figma, Prototype</div>
+                </div>
+            </div>
+            <div class="floating-element element-4">
+                <div class="element-content">
+                    <div class="element-icon">⚡</div>
+                    <div class="element-text">Tools</div>
+                    <div class="element-subtext">GitHub Copilot</div>
+                </div>
+            </div>
+            
+            <!-- Second Row -->
+            <div class="floating-element element-5">
+                <div class="element-content">
+                    <div class="element-icon">🔧</div>
+                    <div class="element-text">Backend</div>
+                    <div class="element-subtext">MongoDB, APIs</div>
+                </div>
+            </div>
+            <div class="floating-element element-6">
+                <div class="element-content">
+                    <div class="element-icon">🚀</div>
+                    <div class="element-text">Deployment</div>
+                    <div class="element-subtext">Vercel, Netlify</div>
+                </div>
+            </div>
+            <div class="floating-element element-7">
+                <div class="element-content">
+                    <div class="element-icon">📱</div>
+                    <div class="element-text">Mobile</div>
+                    <div class="element-subtext">Responsive Design</div>
+                </div>
+            </div>
+            <div class="floating-element element-8">
+                <div class="element-content">
+                    <div class="element-icon">💡</div>
+                    <div class="element-text">Innovation</div>
+                    <div class="element-subtext">Problem Solving</div>
                 </div>
             </div>
         </div>
@@ -9191,6 +9769,383 @@ document.addEventListener('DOMContentLoaded', function() {
         new SkillGallery3D();
     }
 });
+
+// ============= DARK/LIGHT MODE TOGGLE =============
+// Add this to your existing JavaScript
+
+class ThemeToggle {
+    constructor() {
+        this.theme = localStorage.getItem('theme') || 'dark';
+        this.init();
+    }
+
+    init() {
+        this.createToggleButton();
+        this.applyTheme();
+        this.setupEventListeners();
+    }
+
+    createToggleButton() {
+        const toggleBtn = document.createElement('button');
+        toggleBtn.id = 'themeToggle';
+        toggleBtn.className = 'theme-toggle-btn';
+        toggleBtn.innerHTML = `
+            <span class="toggle-icon">🌙</span>
+            <span class="toggle-text">Dark Mode</span>
+        `;
+        toggleBtn.title = 'Toggle Dark/Light Mode';
+
+        const headerActions = document.querySelector('.header-actions');
+        if (headerActions) {
+            headerActions.appendChild(toggleBtn);
+        } else {
+            const header = document.querySelector('.header');
+            if (header) {
+                const headerActionsDiv = document.createElement('div');
+                headerActionsDiv.className = 'header-actions';
+                headerActionsDiv.appendChild(toggleBtn);
+                header.appendChild(headerActionsDiv);
+            }
+        }
+    }
+
+    applyTheme() {
+        if (this.theme === 'light') {
+            document.documentElement.classList.add('light-theme');
+            this.updateToggleButton('light');
+        } else {
+            document.documentElement.classList.remove('light-theme');
+            this.updateToggleButton('dark');
+        }
+    }
+
+    updateToggleButton(theme) {
+        const toggleBtn = document.getElementById('themeToggle');
+        if (!toggleBtn) return;
+
+        const icon = toggleBtn.querySelector('.toggle-icon');
+        const text = toggleBtn.querySelector('.toggle-text');
+
+        if (theme === 'light') {
+            icon.textContent = '☀️';
+            text.textContent = 'Light Mode';
+            toggleBtn.style.background = 'rgba(0, 0, 0, 0.1)';
+            toggleBtn.style.borderColor = 'rgba(0, 0, 0, 0.2)';
+            toggleBtn.style.color = '#000000';
+        } else {
+            icon.textContent = '🌙';
+            text.textContent = 'Dark Mode';
+            toggleBtn.style.background = 'rgba(255, 255, 255, 0.1)';
+            toggleBtn.style.borderColor = 'rgba(255, 255, 255, 0.2)';
+            toggleBtn.style.color = '#ffffff';
+        }
+    }
+
+    toggleTheme() {
+        this.theme = this.theme === 'dark' ? 'light' : 'dark';
+        localStorage.setItem('theme', this.theme);
+        this.applyTheme();
+    }
+
+    setupEventListeners() {
+        const toggleBtn = document.getElementById('themeToggle');
+        if (toggleBtn) {
+            toggleBtn.addEventListener('click', () => this.toggleTheme());
+        }
+    }
+}
+
+// Add this CSS - UPDATED FOR FULL PAGE LIGHT THEME
+const themeStyles = `
+/* ============= THEME TOGGLE STYLES ============= */
+.theme-toggle-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50px;
+    padding: 8px 16px;
+    color: var(--text-light);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.theme-toggle-btn:hover {
+    background: rgba(255, 0, 0, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 0, 0, 0.2);
+}
+
+.toggle-icon {
+    font-size: 18px;
+}
+
+.toggle-text {
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+/* ============= COMPLETE LIGHT THEME ============= */
+:root.light-theme {
+    --primary: #ff3333;           /* Red accent - same */
+    --secondary: #000000;         /* Black text */
+    --accent: #ff6666;            /* Light red */
+    --dark: #ffffff;             /* White background */
+    --light-dark: #f5f5f5;       /* Very light gray */
+    --medium-dark: #e0e0e0;      /* Light gray */
+    --card-bg: rgba(255, 255, 255, 0.95);
+    --header-bg: rgba(255, 255, 255, 0.98);
+    --text-light: #000000;       /* Black text */
+    --text-gray: #666666;        /* Gray text */
+}
+
+/* LIGHT THEME - APPLIED TO ALL ELEMENTS */
+.light-theme body {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f8f8 50%, #fff0f0 100%) !important;
+    color: #000000 !important;
+}
+
+.light-theme .header {
+    background: rgba(255, 255, 255, 0.98) !important;
+    backdrop-filter: blur(20px);
+    border-bottom: 2px solid transparent;
+    background: linear-gradient(var(--header-bg), var(--header-bg)) padding-box,
+                linear-gradient(90deg, var(--primary), #ff3333) border-box !important;
+}
+
+.light-theme .logo-main-text {
+    color: #000000 !important;
+    background: linear-gradient(45deg, #ff0000, #ff3333) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+}
+
+.light-theme .nav-link {
+    color: #000000 !important;
+}
+
+.light-theme .nav-link:hover {
+    background: rgba(255, 0, 0, 0.1) !important;
+}
+
+.light-theme .nav-link.active {
+    background: linear-gradient(135deg, var(--primary), #ff3333) !important;
+    color: white !important;
+}
+
+.light-theme .hero-title {
+    background: linear-gradient(135deg, var(--primary), #000000, var(--accent)) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+}
+
+.light-theme .hero-subtitle {
+    color: #000000 !important;
+}
+
+.light-theme .hero-description {
+    color: #666666 !important;
+}
+
+.light-theme .hero-social-link {
+    background: rgba(0, 0, 0, 0.05) !important;
+    border: 1px solid rgba(255, 0, 0, 0.2) !important;
+    color: #000000 !important;
+}
+
+.light-theme .floating-element {
+    background: rgba(255, 0, 0, 0.05) !important;
+    border: 1px solid rgba(255, 0, 0, 0.2) !important;
+}
+
+.light-theme .section-title {
+    background: linear-gradient(135deg, #000000, var(--primary)) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+}
+
+/* CARDS */
+.light-theme .about-card,
+.light-theme .skill-card,
+.light-theme .project-card,
+.light-theme .contact-card,
+.light-theme .announcement-card,
+.light-theme .item-content {
+    background: rgba(255, 255, 255, 0.95) !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    color: #000000 !important;
+}
+
+.light-theme .about-card-text,
+.light-theme .skill-desc,
+.light-theme .project-desc,
+.light-theme .announcement-description {
+    color: #666666 !important;
+}
+
+.light-theme .tag,
+.light-theme .tool-tag,
+.light-theme .tech-tag {
+    background: rgba(255, 0, 0, 0.1) !important;
+    color: #ff3333 !important;
+    border: 1px solid rgba(255, 0, 0, 0.3) !important;
+}
+
+/* BUTTONS */
+.light-theme .btn-secondary {
+    background: rgba(0, 0, 0, 0.05) !important;
+    color: #000000 !important;
+    border: 2px solid var(--primary) !important;
+}
+
+.light-theme .btn-secondary:hover {
+    background: rgba(255, 0, 0, 0.1) !important;
+}
+
+/* FORM ELEMENTS */
+.light-theme .form-input {
+    background: rgba(0, 0, 0, 0.05) !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    color: #000000 !important;
+}
+
+.light-theme .form-input::placeholder {
+    color: rgba(0, 0, 0, 0.4) !important;
+}
+
+.light-theme .form-input:focus {
+    background: rgba(0, 0, 0, 0.08) !important;
+    border-color: var(--primary) !important;
+}
+
+/* CONTACT ITEMS */
+.light-theme .contact-item {
+    background: rgba(0, 0, 0, 0.03) !important;
+    border: 1px solid rgba(0, 0, 0, 0.05) !important;
+    color: #000000 !important;
+}
+
+.light-theme .item-details p {
+    color: #666666 !important;
+}
+
+/* SOCIAL LINKS */
+.light-theme .social-link {
+    background: rgba(0, 0, 0, 0.05) !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    color: #000000 !important;
+}
+
+/* PROGRESS BARS */
+.light-theme .progress-bar {
+    background: rgba(0, 0, 0, 0.1) !important;
+}
+
+/* GALLERY CONTROLS */
+.light-theme .gallery-controls {
+    background: rgba(255, 255, 255, 0.9) !important;
+    border: 1px solid rgba(255, 0, 0, 0.2) !important;
+}
+
+.light-theme .nav-btn {
+    background: rgba(0, 0, 0, 0.05) !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+/* NOTIFICATION */
+.light-theme .project-notification {
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.95), rgba(255, 240, 240, 0.9)) !important;
+    border: 1px solid rgba(255, 0, 0, 0.3) !important;
+}
+
+.light-theme .notification-text p {
+    color: #666666 !important;
+}
+
+/* DOTS */
+.light-theme .nav-dot {
+    background: rgba(0, 0, 0, 0.2) !important;
+}
+
+.light-theme .dot {
+    background: rgba(0, 0, 0, 0.2) !important;
+}
+
+/* STATS */
+.light-theme .stat-item {
+    background: rgba(0, 0, 0, 0.03) !important;
+    border: 1px solid rgba(0, 0, 0, 0.05) !important;
+}
+
+.light-theme .stat-label {
+    color: #666666 !important;
+}
+
+/* EXPERTISE ITEMS */
+.light-theme .expertise-item {
+    background: rgba(0, 0, 0, 0.03) !important;
+    border: 1px solid rgba(0, 0, 0, 0.05) !important;
+}
+
+/* TOOL ITEMS */
+.light-theme .tool-item {
+    background: rgba(0, 0, 0, 0.03) !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+/* TIMELINE */
+.light-theme .timeline-item:not(:last-child)::after {
+    background: rgba(255, 0, 0, 0.1) !important;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .theme-toggle-btn {
+        padding: 6px 12px;
+    }
+    
+    .light-theme .theme-toggle-btn {
+        color: #000000 !important;
+    }
+    
+    .toggle-text {
+        display: none;
+    }
+    
+    .toggle-icon {
+        font-size: 20px;
+    }
+}
+`;
+
+// Add the theme styles
+const themeStyleSheet = document.createElement('style');
+themeStyleSheet.textContent = themeStyles;
+document.head.appendChild(themeStyleSheet);
+
+// Initialize theme toggle
+document.addEventListener('DOMContentLoaded', () => {
+    const themeToggle = new ThemeToggle();
+    console.log('✅ Theme toggle initialized');
+    
+    // Add CSS transition for smooth theme switch
+    const transitionStyle = document.createElement('style');
+    transitionStyle.textContent = `
+        * {
+            transition: background-color 0.3s ease, 
+                        color 0.3s ease, 
+                        border-color 0.3s ease,
+                        box-shadow 0.3s ease !important;
+        }
+    `;
+    document.head.appendChild(transitionStyle);
+});
+
+
 </script>
 <style>
   /* ========== RIPPLE EFFECT ========== */
