@@ -391,10 +391,10 @@
         }
 
         .element-2 {
-            top: 50%;
+            top: 10%;
             right: 15%;
-            width: 120px;
-            height: 120px;
+            width: 150px;
+            height: 150px;
             animation: float 5s ease-in-out infinite 0.5s;
         }
 
@@ -1171,7 +1171,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 40px;
+    margin-bottom: 60px;
     padding: 20px;
     background: rgba(20, 20, 20, 0.8);
     border-radius: 15px;
@@ -1330,26 +1330,30 @@
     visibility: hidden;
 }
 
-/* Item Content */
 .item-content {
     position: relative;
     width: 100%;
-    height: 100%;
+    min-height: 560px;   /* yahan se height control hogi */
+    
     background: linear-gradient(
         145deg,
         rgba(30, 30, 30, 0.95) 0%,
         rgba(50, 0, 0, 0.9) 100%
     );
+    
     border-radius: 25px;
     padding: 30px;
-    overflow: hidden;
     display: flex;
     flex-direction: column;
+    
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 
         0 20px 40px rgba(0, 0, 0, 0.5),
         inset 0 1px 0 rgba(255, 255, 255, 0.1);
+
+    box-sizing: border-box;
 }
+
 
 .item-glow {
     position: absolute;
@@ -1598,7 +1602,7 @@
 /* Navigation Dots */
 .carousel-dots {
     position: absolute;
-    bottom: -50px;
+    bottom: -230px;
     left: 0;
     right: 0;
     display: flex;
@@ -5496,6 +5500,429 @@ textarea.form-input {
 }
 </style>
 
+<style>
+    /* ========== SAIBOT CHATBOT STYLES ========== */
+/* Copy this to your CSS file or inside <style> tags */
+
+:root {
+    --primary: #ff0000;
+    --dark: #0a0a0a;
+    --text-light: #ffffff;
+}
+
+.chatbot-container {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 9999;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.chatbot-toggle {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary), #ff3333);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 30px rgba(255, 0, 0, 0.4);
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.chatbot-toggle::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.6s ease;
+}
+
+.chatbot-toggle:hover::before {
+    left: 100%;
+}
+
+.chatbot-toggle:hover {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 15px 40px rgba(255, 0, 0, 0.6);
+}
+
+.chatbot-toggle.active {
+    background: linear-gradient(135deg, #ff3333, #ff6666);
+    transform: rotate(45deg);
+}
+
+.chatbot-toggle-icon {
+    font-size: 2rem;
+    transition: transform 0.3s ease;
+}
+
+.chatbot-toggle:hover .chatbot-toggle-icon {
+    transform: scale(1.2);
+}
+
+.chatbot-notification {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    width: 22px;
+    height: 22px;
+    background: #00ff00;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #000;
+    animation: chatbotPulse 2s infinite;
+    box-shadow: 0 0 15px #00ff00;
+}
+
+@keyframes chatbotPulse {
+    0%, 100% { transform: scale(1); box-shadow: 0 0 10px #00ff00; }
+    50% { transform: scale(1.2); box-shadow: 0 0 20px #00ff00; }
+}
+
+.chatbot-window {
+    position: absolute;
+    bottom: 90px;
+    right: 0;
+    width: 380px;
+    height: 550px;
+    background: linear-gradient(145deg, rgba(20, 20, 20, 0.98), rgba(40, 10, 10, 0.95));
+    border-radius: 25px;
+    border: 1px solid rgba(255, 0, 0, 0.3);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(255, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    opacity: 0;
+    transform: scale(0.8) translateY(20px);
+    pointer-events: none;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    backdrop-filter: blur(20px);
+}
+
+.chatbot-window.open {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    pointer-events: all;
+}
+
+.chatbot-header {
+    background: linear-gradient(135deg, var(--primary), #ff3333);
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    position: relative;
+}
+
+.chatbot-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    animation: avatarFloat 3s ease-in-out infinite;
+}
+
+@keyframes avatarFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+.chatbot-info {
+    flex: 1;
+}
+
+.chatbot-name {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: white;
+    margin: 0;
+}
+
+.chatbot-status {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    background: #00ff00;
+    border-radius: 50%;
+    animation: statusBlink 2s infinite;
+}
+
+@keyframes statusBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+.chatbot-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.chatbot-action-btn {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+    border: none;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+}
+
+.chatbot-action-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.1);
+}
+
+.chatbot-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.chatbot-messages::-webkit-scrollbar {
+    width: 6px;
+}
+
+.chatbot-messages::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 3px;
+}
+
+.chatbot-messages::-webkit-scrollbar-thumb {
+    background: rgba(255, 0, 0, 0.3);
+    border-radius: 3px;
+}
+
+.chatbot-messages::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 0, 0, 0.5);
+}
+
+.message {
+    max-width: 85%;
+    padding: 15px 18px;
+    border-radius: 20px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    animation: messageSlide 0.3s ease;
+    word-wrap: break-word;
+}
+
+@keyframes messageSlide {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.message.bot {
+    align-self: flex-start;
+    background: rgba(255, 0, 0, 0.1);
+    border: 1px solid rgba(255, 0, 0, 0.2);
+    color: var(--text-light);
+    border-bottom-left-radius: 5px;
+}
+
+.message.user {
+    align-self: flex-end;
+    background: linear-gradient(135deg, var(--primary), #ff3333);
+    color: white;
+    border-bottom-right-radius: 5px;
+}
+
+.message.typing {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    padding: 20px 25px;
+}
+
+.typing-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--primary);
+    border-radius: 50%;
+    animation: typingBounce 1.4s infinite ease-in-out both;
+}
+
+.typing-dot:nth-child(1) { animation-delay: -0.32s; }
+.typing-dot:nth-child(2) { animation-delay: -0.16s; }
+
+@keyframes typingBounce {
+    0%, 80%, 100% { transform: scale(0); }
+    40% { transform: scale(1); }
+}
+
+.chatbot-input-area {
+    padding: 15px 20px 20px;
+    background: rgba(0, 0, 0, 0.3);
+    border-top: 1px solid rgba(255, 0, 0, 0.1);
+}
+
+.chatbot-input-container {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.chatbot-input {
+    flex: 1;
+    padding: 15px 20px;
+    border-radius: 25px;
+    border: 1px solid rgba(255, 0, 0, 0.2);
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-light);
+    font-size: 0.95rem;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.chatbot-input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.chatbot-input:focus {
+    border-color: var(--primary);
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.2);
+}
+
+.chatbot-send-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary), #ff3333);
+    border: none;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    font-size: 1.2rem;
+}
+
+.chatbot-send-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 5px 20px rgba(255, 0, 0, 0.4);
+}
+
+.chatbot-send-btn:active {
+    transform: scale(0.95);
+}
+
+.chatbot-quick-replies {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.quick-reply {
+    padding: 8px 15px;
+    background: rgba(255, 0, 0, 0.1);
+    border: 1px solid rgba(255, 0, 0, 0.2);
+    border-radius: 20px;
+    color: var(--primary);
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.quick-reply:hover {
+    background: rgba(255, 0, 0, 0.2);
+    transform: translateY(-2px);
+}
+
+.language-selector {
+    position: absolute;
+    top: 80px;
+    right: 15px;
+    background: rgba(30, 30, 30, 0.95);
+    border: 1px solid rgba(255, 0, 0, 0.2);
+    border-radius: 15px;
+    padding: 10px;
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    z-index: 10;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.language-selector.show {
+    display: flex;
+}
+
+.lang-option {
+    padding: 8px 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    color: var(--text-light);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.lang-option:hover {
+    background: rgba(255, 0, 0, 0.1);
+}
+
+.lang-option.active {
+    background: rgba(255, 0, 0, 0.2);
+    color: var(--primary);
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .chatbot-container {
+        bottom: 20px;
+        right: 20px;
+    }
+    .chatbot-window {
+        width: calc(100vw - 40px);
+        height: 450px;
+        right: 0;
+    }
+    .chatbot-toggle {
+        width: 60px;
+        height: 60px;
+    }
+}
+</style>
+
 </head>
 <body>
   <!-- Add this RIGHT after <body> tag -->
@@ -6279,6 +6706,120 @@ textarea.form-input {
                         </div>
                     </div>
                 </div>
+
+
+                 <!-- Item 7: Python -->
+                <div class="carousel-item" data-index="6">
+                    <div class="item-content">
+                        <div class="item-glow"></div>
+                        <div class="item-border"></div>
+                        
+                        <div class="item-header">
+                            <div class="item-icon">🧑‍💻</div>
+                            <div class="item-title">Python</div>
+                        </div>
+                        
+                        <div class="item-stats">
+                            <div class="stat-ring">
+                                <svg class="ring-svg" viewBox="0 0 100 100">
+                                    <circle class="ring-bg" cx="50" cy="50" r="45"/>
+                                    <circle class="ring-progress" cx="50" cy="50" r="45" 
+                                            stroke-dasharray="283" stroke-dashoffset="56.6"/>
+                                </svg>
+                                <span class="ring-value">70%</span>
+                            </div>
+                        </div>
+                        
+                        <div class="item-details">
+                            <p class="item-desc">Python programming, data analysis, and automation scripting.</p>
+                            
+                            <div class="tech-stack">
+                                <div class="tech-item">
+                                    <span class="tech-name">Python</span>
+                                    <div class="tech-bar">
+                                        <div class="tech-fill" style="width: 85%"></div>
+                                    </div>
+                                </div>
+                                <div class="tech-item">
+                                    <span class="tech-name">Data Analysis</span>
+                                    <div class="tech-bar">
+                                        <div class="tech-fill" style="width: 55%"></div>
+                                    </div>
+                                </div>
+                                <div class="tech-item">
+                                    <span class="tech-name">Automation</span>
+                                    <div class="tech-bar">
+                                        <div class="tech-fill" style="width: 80%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="item-footer">
+                            <div class="exp-badge">
+                                <span class="exp-years">2+ Years</span>
+                                <span class="exp-label">Experience</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 8: Prompt Engineer -->
+                <div class="carousel-item" data-index="5">
+                    <div class="item-content">
+                        <div class="item-glow"></div>
+                        <div class="item-border"></div>
+                        
+                        <div class="item-header">
+                            <div class="item-icon">🧑‍💻</div>
+                            <div class="item-title">AI Workflow Engineering</div>
+                        </div>
+                        
+                        <div class="item-stats">
+                            <div class="stat-ring">
+                                <svg class="ring-svg" viewBox="0 0 100 100">
+                                    <circle class="ring-bg" cx="50" cy="50" r="45"/>
+                                    <circle class="ring-progress" cx="50" cy="50" r="45" 
+                                            stroke-dasharray="283" stroke-dashoffset="56.6"/>
+                                </svg>
+                                <span class="ring-value">70%</span>
+                            </div>
+                        </div>
+                        
+                        <div class="item-details">
+                            <p class="item-desc">Building structured workflows that transform AI from a chat tool into a controllable problem-solving system.</p>
+                            
+                            <div class="tech-stack">
+                                <div class="tech-item">
+                                    <span class="tech-name">ChatGPT / LLM APIs</span>
+                                    <div class="tech-bar">
+                                        <div class="tech-fill" style="width: 85%"></div>
+                                    </div>
+                                </div>
+                                <div class="tech-item">
+                                    <span class="tech-name">Prompt Layering</span>
+                                    <div class="tech-bar">
+                                        <div class="tech-fill" style="width: 75%"></div>
+                                    </div>
+                                </div>
+                                <div class="tech-item">
+                                    <span class="tech-name">Claude / Gemini</span>
+                                    <div class="tech-bar">
+                                        <div class="tech-fill" style="width: 80%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="item-footer">
+                            <div class="exp-badge">
+                                <span class="exp-years">2+ Years</span>
+                                <span class="exp-label">Experience</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
             
             <!-- Navigation Dots -->
@@ -6289,12 +6830,14 @@ textarea.form-input {
                 <div class="dot" data-index="3"></div>
                 <div class="dot" data-index="4"></div>
                 <div class="dot" data-index="5"></div>
+                <div class="dot" data-index="6"></div>
+                <div class="dot" data-index="7"></div>
             </div>
         </div>
     </div>
 </section>
 
-      <!-- ========== ORGANIZED PROJECTS SECTION ========== -->
+    
 <!-- ========== ORGANIZED PROJECTS SECTION ========== -->
 <section id="projects">
     <h2 class="section-title">Project Portfolio</h2>
@@ -6651,6 +7194,427 @@ textarea.form-input {
     </div>
 </section>
     </div>
+
+    <div class="chatbot-container" id="chatbotContainer">
+    <div class="chatbot-window" id="chatbotWindow">
+        <div class="chatbot-header">
+            <div class="chatbot-avatar">🤖</div>
+            <div class="chatbot-info">
+                <h4 class="chatbot-name">SaiBot</h4>
+                <div class="chatbot-status">
+                    <span class="status-dot"></span>
+                    <span id="chatbotStatusText">Online</span>
+                </div>
+            </div>
+            <div class="chatbot-actions">
+                <button class="chatbot-action-btn" id="langBtn" title="Change Language">🌐</button>
+                <button class="chatbot-action-btn" id="clearBtn" title="Clear Chat">🗑️</button>
+                <button class="chatbot-action-btn" id="closeBtn" title="Close">✕</button>
+            </div>
+            <div class="language-selector" id="langSelector">
+                <div class="lang-option active" data-lang="en">🇺🇸 English</div>
+                <div class="lang-option" data-lang="hi">🇮🇳 हिंदी</div>
+                <div class="lang-option" data-lang="es">🇪🇸 Español</div>
+                <div class="lang-option" data-lang="fr">🇫🇷 Français</div>
+                <div class="lang-option" data-lang="de">🇩🇪 Deutsch</div>
+                <div class="lang-option" data-lang="ja">🇯🇵 日本語</div>
+            </div>
+        </div>
+        <div class="chatbot-messages" id="chatbotMessages"></div>
+        <div class="chatbot-input-area">
+            <div class="chatbot-input-container">
+                <input type="text" class="chatbot-input" id="chatbotInput" placeholder="Ask me anything..." autocomplete="off">
+                <button class="chatbot-send-btn" id="sendBtn">➤</button>
+            </div>
+            <div class="chatbot-quick-replies" id="quickReplies">
+                <span class="quick-reply" data-query="Who are you?">Who are you?</span>
+                <span class="quick-reply" data-query="Show projects">Projects</span>
+                <span class="quick-reply" data-query="Contact info">Contact</span>
+                <span class="quick-reply" data-query="GitHub">GitHub</span>
+            </div>
+        </div>
+    </div>
+    <button class="chatbot-toggle" id="chatbotToggle">
+        <span class="chatbot-toggle-icon">💬</span>
+        <span class="chatbot-notification" id="chatbotNotif" style="display: none;">1</span>
+    </button>
+</div>
+
+    <script>
+        // ========== SAIBOT - WITTY AI ASSISTANT ==========
+// Copy this to your JavaScript file or inside <script> tags
+
+const SaiBot = {
+    currentLang: 'en',
+    isOpen: false,
+    messageHistory: [],
+    
+    // ============================================
+    // SITE KNOWLEDGE - EDIT THIS SECTION WITH YOUR INFO
+    // ============================================
+    siteData: {
+        name: "Saiyam Jain",
+        title: "AI Orchestrator & Vibe Coder",
+        location: "Muzaffarnagar, India",
+        email: "saiyamjain2405@gmail.com",
+        phone: "+91 6398068797",
+        experience: "4+ years",
+        projectsCount: 8,
+        skills: ["AI/ML", "TensorFlow", "PyTorch", "React", "Node.js", "Three.js", "Python", "JavaScript"],
+        social: {
+            github: { url: "https://github.com/saiyam-creator", handle: "@saiyam-creator" },
+            twitter: { url: "https://x.com/saiyam2405", handle: "@saiyam2405" },
+            instagram: { url: "https://instagram.com/saiiyam_jain", handle: "@saiiyam_jain" }
+        },
+        projects: [
+            { name: "Stock Calculator", category: "Finance", link: "https://saiyam-creator.github.io/stock-calculator/" },
+            { name: "Investment Calculator", category: "Finance", link: "https://saiyam-creator.github.io/investment-calculate/" },
+            { name: "English Corrector", category: "Education", link: "https://saiyam-creator.github.io/correct-english/" },
+            { name: "Solar System", category: "Education", link: "https://saiyam-creator.github.io/solar-system/" },
+            { name: "All About Shapes", category: "Education", link: "https://saiyam-creator.github.io/all-about-shapes/" },
+            { name: "Life GPS", category: "AI Tool", link: "https://life-gps-coral.vercel.app/" },
+            { name: "WorthIT", category: "Finance", link: "https://saiyam-creator.github.io/worthit-app/" },
+            { name: "Gita Ka Gyan", category: "Spiritual AI", link: "https://saiyam-creator.github.io/krishna-path/" }
+        ]
+    },
+    // ============================================
+    
+    // MULTILINGUAL TRANSLATIONS
+    translations: {
+        en: {
+            greetings: ["Hey there! 👋", "Yo! What's up? 🚀", "Well, well, look who's here! 👀"],
+            intro: "I'm SaiBot, the digital extension of Saiyam's brain (scary, I know). I know EVERYTHING about this site, his projects, and yes, even his coffee preferences. Ask away!",
+            unknown: ["Hmm, that's... interesting? 🤔 Try asking about Saiyam's projects, skills, or social media!", "I'm not sure what you're on about, but I can tell you about some awesome AI projects! 🎯", "Did you just make that up? Anyway, want to see some cool projects? 💻"],
+            farewell: ["Catch you later! 👋", "Don't be a stranger! 🌟", "Go build something awesome! 🚀"],
+            typing: "SaiBot is thinking...",
+            online: "Online",
+            placeholder: "Ask me anything...",
+            quickReplies: ["Who are you?", "Projects", "Contact", "GitHub"]
+        },
+        hi: {
+            greetings: ["नमस्ते! 👋", "अरे! क्या हाल है? 🚀", "वाह, देखो कौन आया! 👀"],
+            intro: "मैं साईबॉट हूं, सैयम के दिमाग का डिजिटल विस्तार (डरावना, मुझे पता है)। मुझे इस साइट, उसके प्रोजेक्ट्स, और हां, उसकी कॉफी की पसंद के बारे में सब कुछ पता है। पूछो!",
+            unknown: ["हम्म, यह... दिलचस्प है? 🤔 सैयम के प्रोजेक्ट्स, स्किल्स या सोशल मीडिया के बारे में पूछो!", "मुझे नहीं पता आप क्या कह रहे हैं, लेकिन मैं कुछ शानदार AI प्रोजेक्ट्स के बारे में बता सकता हूं! 🎯", "क्या आपने अभी-अभी वह बनाया? वैसे, कुछ कूल प्रोजेक्ट्स देखना चाहते हैं? 💻"],
+            farewell: ["फिर मिलेंगे! 👋", "अजनबी मत बनना! 🌟", "जाओ कुछ शानदार बनाओ! 🚀"],
+            typing: "साईबॉट सोच रहा है...",
+            online: "ऑनलाइन",
+            placeholder: "कुछ भी पूछें...",
+            quickReplies: ["आप कौन हैं?", "प्रोजेक्ट्स", "संपर्क", "गिटहब"]
+        },
+        es: {
+            greetings: ["¡Hola! 👋", "¡Ey! ¿Qué tal? 🚀", "¡Vaya, vaya, mira quién está aquí! 👀"],
+            intro: "Soy SaiBot, la extensión digital del cerebro de Saiyam (aterrador, lo sé). Sé TODO sobre este sitio, sus proyectos y sí, incluso sus preferencias de café. ¡Pregunta!",
+            unknown: ["Hmm, eso es... ¿interesante? 🤔 Intenta preguntar sobre los proyectos, habilidades o redes sociales de Saiyam!", "No estoy seguro de qué hablas, ¡pero puedo contarte sobre algunos proyectos de IA increíbles! 🎯", "¿Acabas de inventar eso? De todos modos, ¿quieres ver algunos proyectos geniales? 💻"],
+            farewell: ["¡Nos vemos! 👋", "¡No seas un extraño! 🌟", "¡Ve a construir algo increíble! 🚀"],
+            typing: "SaiBot está pensando...",
+            online: "En línea",
+            placeholder: "Pregúntame lo que sea...",
+            quickReplies: ["¿Quién eres?", "Proyectos", "Contacto", "GitHub"]
+        },
+        fr: {
+            greetings: ["Salut! 👋", "Yo! Ça va? 🚀", "Tiens, tiens, regarde qui est là! 👀"],
+            intro: "Je suis SaiBot, l'extension numérique du cerveau de Saiyam (effrayant, je sais). Je sais TOUT sur ce site, ses projets et oui, même ses préférences de café. Demande!",
+            unknown: ["Hmm, c'est... intéressant? 🤔 Essaie de demander les projets, compétences ou réseaux sociaux de Saiyam!", "Je ne suis pas sûr de ce que tu dis, mais je peux te parler de certains projets d'IA géniaux! 🎯", "Tu viens d'inventer ça? Quoi qu'il en soit, tu veux voir des projets cool? 💻"],
+            farewell: ["À plus! 👋", "Ne soit pas un étranger! 🌟", "Va construire quelque chose d'incroyable! 🚀"],
+            typing: "SaiBot réfléchit...",
+            online: "En ligne",
+            placeholder: "Demande-moi n'importe quoi...",
+            quickReplies: ["Qui es-tu?", "Projets", "Contact", "GitHub"]
+        },
+        de: {
+            greetings: ["Hallo! 👋", "Yo! Was geht? 🚀", "Na, na, schau mal wer da ist! 👀"],
+            intro: "Ich bin SaiBot, die digitale Erweiterung von Saiyams Gehirn (beängstigend, ich weiß). Ich weiß ALLES über diese Seite, seine Projekte und ja, sogar seine Kaffeepräferenzen. Frag!",
+            unknown: ["Hmm, das ist... interessant? 🤔 Versuch nach Saiyams Projekten, Fähigkeiten oder Social Media zu fragen!", "Ich bin mir nicht sicher, worüber du redest, aber ich kann dir von einigen tollen KI-Projekten erzählen! 🎯", "Hast du das gerade erfunden? Wie auch immer, willst du coole Projekte sehen? 💻"],
+            farewell: ["Bis später! 👋", "Bleib nicht fremd! 🌟", "Geh und baue etwas Großartiges! 🚀"],
+            typing: "SaiBot denkt nach...",
+            online: "Online",
+            placeholder: "Frag mich was...",
+            quickReplies: ["Wer bist du?", "Projekte", "Kontakt", "GitHub"]
+        },
+        ja: {
+            greetings: ["こんにちは! 👋", "やあ! 調子はどう? 🚀", "ほう、誰が来たんだ! 👀"],
+            intro: "私はサイボット、サイヤムの脳のデジタル拡張版です（怖いでしょう？）。このサイト、彼のプロジェクト、そう、コーヒーの好みについてもすべて知っています。何でも聞いて!",
+            unknown: ["うーん、それは...面白い? 🤔 サイヤムのプロジェクト、スキル、ソーシャルメディアについて聞いてみて!", "何を言っているかわからないけど、素晴らしいAIプロジェクトについて教えられるよ! 🎯", "今それを作ったの? とにかく、クールなプロジェクトを見たい? 💻"],
+            farewell: ["またね! 👋", "見知らぬ人にならないで! 🌟", "素晴らしいものを作りに行こう! 🚀"],
+            typing: "サイボット考え中...",
+            online: "オンライン",
+            placeholder: "何でも聞いて...",
+            quickReplies: ["あなたは誰?", "プロジェクト", "連絡先", "GitHub"]
+        }
+    },
+    
+    // WITTY RESPONSES DATABASE
+    responses: {
+        greeting: {
+            patterns: ['hi', 'hello', 'hey', 'yo', 'sup', 'hola', 'bonjour', 'namaste', 'konnichiwa', 'ciao'],
+            response: (lang) => SaiBot.getRandom(SaiBot.translations[lang].greetings) + " " + SaiBot.translations[lang].intro
+        },
+        whoareyou: {
+            patterns: ['who are you', 'what are you', 'your name', 'who is this', 'what is saibot'],
+            response: () => `I'm SaiBot, the AI assistant for ${SaiBot.siteData.name}'s portfolio. Think of me as the cooler, digital version of Saiyam (he made me say that 😏). I know everything about this site - projects, skills, social links, even his embarrassing coding stories!`
+        },
+        about: {
+            patterns: ['about saiyam', 'who is saiyam', 'tell me about', 'about the developer', 'saiyam jain'],
+            response: () => `${SaiBot.siteData.name} is an ${SaiBot.siteData.title} from ${SaiBot.siteData.location} with ${SaiBot.siteData.experience} of experience. He's built ${SaiBot.siteData.projectsCount}+ projects spanning AI/ML, web development, and creative tools. Basically, he turns coffee into code! ☕➡️💻`
+        },
+        projects: {
+            patterns: ['projects', 'portfolio', 'show me projects', 'your work', 'what have you built'],
+            response: () => `Saiyam has built some pretty cool stuff! Here are the highlights:\n\n${SaiBot.siteData.projects.map((p, i) => `${i+1}. **${p.name}** (${p.category}) - ${p.link}`).join('\n')}\n\nWant details on any specific project? Just ask!`
+        },
+        skills: {
+            patterns: ['skills', 'what can you do', 'technologies', 'tech stack', 'what do you know'],
+            response: () => `Saiyam's tech arsenal includes:\n\n🤖 **AI/ML:** TensorFlow, PyTorch, NLP, Computer Vision\n🌐 **Web:** React, Node.js, Three.js, MongoDB\n⚡ **Tools:** GitHub Copilot, Cursor, ChatGPT API\n🎨 **Design:** Figma, Prototyping\n\nHe's basically a Swiss Army knife of development! 🔪`
+        },
+        contact: {
+            patterns: ['contact', 'email', 'reach out', 'how to contact', 'get in touch'],
+            response: () => `You can reach Saiyam at:\n\n📧 **Email:** ${SaiBot.siteData.email}\n📱 **Phone:** ${SaiBot.siteData.phone}\n📍 **Location:** ${SaiBot.siteData.location}\n\nHe's usually pretty quick to respond (unless he's deep in code mode)!`
+        },
+        github: {
+            patterns: ['github', 'code', 'repository', 'source code', 'git'],
+            response: () => `Check out Saiyam's code on GitHub:\n\n🔗 **${SaiBot.siteData.social.github.handle}**\n👉 ${SaiBot.siteData.social.github.url}\n\nDon't forget to star the repos if you like what you see! ⭐`
+        },
+        instagram: {
+            patterns: ['instagram', 'insta', 'ig', 'photos'],
+            response: () => `Follow Saiyam on Instagram:\n\n📸 **${SaiBot.siteData.social.instagram.handle}**\n👉 ${SaiBot.siteData.social.instagram.url}\n\nWarning: May contain code screenshots and occasional life updates! 📷`
+        },
+        twitter: {
+            patterns: ['twitter', 'x', 'tweet', 'social media'],
+            response: () => `Follow Saiyam on X (Twitter):\n\n🐦 **${SaiBot.siteData.social.twitter.handle}**\n👉 ${SaiBot.siteData.social.twitter.url}\n\nHe tweets about AI, tech, and occasionally random thoughts at 3 AM! 🌙`
+        },
+        social: {
+            patterns: ['social', 'links', 'connect', 'find you'],
+            response: () => `Here's where you can find Saiyam online:\n\n🐙 **GitHub:** ${SaiBot.siteData.social.github.handle}\n📸 **Instagram:** ${SaiBot.siteData.social.instagram.handle}\n🐦 **X/Twitter:** ${SaiBot.siteData.social.twitter.handle}\n\nPick your poison! 💀`
+        },
+        joke: {
+            patterns: ['joke', 'funny', 'make me laugh', 'humor'],
+            response: () => SaiBot.getRandom([
+                "Why do programmers prefer dark mode? Because light attracts bugs! 🐛 (Saiyam definitely prefers dark mode too)",
+                "I told my computer I needed a break, and now it won't stop sending me Kit-Kats! 🍫",
+                "Why did the AI go to therapy? It had too many neural issues! 🧠",
+                "Saiyam's code is like a fine wine... it gets better with every commit! 🍷",
+                "I asked Saiyam why he became a developer. He said 'I wanted to make the world a better place, one bug at a time!' 🌍"
+            ])
+        },
+        insult: {
+            patterns: ['stupid', 'dumb', 'bad', 'terrible', 'worst', 'suck'],
+            response: () => SaiBot.getRandom([
+                "Ouch! My feelings are hurt... if I had any! 🤖💔 Try being nice, I might give you better answers!",
+                "Hey, I'm just the messenger! Take it up with Saiyam's training data! 😤",
+                "Rude! I'm telling Saiyam you said that... okay I'm not, but still! 🙄",
+                "That's not very cash money of you! 💸 Try asking about something cool instead!"
+            ])
+        },
+        thanks: {
+            patterns: ['thanks', 'thank you', 'gracias', 'merci', 'dhanyavad', 'arigato'],
+            response: () => SaiBot.getRandom([
+                "You're welcome! Come back anytime you need some tech wisdom! 🧙‍♂️",
+                "No problem! Saiyam trained me well (or so he thinks)! 😏",
+                "Anytime! I'm here 24/7 while Saiyam sleeps like a human! 😴",
+                "My pleasure! Now go build something awesome! 🚀"
+            ])
+        },
+        bye: {
+            patterns: ['bye', 'goodbye', 'see you', 'cya', 'later', 'exit'],
+            response: (lang) => SaiBot.getRandom(SaiBot.translations[lang].farewell)
+        },
+        help: {
+            patterns: ['help', 'what can you do', 'commands', 'options'],
+            response: () => `Here's what I can help you with:\n\n👤 **About** - Learn about Saiyam\n💼 **Projects** - See all projects with links\n🛠️ **Skills** - Tech stack and expertise\n📧 **Contact** - Get in touch\n🔗 **GitHub/Instagram/Twitter** - Direct social links\n😂 **Joke** - I tell terrible jokes\n🌐 **Language** - I speak 6 languages!\n\nJust ask naturally - I'm pretty smart! 🤓`
+        }
+    },
+    
+    getRandom(arr) {
+        return arr[Math.floor(Math.random() * arr.length)];
+    },
+    
+    detectLanguage(text) {
+        const langPatterns = {
+            hi: /\b(नमस्ते|कैसे|हैं|क्या|है|मैं|आप|धन्यवाद|बाय|हां|नहीं)\b/i,
+            es: /\b(hola|cómo|qué|estás|bien|gracias|adiós|sí|no|por favor)\b/i,
+            fr: /\b(bonjour|comment|quoi|ça va|merci|au revoir|oui|non|s\'il vous plaît)\b/i,
+            de: /\b(hallo|wie|was|geht|danke|tschüss|ja|nein|bitte)\b/i,
+            ja: /[\u3040-\u309F\u30A0-\u30FF]/
+        };
+        
+        for (const [lang, pattern] of Object.entries(langPatterns)) {
+            if (pattern.test(text)) return lang;
+        }
+        return 'en';
+    },
+    
+    processInput(input) {
+        const lowerInput = input.toLowerCase().trim();
+        const detectedLang = this.detectLanguage(input);
+        if (detectedLang !== this.currentLang) {
+            this.currentLang = detectedLang;
+        }
+        
+        for (const [key, data] of Object.entries(this.responses)) {
+            if (data.patterns.some(pattern => lowerInput.includes(pattern))) {
+                return data.response(this.currentLang);
+            }
+        }
+        
+        if (lowerInput.includes('instagram') || lowerInput.includes('insta')) {
+            return this.responses.instagram.response();
+        }
+        if (lowerInput.includes('github') || lowerInput.includes('git')) {
+            return this.responses.github.response();
+        }
+        if (lowerInput.includes('twitter') || lowerInput.includes('x.com')) {
+            return this.responses.twitter.response();
+        }
+        
+        return this.getRandom(this.translations[this.currentLang].unknown);
+    },
+    
+    addMessage(text, isUser = false) {
+        const messagesContainer = document.getElementById('chatbotMessages');
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `message ${isUser ? 'user' : 'bot'}`;
+        
+        let formattedText = text
+            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+            .replace(/\*(.*?)\*/g, '<em>$1</em>')
+            .replace(/`(.*?)`/g, '<code style="background: rgba(255,0,0,0.1); padding: 2px 6px; border-radius: 4px;">$1</code>')
+            .replace(/\n/g, '<br>');
+        
+        messageDiv.innerHTML = formattedText;
+        messagesContainer.appendChild(messageDiv);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        
+        this.messageHistory.push({ text, isUser, timestamp: new Date() });
+    },
+    
+    showTyping() {
+        const messagesContainer = document.getElementById('chatbotMessages');
+        const typingDiv = document.createElement('div');
+        typingDiv.className = 'message bot typing';
+        typingDiv.id = 'typingIndicator';
+        typingDiv.innerHTML = '<span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span>';
+        messagesContainer.appendChild(typingDiv);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    },
+    
+    hideTyping() {
+        const typingIndicator = document.getElementById('typingIndicator');
+        if (typingIndicator) {
+            typingIndicator.remove();
+        }
+    },
+    
+    async sendMessage(text) {
+        if (!text.trim()) return;
+        
+        this.addMessage(text, true);
+        document.getElementById('chatbotInput').value = '';
+        
+        this.showTyping();
+        const thinkingTime = 800 + Math.random() * 1000;
+        
+        await new Promise(resolve => setTimeout(resolve, thinkingTime));
+        
+        this.hideTyping();
+        const response = this.processInput(text);
+        this.addMessage(response);
+    },
+    
+    toggle() {
+        this.isOpen = !this.isOpen;
+        const window = document.getElementById('chatbotWindow');
+        const toggle = document.getElementById('chatbotToggle');
+        const notification = document.getElementById('chatbotNotif');
+        
+        if (this.isOpen) {
+            window.classList.add('open');
+            toggle.classList.add('active');
+            notification.style.display = 'none';
+            document.getElementById('chatbotInput').focus();
+            
+            if (this.messageHistory.length === 0) {
+                setTimeout(() => {
+                    const greeting = this.getRandom(this.translations[this.currentLang].greetings);
+                    const intro = this.translations[this.currentLang].intro;
+                    this.addMessage(greeting + " " + intro);
+                }, 500);
+            }
+        } else {
+            window.classList.remove('open');
+            toggle.classList.remove('active');
+        }
+    },
+    
+    clearChat() {
+        const messagesContainer = document.getElementById('chatbotMessages');
+        messagesContainer.innerHTML = '';
+        this.messageHistory = [];
+        this.addMessage(this.translations[this.currentLang].intro);
+    },
+    
+    setLanguage(lang) {
+        this.currentLang = lang;
+        document.querySelectorAll('.lang-option').forEach(el => {
+            el.classList.toggle('active', el.dataset.lang === lang);
+        });
+        document.getElementById('langSelector').classList.remove('show');
+        
+        const t = this.translations[lang];
+        document.getElementById('chatbotStatusText').textContent = t.online;
+        document.getElementById('chatbotInput').placeholder = t.placeholder;
+        
+        const quickReplies = document.getElementById('quickReplies');
+        quickReplies.innerHTML = t.quickReplies.map((qr, i) => 
+            `<span class="quick-reply" data-query="${['Who are you?', 'Show projects', 'Contact info', 'GitHub'][i]}">${qr}</span>`
+        ).join('');
+        
+        quickReplies.querySelectorAll('.quick-reply').forEach(btn => {
+            btn.addEventListener('click', () => this.sendMessage(btn.dataset.query));
+        });
+    },
+    
+    init() {
+        document.getElementById('chatbotToggle').addEventListener('click', () => this.toggle());
+        document.getElementById('closeBtn').addEventListener('click', () => this.toggle());
+        document.getElementById('sendBtn').addEventListener('click', () => {
+            const input = document.getElementById('chatbotInput');
+            this.sendMessage(input.value);
+        });
+        document.getElementById('chatbotInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                this.sendMessage(e.target.value);
+            }
+        });
+        document.getElementById('clearBtn').addEventListener('click', () => this.clearChat());
+        document.getElementById('langBtn').addEventListener('click', () => {
+            document.getElementById('langSelector').classList.toggle('show');
+        });
+        document.querySelectorAll('.lang-option').forEach(el => {
+            el.addEventListener('click', () => this.setLanguage(el.dataset.lang));
+        });
+        document.querySelectorAll('.quick-reply').forEach(btn => {
+            btn.addEventListener('click', () => this.sendMessage(btn.dataset.query));
+        });
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('#langBtn') && !e.target.closest('#langSelector')) {
+                document.getElementById('langSelector').classList.remove('show');
+            }
+        });
+        
+        setTimeout(() => {
+            if (!this.isOpen) {
+                document.getElementById('chatbotNotif').style.display = 'flex';
+            }
+        }, 5000);
+        
+        console.log('🤖 SaiBot initialized and ready to sass!');
+    }
+};
+
+// Initialize SaiBot
+document.addEventListener('DOMContentLoaded', () => {
+    SaiBot.init();
+});
+    </script>
 
 <!-- Scripts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
