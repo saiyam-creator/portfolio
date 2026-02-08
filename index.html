@@ -2029,6 +2029,12 @@
             Showcase Projects
             <span class="filter-count" id="count-showcase">4</span>
         </button>
+         <button class="filter-btn" data-category="website">
+             <span class="filter-icon">🌐</span>
+             website
+             <span class="filter-count" id="count-website">1</span>
+        
+        </button>
     </div>
     
     <!-- Projects Container -->
@@ -2176,6 +2182,13 @@
                         <i class="fab fa-instagram"></i>
                         <span class="social-tooltip">Instagram</span>
                     </a>
+                    
+                    <a href="https://www.linkedin.com/in/saiyam-jain-68094a292/" target="_blank" class="social-link" 
+                       title="LinkedIn - Professional network">
+                        <i class="fab fa-linkedin"></i>
+                        <span class="social-tooltip">LinkedIn</span>
+                    </a>
+                    
                     
                     <a href="#contact-form" class="social-link scroll-to-form" 
                        title="Direct message form">
@@ -3036,12 +3049,13 @@ const SaiBot = {
         email: "saiyamjain2405@gmail.com",
         phone: "+91 6398068797",
         experience: "4+ years",
-        projectsCount: 8,
+        projectsCount: 10,
         skills: ["AI/ML", "TensorFlow", "PyTorch", "React", "Node.js", "Three.js", "Python", "JavaScript"],
         social: {
             github: { url: "https://github.com/saiyam-creator", handle: "@saiyam-creator" },
             twitter: { url: "https://x.com/saiyam2405", handle: "@saiyam2405" },
-            instagram: { url: "https://instagram.com/saiiyam_jain", handle: "@saiiyam_jain" }
+            instagram: { url: "https://instagram.com/saiiyam_jain", handle: "@saiiyam_jain" },
+            linkedin: { url: "https://www.linkedin.com/in/saiyam-jain-68094a292/", handle: "Saiyam Jain" }
         },
         projects: [
             { name: "Stock Calculator", category: "Finance", link: "https://saiyam-creator.github.io/stock-calculator/" },
@@ -3051,7 +3065,10 @@ const SaiBot = {
             { name: "All About Shapes", category: "Education", link: "https://saiyam-creator.github.io/all-about-shapes/" },
             { name: "Life GPS", category: "AI Tool", link: "https://life-gps-coral.vercel.app/" },
             { name: "WorthIT", category: "Finance", link: "https://saiyam-creator.github.io/worthit-app/" },
-            { name: "Gita Ka Gyan", category: "Spiritual AI", link: "https://saiyam-creator.github.io/krishna-path/" }
+            { name: "Gita Ka Gyan", category: "Spiritual AI", link: "https://saiyam-creator.github.io/krishna-path/" },
+            { name: "AI Voice Translator", category: "AI Tool", link: "https://huggingface.co/spaces/s143a/ai-voice-translator" },
+            { name: "AI Spam Email Detector", category: "AI Tool", link: "https://ai-spam-classifier-2407.streamlit.app/" },
+            
         ]
     },
     // ============================================
@@ -3549,6 +3566,24 @@ const SITE_CONFIG = {
                 users: '2500+',
                 rating: '4.9',
                 updates: '25'
+            },
+            favorite: true
+        }
+        ,
+    {
+            id: 'project9',
+            title: 'Ai spam email detector',
+            category: ['ai', 'showcase'],
+            difficulty: 4,
+            date: '2026-02-05',
+            description: 'AI-powered spam email detection tool.',
+            tags: ['python', 'AI', 'Web App', 'Streamlit'],
+            demoLink: 'https://ai-spam-classifier-2407.streamlit.app/',
+            codeLink: 'https://github.com/saiyam-creator/ai-spam-classifier',
+            stats: {
+                users: '-',
+                rating: '-',
+                updates: '-'
             },
             favorite: true
         }
@@ -4125,6 +4160,24 @@ function loadProjects() {
         },
         favorite: true
     }
+    ,
+    {
+            id: 'project9',
+            title: 'Ai spam email detector',
+            category: ['ai', 'showcase'],
+            difficulty: 4,
+            date: '2026-02-05',
+            description: 'AI-powered spam email detection tool.',
+            tags: ['python', 'AI', 'Web App', 'Streamlit'],
+            demoLink: 'https://ai-spam-classifier-2407.streamlit.app/',
+            codeLink: 'https://github.com/saiyam-creator/ai-spam-classifier',
+            stats: {
+                users: '-',
+                rating: '-',
+                updates: '-'
+            },
+            favorite: true
+        }
 ];
 
     const grid = document.getElementById('projectsGrid');
@@ -5103,6 +5156,59 @@ class ProjectManager {
                 updates: '25'
             },
             favorite: true
+        },
+    {
+            id: 'project9',
+            title: 'Ai spam email detector',
+            category: ['ai', 'showcase'],
+            difficulty: 4,
+            date: '2026-02-05',
+            description: 'AI-powered spam email detection tool.',
+            tags: ['python', 'AI', 'Web App', 'Streamlit'],
+            demoLink: 'https://ai-spam-classifier-2407.streamlit.app/',
+            codeLink: 'https://github.com/saiyam-creator/ai-spam-classifier',
+            stats: {
+                users: '-',
+                rating: '-',
+                updates: '-'
+            },
+            favorite: true
+        }
+        ,
+    {
+            id: 'project10',
+            title: ' AI Voice Translator',
+            category: ['ai', 'showcase'],
+            difficulty: 4,
+            date: '2026-02-05',
+            description: 'AI-powered voice translation tool.',
+            tags: ['python', 'AI', 'Web App', 'Hugging Face'],
+            demoLink: 'https://huggingface.co/spaces/s143a/ai-voice-translator',
+            codeLink: 'https://github.com/saiyam-creator/ai-voice-translator',
+            stats: {
+                users: '-',
+                rating: '-',
+                updates: '-'
+            },
+            favorite: true
+        }
+         ,
+    {
+            id: 'project11',
+            title: 'Namaste Meerut Restaurant',
+            category: ['website'],
+            difficulty: 4,
+            date: '2026-01-29',
+            description: 'A modern, responsive restaurant website showcasing menu items and reservation system.',
+            tags: ['HTML', 'CSS', 'JS', 'Three.js', 'Web App'],
+            demoLink: 'https://saiyam-creator.github.io/Namaste-Meerut/',
+            codeLink: 'https://github.com/saiyam-creator/Namaste-Meerut',
+            stats: {
+                users: '-',
+                rating: '-',
+                updates: '-'
+            },
+            favorite: true
         }
     ];
     }
@@ -6062,7 +6168,8 @@ class ProjectFilterSystem {
             finance: this.projects.filter(p => p.category.includes('finance')).length,
             education: this.projects.filter(p => p.category.includes('education')).length,
             ai: this.projects.filter(p => p.category.includes('ai')).length,
-            showcase: this.projects.filter(p => p.category.includes('showcase')).length
+            showcase: this.projects.filter(p => p.category.includes('showcase')).length,
+            website: this.projects.filter(p => p.category.includes('website')).length
         };
         
         // Update count displays
@@ -6154,7 +6261,8 @@ class ProjectFilterSystem {
             finance: '💰 Finance',
             education: '🎓 Education',
             ai: '🤖 AI Tools',
-            showcase: '🚀 Showcase'
+            showcase: '🚀 Showcase',
+            website: '🌐 Website'
         };
         
         card.innerHTML = `
@@ -6291,7 +6399,9 @@ document.addEventListener('DOMContentLoaded', function() {
                         ${project.category[0] === 'finance' ? '💰 Finance' : 
                           project.category[0] === 'education' ? '🎓 Education' : 
                           project.category[0] === 'ai' ? '🤖 AI Tools' : 
-                          '🚀 Showcase'}
+                          project.category[0] === 'website' ? '🌐 Website' : 
+                          '🚀 Showcase' 
+                          }
                     </div>` : ''}
                     
                     <!-- Favorite Star -->
@@ -6474,7 +6584,8 @@ document.addEventListener('DOMContentLoaded', function() {
                     'finance': '💰',
                     'education': '🎓', 
                     'ai': '🤖',
-                    'showcase': '🚀'
+                    'showcase': '🚀',
+                    'website': '🌐'
                 };
                 
                 // Get main category icon
@@ -7069,9 +7180,9 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="notification-icon">🚀</div>
         <div class="notification-text">
             <h4>Latest Project Launched!</h4>
-            <p>Check out my new project: <strong>gita ka gyan</strong> - shlokas of bhagwat gita with meaning according to your feeling.</p>
+            <p>Check out my new project: <strong>AI Voice Translator</strong> - an AI-powered tool to translate voice.</p>
         </div>
-        <a href="https://saiyam-creator.github.io/krishna-path/" target="_blank" class="notification-btn">
+        <a href="https://huggingface.co/spaces/s143a/ai-voice-translator" target="_blank" class="notification-btn">
             View Project →
         </a>
     </div>
