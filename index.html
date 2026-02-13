@@ -1050,6 +1050,60 @@
     opacity: 0.3;
     pointer-events: none;
 }
+
+/* ========== DISABLED BUTTON STYLES ========== */
+.btn-small.btn-disabled,
+.btn-small.btn-secondary:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 0, 0, 0.2);
+    color: rgba(255, 255, 255, 0.5);
+    transform: none;
+    box-shadow: none;
+    position: relative;
+    overflow: visible;
+}
+
+.btn-small.btn-disabled:hover,
+.btn-small.btn-secondary:disabled:hover {
+    transform: none;
+    box-shadow: none;
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 0, 0, 0.2);
+}
+
+.btn-small.btn-disabled .btn-badge,
+.btn-small.btn-secondary:disabled .btn-badge {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: rgba(255, 0, 0, 0.2);
+    color: #ff9999;
+    font-size: 0.65rem;
+    padding: 2px 8px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 0, 0, 0.3);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    backdrop-filter: blur(4px);
+}
+
+/* Light theme support */
+.light-theme .btn-small.btn-disabled,
+.light-theme .btn-small.btn-secondary:disabled {
+    background: rgba(0, 0, 0, 0.05);
+    border-color: rgba(0, 0, 0, 0.1);
+    color: rgba(0, 0, 0, 0.4);
+}
+
+.light-theme .btn-small.btn-disabled .btn-badge,
+.light-theme .btn-small.btn-secondary:disabled .btn-badge {
+    background: rgba(255, 0, 0, 0.1);
+    color: #cc0000;
+    border-color: rgba(255, 0, 0, 0.3);
+}
 </style>
 
 <link rel="stylesheet" href="bot.css">
@@ -2592,7 +2646,7 @@ class RotaryDialManager {
                 credentialId: 'ALM-COURSE_4058600',
                 verified: true
             }
-              ,
+             ,
             {
                 id: 'cert-005',
                 title: 'Artificial Intelligence intern at Codec Technologies',
@@ -4217,10 +4271,13 @@ function loadProjects() {
                     <span class="btn-icon">🌐</span>
                     Live Demo
                 </button>
-                <button class="btn-small btn-secondary" onclick="window.open('${project.codeLink}', '_blank')">
-                    <span class="btn-icon">👨‍💻</span>
-                    Source Code
-                </button>
+               <button class="btn-small btn-secondary ${!project.codeLink ? 'btn-disabled' : ''}" 
+        ${!project.codeLink ? 'disabled' : ''}
+        onclick="${project.codeLink ? `window.open('${project.codeLink}', '_blank')` : 'return false;'}">
+    <span class="btn-icon">👨‍💻</span>
+    Source Code
+    ${!project.codeLink ? '<span class="btn-badge">Private</span>' : ''}
+</button>
             </div>
         `;
         grid.appendChild(card);
@@ -5221,7 +5278,8 @@ class ProjectManager {
             },
             favorite: true
         }
-              ,
+
+         ,
     {
             id: 'project12',
             title: 'AI content generator',
@@ -5239,6 +5297,25 @@ class ProjectManager {
             },
             favorite: true
         }
+        ,
+{
+    id: 'project13',
+    title: 'Whispers — Anonymous Diary Web App',
+    category: ['website'],
+    difficulty: 6,
+    date: '2026-02-13',
+    description: 'A live anonymous diary web application where users can safely share thoughts without identity, interaction, or social pressure. Built with secure token-based anonymity, real-time Firebase database, image uploads with moderation checks, and full production deployment.',
+    tags: ['JavaScript', 'Firebase', 'Web App', 'Anonymous Platform', 'Realtime Database'],
+    demoLink: 'https://mywebsite-ca4b1.web.app/',
+    codeLink: null , // change if repo name different
+    stats: {
+        users: 'Live',
+        rating: '—',
+        updates: 'Active'
+    },
+    favorite: true
+}
+
     ];
     }
       async loadProjects() {
@@ -6348,17 +6425,21 @@ class ProjectFilterSystem {
                 ${project.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
             </div>
             
-            <!-- Actions -->
-            <div class="project-actions">
-                <button class="btn-small btn-view" data-action="view-project" data-link="${project.demoLink}">
-                    <span class="btn-icon">🌐</span>
-                    Live Demo
-                </button>
-                <button class="btn-small btn-secondary" data-action="view-code" data-link="${project.codeLink}">
-                    <span class="btn-icon">👨‍💻</span>
-                    Source Code
-                </button>
-            </div>
+            
+          <!-- Actions -->
+<div class="project-actions">
+    <button class="btn-small btn-view" onclick="window.open('${project.demoLink}', '_blank')">
+        <span class="btn-icon">🌐</span>
+        Live Demo
+    </button>
+    <button class="btn-small btn-secondary ${!project.codeLink ? 'btn-disabled' : ''}" 
+            ${!project.codeLink ? 'disabled' : ''}
+            onclick="${project.codeLink ? `window.open('${project.codeLink}', '_blank')` : 'return false;'}">
+        <span class="btn-icon">👨‍💻</span>
+        Source Code
+        ${!project.codeLink ? '<span class="btn-badge">Private</span>' : ''}
+    </button>
+</div>
         `;
         
         return card;
@@ -6455,17 +6536,20 @@ document.addEventListener('DOMContentLoaded', function() {
                         ${project.tags ? project.tags.map(tag => `<span class="tag">${tag}</span>`).join('') : ''}
                     </div>
                     
-                    <!-- Actions -->
-                    <div class="project-actions">
-                        <button class="btn-small btn-view" onclick="window.open('${project.demoLink}', '_blank')">
-                            <span class="btn-icon">🌐</span>
-                            Live Demo
-                        </button>
-                        <button class="btn-small btn-secondary" onclick="window.open('${project.codeLink}', '_blank')">
-                            <span class="btn-icon">👨‍💻</span>
-                            Source Code
-                        </button>
-                    </div>
+                   <!-- Actions -->
+<div class="project-actions">
+    <button class="btn-small btn-view" onclick="window.open('${project.demoLink}', '_blank')">
+        <span class="btn-icon">🌐</span>
+        Live Demo
+    </button>
+    <button class="btn-small btn-secondary ${!project.codeLink ? 'btn-disabled' : ''}" 
+            ${!project.codeLink ? 'disabled' : ''}
+            onclick="${project.codeLink ? `window.open('${project.codeLink}', '_blank')` : 'return false;'}">
+        <span class="btn-icon">👨‍💻</span>
+        Source Code
+        ${!project.codeLink ? '<span class="btn-badge">Private</span>' : ''}
+    </button>
+</div>
                 `;
                 
                 grid.appendChild(card);
@@ -6646,16 +6730,19 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
     
     <!-- Actions -->
-    <div class="project-actions">
-        <button class="btn-small btn-view" onclick="window.open('${project.demoLink}', '_blank')">
-            <span class="btn-icon">🌐</span>
-            Live Demo
-        </button>
-        <button class="btn-small btn-secondary" onclick="window.open('${project.codeLink}', '_blank')">
-            <span class="btn-icon">👨‍💻</span>
-            Source Code
-        </button>
-    </div>
+<div class="project-actions">
+    <button class="btn-small btn-view" onclick="window.open('${project.demoLink}', '_blank')">
+        <span class="btn-icon">🌐</span>
+        Live Demo
+    </button>
+    <button class="btn-small btn-secondary ${!project.codeLink ? 'btn-disabled' : ''}" 
+            ${!project.codeLink ? 'disabled' : ''}
+            onclick="${project.codeLink ? `window.open('${project.codeLink}', '_blank')` : 'return false;'}">
+        <span class="btn-icon">👨‍💻</span>
+        Source Code
+        ${!project.codeLink ? '<span class="btn-badge">Private</span>' : ''}
+    </button>
+</div>
 `;
                 
                 grid.appendChild(card);
@@ -7209,14 +7296,12 @@ document.addEventListener('DOMContentLoaded', () => {
         <div class="notification-icon">🚀</div>
         <div class="notification-text">
             <h4>Latest Project Launched!</h4>
-            <p>Check out my new project: <strong>AI Voice Translator</strong> - an AI-powered tool to translate voice.</p>
+            <p>Check out my new project: <strong>Whispers — Anonymous Diary Web App</strong> A live anonymous diary web application. </p>
         </div>
-        <a href="https://huggingface.co/spaces/s143a/ai-voice-translator" target="_blank" class="notification-btn">
+        <a href="https://mywebsite-ca4b1.web.app/" target="_blank" class="notification-btn">
             View Project →
         </a>
     </div>
 </div>
 </body>
 </html>
-
-
