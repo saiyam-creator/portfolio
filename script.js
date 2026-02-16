@@ -149,6 +149,29 @@ class RotaryDialManager {
                 credentialId: '-',
                 verified: true
             }
+               ,
+            {
+                id: 'cert-006',
+                title: 'Ethical Considerations for generative AI',
+                issuer: 'IBM',
+                date: 'Feb-26',
+                image: 'https://i.ibb.co/ZpKbzLCd/Screenshot-2026-02-15-202321.png',
+                description: 'Complete Learning Gen AI Ethical Consideration',
+                credentialId: 'ALM-COURSE-4058916',
+                verified: true
+            }
+
+                ,
+            {
+                id: 'cert-007',
+                title: 'Basics of Python',
+                issuer: 'Uniathena',
+                date: 'Feb-26',
+                image: 'https://i.ibb.co/yBWDK7Q3/Screenshot-2026-02-14-122855.png',
+                description: 'complete Basics of Python',
+                credentialId: '-',
+                verified: true
+            }
         ];
         
         // Sample badges data
@@ -585,3 +608,4 @@ document.addEventListener('DOMContentLoaded', () => {
     
     console.log('✅ Rotary Dial Manager initialized successfully');
 });
+
