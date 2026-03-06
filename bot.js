@@ -35,7 +35,11 @@ const SaiBot = {
             { name: "WorthIT", category: "Finance", link: "https://saiyam-creator.github.io/worthit-app/" },
             { name: "Gita Ka Gyan", category: "Spiritual AI", link: "https://saiyam-creator.github.io/krishna-path/" },
             { name: "AI Voice Translator", category: "AI Tool", link: "https://huggingface.co/spaces/s143a/ai-voice-translator" },
+            { name: "Namaste Meerut Restaurant", category: "Website", link: "https://saiyam-creator.github.io/Namaste-Meerut/" },
             { name: "AI Spam Email Detector", category: "AI Tool", link: "https://ai-spam-classifier-2407.streamlit.app/" },
+            { name: "AI Content Generator", category: "AI Tool", link: "https://huggingface.co/spaces/s143a/instagram" },
+            { name: "SafeSpace — A Peer Listening Platform 🫂", category: "Web App", link: "https://safespaces-rust.vercel.app/" },
+            { name: "whispers — Anonymous Diary Web App", category: "Web App", link: "https://mywebsite-ca4b1.web.app/" },
             
         ]
     },
