@@ -230,6 +230,25 @@ class ProjectManager {
     favorite: true
 }
 
+ ,
+{
+    id: 'project14',
+    title: 'SafeSpace — A Peer Listening Platform 🫂',
+    category: ['website'],
+    difficulty: 6,
+    date: '2026-03-05',
+    description: 'SafeSpace is a peer listening web app that connects emotionally vulnerable speakers with trained volunteer listeners. Features include anonymous sessions, real-time booking, privacy-first contact sharing, and automated email notifications — built with React, Firebase, and deployed on Vercel.',
+    tags: ['JavaScript', 'Firebase', 'Web App', 'Emailjs', 'Realtime Database', 'Reactjs', 'UI/UX', 'Peer Support', 'tailwindcss'],
+    demoLink: 'https://safespaces-rust.vercel.app/',
+    codeLink: 'https://github.com/saiyam-creator/safespaces',
+    stats: {
+        users: 'Live',
+        rating: '—',
+        updates: 'Active'
+    },
+    favorite: true
+}
+
     ];
     }
       async loadProjects() {
