@@ -248,6 +248,25 @@ class ProjectManager {
     },
     favorite: true
 }
+          ,
+{
+    id: 'project15',
+    title: 'Ghost Room — A Temporary Private Chat Room System 👻',
+    category: ['website'],
+    difficulty: 6,
+    date: '2026-03-13',
+    description: 'Ghost Room allows users to create temporary private chat rooms with a unique key. Rooms can have custom member limits, destruction timers, and support for media messages including text, images, audio, and video.',
+    tags: ['JavaScript',  'Web App', 'Realtime Database', 'Reactjs', 'UI/UX', 'HTML','CSS','Supabase',],
+    demoLink: 'https://saiyam-creator.github.io/ghost-room/',
+    codeLink: null , // change if repo name different
+    stats: {
+        users: 'Live',
+        rating: '—',
+        updates: 'Active'
+    },
+    favorite: true
+}
+
 
     ];
     }
@@ -686,3 +705,4 @@ document.addEventListener('DOMContentLoaded', async () => {
     
     console.log('✅ Project section loaded with 8 professional projects!');
 });
+
